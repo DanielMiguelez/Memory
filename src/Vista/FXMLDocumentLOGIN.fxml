@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login.FXMLDocumentController">
+    <stylesheets>
+        <URL value="@fxmldocument.css" />
+    </stylesheets>
+   <children>
+      <ImageView fitHeight="720.0" fitWidth="1280.0" opacity="0.47" pickOnBounds="true" smooth="false">
+         <effect>
+            <DropShadow />
+         </effect>
+         <image>
+            <Image url="@../images/castle.jpg" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="93.0" layoutY="334.0" prefHeight="108.0" prefWidth="428.0" text="NICKNAME">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="60.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.3612167318510918" startX="0.5171102625335577" startY="0.14448673552886615">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.49473685026168823" green="0.28432098031044006" blue="0.009161793626844883" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.15771280229091644" green="0.8421052694320679" blue="0.13411305844783783" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="CENTER" layoutX="97.0" layoutY="442.0" prefHeight="108.0" prefWidth="428.0" text="PASSWORD">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="60.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.3612167318510918" startX="0.5171102625335577" startY="0.14448673552886615">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.49473685026168823" green="0.28432098031044006" blue="0.009161793626844883" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.15771280229091644" green="0.8421052694320679" blue="0.13411305844783783" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <TextField layoutX="644.0" layoutY="354.0" prefHeight="72.0" prefWidth="410.0" />
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="501.0" layoutY="586.0" mnemonicParsing="false" opacity="0.75" prefHeight="62.0" prefWidth="245.0" text="ACCEPT" />
+      <ImageView fitHeight="252.0" fitWidth="561.0" layoutX="835.0" layoutY="467.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/donkeyKong.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="472.0" layoutY="132.0" prefHeight="175.0" prefWidth="336.0" text="LOGIN">
+         <font>
+            <Font name="Gill Sans Ultra Bold Condensed" size="96.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="0.3612167318510918" startX="0.5171102625335577" startY="0.14448673552886615">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.49473685026168823" green="0.28432098031044006" blue="0.009161793626844883" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.15771280229091644" green="0.8421052694320679" blue="0.13411305844783783" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <PasswordField layoutX="645.0" layoutY="461.0" prefHeight="67.0" prefWidth="406.0" />
+      <ImageView fitHeight="235.0" fitWidth="198.0" layoutX="208.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/Luigi2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="221.0" fitWidth="379.0" layoutX="913.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/MarioGroup.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
