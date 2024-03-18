@@ -1,0 +1,34 @@
+create database abpDefault;
+
+create table if not exists Jugadores (
+id_jugador serial primary key,
+name  varchar(20) unique,
+Email varchar(20) unique,
+Contraseña varchar(10),
+Puntos int,
+Fecha_Registro timestamp,
+Nivel int
+);
+
+create table if not exists Partidas (
+id_Partida serial primary key,
+Fecha_partida date,
+Email unique varchar(20)
+);
+
+create table if not exists Jugadores_Partida (
+id_jugador int,
+id_Partida int,
+Puntos_Partida int,
+constraint primary key (id_jugador, id_partida),
+constraint foreign key id_jugador references Jugadores, id_partida references Partidas
+);
+
+create table if not exists Comentarios (
+id_Comentario serial primary key,
+Contenido text,
+Fecha_Com timestamp,
+id_Partida int,
+id_jugador int,
+constraint foreign key id_partida references Partidas, id_jugador references Jugadores
+);

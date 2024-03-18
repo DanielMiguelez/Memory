@@ -66,5 +66,4 @@ public class MemoryDani extends Application {
             System.out.println(); // Espacio en blanco para mejorar la legibilidad
         }
     }
-    
 }
