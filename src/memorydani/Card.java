@@ -23,6 +23,14 @@ public class Card {
         return uncovered;
     }
     
+    public void uncover() {
+        uncovered = true; // Método para descubrir la carta
+    }
+    
+    public void cover() {
+        uncovered = false; // Método para cubrir la carta
+    }
+    
     public String toString(){
         String info = "";
         return info + "name : " + name + "Is uncovered : " + uncovered;
