@@ -68,9 +68,9 @@ public class testJuego {
         int puntosJugador1 = 0;
         int puntosJugador2 = 0;
         
-        while(!juegoTerminado){
+        //while(!juegoTerminado){
             
-        }
+        //}
         
     }
 }
