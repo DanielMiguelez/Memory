@@ -13,15 +13,16 @@ Nivel int
 create table if not exists Partidas (
 id_Partida serial primary key,
 Fecha_partida date,
-Email unique varchar(20)
+Email varchar(20) unique
 );
 
 create table if not exists Jugadores_Partida (
-id_jugador int,
-id_Partida int,
-Puntos_Partida int,
-constraint primary key (id_jugador, id_partida),
-constraint foreign key id_jugador references Jugadores, id_partida references Partidas
+    id_jugador int,
+    id_Partida int,
+    Puntos_Partida int,
+    primary key (id_jugador, id_Partida),
+    constraint fk_id_jugador foreign key (id_jugador) references Jugadores(id_jugador),
+    constraint fk_id_partida foreign key (id_Partida) references Partidas(id_Partida)
 );
 
 create table if not exists Comentarios (
@@ -30,5 +31,6 @@ Contenido text,
 Fecha_Com timestamp,
 id_Partida int,
 id_jugador int,
-constraint foreign key id_partida references Partidas, id_jugador references Jugadores
+foreign key (id_Partida) references Partidas,
+foreign key (id_jugador) references Jugadores
 );
