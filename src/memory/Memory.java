@@ -1,4 +1,4 @@
-package memorydani;
+package memory;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,7 +17,7 @@ import javafx.stage.Stage;
  *
  * @author Dani
  */
-public class MemoryDani extends Application {
+public class Memory extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
