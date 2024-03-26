@@ -1,0 +1,9 @@
+
+.exitButton{
+    -fx-background-color: transparent;
+    -fx-background-image:url("cruz.png");
+    -fx-background-size:100%;
+    -fx-background-position:center; 
+  
+   
+}

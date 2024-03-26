@@ -1,4 +1,4 @@
-package REGISTER;
+package memory;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,7 +17,7 @@ import utilidades.bbdd.Bd;
 import static utilidades.bbdd.Bd.crearBBDD;
 import utilidades.bbdd.Gestor_conexion_POSTGRE;
 
-public class FXMLControllerREG implements Initializable {
+public class FXMLDocumentController implements Initializable {
     
     public static void mostrar(String [][] vec){
         for(int i=0; i<vec.length; i++){
@@ -32,7 +32,7 @@ public class FXMLControllerREG implements Initializable {
         String vec[][];
        
        
-        Gestor_conexion_POSTGRE gestor= new Gestor_conexion_POSTGRE("defaultabp",true);
+        Gestor_conexion_POSTGRE gestor= new Gestor_conexion_POSTGRE("memory",true);
         //Bd.consultaModificacion(gestor, "delete from jugadores where nick='jose' ");
         vec=Bd.consultaSelect(gestor, "select * from jugadores");
         gestor.cerrar_Conexion(true);

@@ -1,0 +1,10 @@
+
+.button{
+	-fx-background-image:url("boton.png");
+	-fx-background-size:cover;
+	-fx-background-repeat: no-repeat;
+        
+        -fx-background-radius:50px;
+        -fx-border-radius:50px;
+        -fx-background-attatchment:fixed;
+}
