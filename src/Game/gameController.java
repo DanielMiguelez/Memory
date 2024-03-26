@@ -49,7 +49,7 @@ private void initializeImageView()
         {
             //"cast" the Node to be of type ImageView
             ImageView imageView = (ImageView) board.getChildren().get(i);
-            imageView.setImage(new Image(funcionamientoJuego.Card.class.getResourceAsStream("/media/Luigi1.png")));
+            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Luigi1.png")));
             imageView.setUserData(i);
 
             //register a click listener
