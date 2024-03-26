@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Memory extends Application {
     
-     Scanner scanner = new Scanner(System.in);
+     
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -19,36 +19,25 @@ public class Memory extends Application {
         stage.show();
     }
     
-     public void newTurn(){
-     
-        System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
-        int row1 = scanner.nextInt();
-
-        System.out.println("Ingrese la posición de la columna (0-3) para la primera carta:");
-        int col1 = scanner.nextInt();
-
-        System.out.println("Ingrese la posición de la fila (0-3) para la segunda carta:");
-        int row2 = scanner.nextInt();
-
-        System.out.println("Ingrese la posición de la columna (0-3) para la segunda carta:");
-        int col2 = scanner.nextInt();
-     }
-   
-    
+//        public void newTurn(){
+//     
+//          
+//     }
+        
     public static void main(String[] args) {
       
        launch(args);
        
        // In Game Variables
        
-       int playerPoints = 0;
-       int attempts = 0;
-       boolean sameCards = false;
-       int turn = 1;
+//       int playerPoints = 0;
+//       int attempts = 0;
+//       boolean sameCards = false;
+//       int turn = 1;
        
        
        //Player register
-       boolean registered = false;
+//       boolean registered = false;
        
 //       while(!registered){ 
 //           
@@ -67,6 +56,9 @@ public class Memory extends Application {
 //        registered = true;
 //       }
        //Deck init
+       
+       
+       
         Deck deck = new Deck();
 
         Card Mario = new Card("Mario", 1);
@@ -100,13 +92,13 @@ public class Memory extends Application {
         
         // Barajar el mazo
         deck.shuffle();
-        System.out.println(deck.getCards());
+//        System.out.println(deck.getCards());
         
         // Declarar matriz de cartas
         
      String[][] cards = new String[4][4];
         // Declarar matriz de booleanos
-     boolean[][] turned = new boolean[4][4];
+//     boolean[][] turned = new boolean[4][4];
         
      ArrayList<Card> Deck = deck.getCards();
      
@@ -126,10 +118,41 @@ public class Memory extends Application {
         } else {
             System.out.println("El mazo no tiene suficientes cartas para llenar la matriz.");
         }
+        
           //Obtener la posición de fila y columna del usuario
           
         System.out.println();
+        boolean jugador1 = true;
         
+        while(jugador1){
+            Scanner scanner = new Scanner(System.in);
+             System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
+            int row1 = scanner.nextInt();
+
+            System.out.println("Ingrese la posición de la columna (0-3) para la primera carta:");
+            int col1 = scanner.nextInt();
+
+            System.out.println("Ingrese la posición de la fila (0-3) para la segunda carta:");
+            int row2 = scanner.nextInt();
+
+            System.out.println("Ingrese la posición de la columna (0-3) para la segunda carta:");
+            int col2 = scanner.nextInt();
+            
+            jugador1 = false;
+            
+             int card1 = row1*4+col1;
+             int card2 = row2*4+col2;
+             
+             if(Deck.get(card1).equals(Deck.get(card2))){
+                 System.out.println("hola joseANgel");
+                 jugador1 = true;
+                 
+             }else{
+                 System.out.println("Anaalcantara");
+             }
+//           
+        }
         
     }
+
 }
