@@ -9,10 +9,12 @@ public class Player {
     
     public String name;
     public String password;
+    public int points;
     
     public Player (String name, String password){
         this.name = name;
         this.password = password;
+        this.points = 0;
     }
     
     public String getName(){
@@ -25,7 +27,7 @@ public class Player {
     
     public String toString(){
         String info = "";
-        return info + "name : " + name + "password : " + password;
+        return info + "name : " + name + "password : " + password + "points : " + points;
     }
 
 }

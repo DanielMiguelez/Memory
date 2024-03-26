@@ -8,11 +8,15 @@ package memory;
 public class Card {
     
     public String name;
-     private int id;
+    private int id;
+    private boolean turned;
+    private String image;
     
     public Card (String name, int id){
         this.name = name;
         this.id = id;
+        this.turned = false;
+        this.image = image;
     }
     
     public String getName(){
@@ -25,7 +29,7 @@ public class Card {
     
     public String toString(){
         String info = "";
-        return info + name + " " + id;
+        return info + name + " " + id + " " +turned;
     }
 
 }
