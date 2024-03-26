@@ -3,29 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gameMechanics;
+package memory;
 
-public class Card {
+public class Player {
     
     public String name;
-    public boolean uncovered;
+    public String password;
     
-    public Card (String name, boolean uncovered){
+    public Player (String name, String password){
         this.name = name;
-        this.uncovered = false;
+        this.password = password;
     }
     
     public String getName(){
         return name;
     }
     
-    public boolean isUncovered(){
-        return uncovered;
+    public String getPassword(){
+        return password;
     }
     
     public String toString(){
         String info = "";
-        return info + "name : " + name + "Is uncovered : " + uncovered;
+        return info + "name : " + name + "password : " + password;
     }
 
 }
