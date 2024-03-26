@@ -3,29 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package funcionamientoJuego;
+package gameMechanics;
 
-public class Jugador {
+public class Player {
     
     public String name;
-    public String contrasenya;
+    public String password;
     
-    public Jugador (String name, String contrasenya){
+    public Player (String name, String password){
         this.name = name;
-        this.contrasenya = contrasenya;
+        this.password = password;
     }
     
     public String getName(){
         return name;
     }
     
-    public String getContrasenya(){
-        return contrasenya;
+    public String getPassword(){
+        return password;
     }
     
     public String toString(){
         String info = "";
-        return info + "name : " + name + "Contrasenya : " + contrasenya;
+        return info + "name : " + name + "password : " + password;
     }
 
 }

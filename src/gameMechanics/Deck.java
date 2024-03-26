@@ -1,4 +1,4 @@
-package funcionamientoJuego;
+package gameMechanics;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,18 +30,18 @@ public class Deck {
     
     // FUNCIONES RESPECTO A LAS CARTAS DE LA BARAJA -----------------
     
-    public void mostrarCarta(int i){
+    public void showCard(int i){
         if(i >= 0 && i < cards.size()){
-            Card carta = cards.get(i);
-            carta.uncovered = true;
+            Card card = cards.get(i);
+            card.uncovered = true;
             }
         }
     
-    public boolean compararcartas(int indiceCarta1, int indiceCarta2) {
-    if (indiceCarta1 >= 0 && indiceCarta1 < cards.size() &&
-        indiceCarta2 >= 0 && indiceCarta2 < cards.size()) {
-        Card carta1 = cards.get(indiceCarta1);
-        Card carta2 = cards.get(indiceCarta2);
+    public boolean compareCards(int indexCard1, int indexCard2) {
+    if (indexCard1 >= 0 && indexCard1 < cards.size() &&
+        indexCard2 >= 0 && indexCard2 < cards.size()) {
+        Card carta1 = cards.get(indexCard1);
+        Card carta2 = cards.get(indexCard2);
         return carta1.getName().equals(carta2.getName());
     }
     return false;
