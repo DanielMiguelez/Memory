@@ -9,6 +9,8 @@ import java.util.Scanner;
 
 public class Memory extends Application {
     
+     Scanner scanner = new Scanner(System.in);
+    
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml")); 
@@ -17,9 +19,33 @@ public class Memory extends Application {
         stage.show();
     }
     
+     public void newTurn(){
+     
+        System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
+        int row1 = scanner.nextInt();
+
+        System.out.println("Ingrese la posición de la columna (0-3) para la primera carta:");
+        int col1 = scanner.nextInt();
+
+        System.out.println("Ingrese la posición de la fila (0-3) para la segunda carta:");
+        int row2 = scanner.nextInt();
+
+        System.out.println("Ingrese la posición de la columna (0-3) para la segunda carta:");
+        int col2 = scanner.nextInt();
+     }
+   
+    
     public static void main(String[] args) {
-       Scanner scanner = new Scanner(System.in);
+      
        launch(args);
+       
+       // In Game Variables
+       
+       int playerPoints = 0;
+       int attempts = 0;
+       boolean sameCards = false;
+       int turn = 1;
+       
        
        //Player register
        boolean registered = false;
@@ -52,7 +78,17 @@ public class Memory extends Application {
         Card Bowser = new Card("Bowser", 7);
         Card Koopa = new Card("Koopa", 8);
 
-        // AGREGAR CARTAS AL MAZO
+        // AGREGAR CARTAS AL MAZO 2 VECES, Y TENEMOS LAS 16.
+        
+        deck.addCards(Mario);
+        deck.addCards(Luigi);
+        deck.addCards(Wario);
+        deck.addCards(Toad);
+        deck.addCards(Yoshi);
+        deck.addCards(Peach);
+        deck.addCards(Bowser);
+        deck.addCards(Koopa);
+        
         deck.addCards(Mario);
         deck.addCards(Luigi);
         deck.addCards(Wario);
@@ -65,29 +101,35 @@ public class Memory extends Application {
         // Barajar el mazo
         deck.shuffle();
         System.out.println(deck.getCards());
+        
         // Declarar matriz de cartas
+        
      String[][] cards = new String[4][4];
         // Declarar matriz de booleanos
      boolean[][] turned = new boolean[4][4];
         
      ArrayList<Card> Deck = deck.getCards();
      
-//        for (int i = 0; i < Deck.size(); i++) {
-//            Card card = Deck.get(i);
-////            for(int j = 0; i < cards.length;i++){
-////                 int row = i / 4; // Calcular fila basada en el índice del mazo
-////                 int col = i % 4; // Calcular columna basada en el índice del mazo
-////                 cards[row][col] = card.getName(); // Asignar el nombre de la carta a la posición correspondiente en la matriz
-////                 
-////            }
-//              System.out.println(card);  
-//         }
-         // Obtener la posición de fila y columna del usuario
-//        System.out.println("Ingrese la posición de la fila (0-3):");
-//        int row = scanner.nextInt();
-//
-//        System.out.println("Ingrese la posición de la columna (0-3):");
-//        int col = scanner.nextInt();
-//                
+     System.out.println();
+     
+      if (Deck.size() >= 16) {
+            // Llenar la matriz de cartas
+            int index = 0;
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    Card card = Deck.get(index++);
+                    cards[i][j] = card.getName(); // Asignar el nombre de la carta a la posición correspondiente en la matriz
+                    System.out.print(card + "\t"); // Imprimir la carta y agregar un tabulador para mantener las columnas alineadas
+                }
+                System.out.println(); // Imprimir una nueva línea después de imprimir todas las cartas de una fila
+            }
+        } else {
+            System.out.println("El mazo no tiene suficientes cartas para llenar la matriz.");
+        }
+          //Obtener la posición de fila y columna del usuario
+          
+        System.out.println();
+        
+        
     }
 }

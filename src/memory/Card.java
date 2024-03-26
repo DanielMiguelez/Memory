@@ -27,6 +27,18 @@ public class Card {
         return id;
     }
     
+    public boolean isTurned(){
+        return turned;
+    }
+    
+    public boolean flip(){
+        return !turned;
+    }
+    
+    public String getImage() {
+        return image;
+    }
+    
     public String toString(){
         String info = "";
         return info + name + " " + id + " " +turned;
