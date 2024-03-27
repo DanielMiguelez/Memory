@@ -9,12 +9,14 @@ public class Player {
     
     public String name;
     public String password;
+    public int victories;
     public int points;
     
     public Player (String name, String password){
         this.name = name;
         this.password = password;
         this.points = 0;
+        this.victories = 0;
     }
     
     public String getName(){
@@ -28,14 +30,22 @@ public class Player {
      public int getPoints(){
         return points;
     }
+     
+      public int getVictories(){
+        return victories;
+    }
     
     public void sumPoints(int points){
         this.points += points;
     }
     
+    public void sumVictories(int victories){
+        this.victories += victories;
+    }
+    
     public String toString(){
         String info = "";
-        return info + "name : " + name + "password : " + password + "points : " + points;
+        return info + "name : " + name + "password : " + password + "points : " + points + "Victories : " + victories;
     }
 
 }

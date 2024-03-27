@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import java.util.Scanner;
 
 public class Memory extends Application {
-     
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -17,7 +16,7 @@ public class Memory extends Application {
         stage.setScene(scene);
         stage.show();
     }
-        
+     
     public static void main(String[] args) {
       
        launch(args);
@@ -109,6 +108,7 @@ public class Memory extends Application {
      System.out.println();
      
      
+     
      // LLENAMOS LA MATRIZ CON EL FOR ANIDADO, CON TODAS LAS CARTAS CREADAS.
      
       if (Deck.size() >= 16) {
@@ -133,6 +133,8 @@ public class Memory extends Application {
         boolean player1Turn = true;
         boolean player2Turn = false;
         boolean gameFinished = false;
+        boolean player1Wins = false;
+        boolean player2Wins = false;
         int row1 = 0;
         int col1 = 0;
         int row2 = 0;
@@ -140,10 +142,29 @@ public class Memory extends Application {
         int card1 = 0;
         int card2 = 0;
         
-       
         
-        while(gameFinished){
-           
+        
+       // FLUJO DEL JUEGO Y TURNOS
+        
+        while(!gameFinished){
+            
+            if(player1.getPoints()+ player2.getPoints()== 8 && player1.getPoints() > player2.getPoints() ){
+                player1.sumVictories(1);
+                player1Wins = true;
+                gameFinished = true;
+                System.out.println("PLAYER 1 WINS!!!!");
+                
+                
+            }else if(player1.getPoints()+ player2.getPoints()== 8 && player1.getPoints() < player2.getPoints() ){
+                player2.sumVictories(1);
+                player2Wins = true;
+                gameFinished = true;
+                System.out.println("PLAYER 2 WINS!!!!");
+            }else {
+                gameFinished = true;
+                System.out.println("Match tied!!!!");
+            }
+             
             while(player1Turn){
 
                 System.out.println("TURNO DEL JUGADOR 1!");
@@ -174,17 +195,21 @@ public class Memory extends Application {
                     Deck.get(card1).setTurned();
                     Deck.get(card2).setTurned();
                     player1.sumPoints(1);
-                    System.out.println("PUNTOS! : " +player1.getPoints());
-                    // aumentar points
-                    // gira carta
+                    System.out.println("PUNTOS JUGADOR 1! : " + player1.getPoints());
+                    System.out.println("PUNTOS JUGADOR 2! : " + player2.getPoints());
+                    
+                    deck.printCardsMatrix(Deck, cards);
 
                  }else{
                      System.out.println("NOT MATCH");
                      player1Turn = false;
                      player2Turn = true;
+                     
+                     deck.printCardsMatrix(Deck, cards);
                  } 
                 }
             }
+            
             while(player2Turn){
 
                     System.out.println("TURNO DEL JUGADOR 2!");
@@ -208,6 +233,8 @@ public class Memory extends Application {
 
                     if( Deck.get(card1).isTurned()== true && Deck.get(card2).isTurned()== true){
                         System.out.println("NOT POSSIBLE!!!");
+                        
+                        deck.printCardsMatrix(Deck, cards);
                     }else{
                        if(Deck.get(card1).equals(Deck.get(card2))){
                         System.out.println("Match!");
@@ -215,27 +242,21 @@ public class Memory extends Application {
                         Deck.get(card1).setTurned();
                         Deck.get(card2).setTurned();
                         player2.sumPoints(1);
-                        System.out.println("PUNTOS! : " +player2.getPoints());
-
+                        System.out.println("PUNTOS JUGADOR 1! : " + player1.getPoints());
+                        System.out.println("PUNTOS JUGADOR 2! : " + player2.getPoints());
+                        
+                        deck.printCardsMatrix(Deck, cards);
 
                         }else{
                              System.out.println("NOT MATCH");
                              player1Turn = true;
                              player2Turn = false;
+                             System.out.println("PUNTOS JUGADOR 1! : " + player1.getPoints());
+                             System.out.println("PUNTOS JUGADOR 2! : " + player2.getPoints());
+                             
+                             deck.printCardsMatrix(Deck, cards);
                         } 
-                    }
-
-
-                int index = 0;
-                    
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 4; j++) {
-                            Card card = Deck.get(index++);
-                            cards[i][j] = card.getName(); // Asignar el nombre de la carta a la posición correspondiente en la matriz
-                            System.out.print(card + "\t"); // Imprimir la carta y agregar un tabulador para mantener las columnas alineadas
-                    }
-                    System.out.println(); // Imprimir una nueva línea después de imprimir todas las cartas de una fila
-                }          
+                    }  
             }
         } 
     }

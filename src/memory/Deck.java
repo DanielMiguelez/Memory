@@ -22,23 +22,15 @@ public class Deck {
         return cards;
     }
     
-    
-    // FUNCIONES RESPECTO A LAS CARTAS DE LA BARAJA -----------------
-    
-//    public void showCard(int i){
-//        if(i >= 0 && i < cards.size()){
-//            Card card = cards.get(i);
-//            card.uncovered = true;
-//            }
-//        }
-//    
-//    public boolean compareCards(int indexCard1, int indexCard2) {
-//    if (indexCard1 >= 0 && indexCard1 < cards.size() &&
-//        indexCard2 >= 0 && indexCard2 < cards.size()) {
-//        Card carta1 = cards.get(indexCard1);
-//        Card carta2 = cards.get(indexCard2);
-//        return carta1.getName().equals(carta2.getName());
-//    }
-//    return false;
-//    }
+    public static void printCardsMatrix(ArrayList<Card> deck, String[][] cards) {
+        int index = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                Card card = deck.get(index++);
+                cards[i][j] = card.getName();
+                System.out.print(card + "\t");
+            }
+            System.out.println();
+        }
+    }
 }
