@@ -34,6 +34,10 @@ public class Card {
     public void setTurned(){
         this.turned = true;
     }
+    
+     public boolean getTurned(){
+        return turned;
+    }
      public void setCovered(){
         this.turned = false;
     }
