@@ -25,6 +25,14 @@ public class Player {
         return password;
     }
     
+     public int getPoints(){
+        return points;
+    }
+    
+    public void setPoints(int points){
+        this.points = points;
+    }
+    
     public String toString(){
         String info = "";
         return info + "name : " + name + "password : " + password + "points : " + points;

@@ -8,7 +8,6 @@ import javafx.stage.Stage;
 import java.util.Scanner;
 
 public class Memory extends Application {
-    
      
     
     @Override
@@ -18,46 +17,52 @@ public class Memory extends Application {
         stage.setScene(scene);
         stage.show();
     }
-    
-//        public void newTurn(){
-//     
-//          
-//     }
         
     public static void main(String[] args) {
       
        launch(args);
        
-       // In Game Variables
-       
-//       int playerPoints = 0;
-//       int attempts = 0;
-//       boolean sameCards = false;
-//       int turn = 1;
-       
+       String playerName ="";
+       String passPlayer1 ="";
        
        //Player register
-//       boolean registered = false;
        
-//       while(!registered){ 
-//           
-//        System.out.println("Ingrese nombre jugador 1: ");
-//        String player1 = scanner.nextLine();
-//
-//        System.out.println("Ingrese contraseña jugador 1: ");
-//        String passPlayer1 = scanner.nextLine();
-//        
-//        System.out.println("Ingrese nombre jugador 2: ");
-//        String player2 = scanner.nextLine();
-//
-//        System.out.println("Ingrese contraseña jugador 2: ");
-//        String passPlayer2 = scanner.nextLine();
-//        
-//        registered = true;
-//       }
+       boolean player1Registered = false;
+       boolean player2Registered = false;
+       
+       while(!player1Registered){ 
+           
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Ingrese nombre jugador 1: ");
+        playerName = scanner.nextLine();
+
+        System.out.println("Ingrese contraseña jugador 1: ");
+        passPlayer1 = scanner.nextLine();
+          
+        player1Registered = true;
+       }
+       
+       Player player1 = new Player(playerName, passPlayer1);
+       
+       
+       
+       while(!player2Registered && player1Registered ){ 
+           
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.println("Ingrese nombre jugador 2: ");
+        String playerName2 = scanner.nextLine();
+
+        System.out.println("Ingrese contraseña jugador 2: ");
+        String passPlayer2 = scanner.nextLine();
+        
+        Player player2 = new Player(playerName2, passPlayer2);
+          
+        player2Registered = true;
+       }
+       
        //Deck init
-       
-       
        
         Deck deck = new Deck();
 
@@ -92,13 +97,10 @@ public class Memory extends Application {
         
         // Barajar el mazo
         deck.shuffle();
-//        System.out.println(deck.getCards());
         
         // Declarar matriz de cartas
         
      String[][] cards = new String[4][4];
-        // Declarar matriz de booleanos
-//     boolean[][] turned = new boolean[4][4];
         
      ArrayList<Card> Deck = deck.getCards();
      
@@ -122,11 +124,12 @@ public class Memory extends Application {
           //Obtener la posición de fila y columna del usuario
           
         System.out.println();
-        boolean jugador1 = true;
+        boolean player1Turn = true;
+        boolean player2Turn = false;
         
-        while(jugador1){
+        while(player1Turn ){
             Scanner scanner = new Scanner(System.in);
-             System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
+            System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
             int row1 = scanner.nextInt();
 
             System.out.println("Ingrese la posición de la columna (0-3) para la primera carta:");
@@ -138,18 +141,30 @@ public class Memory extends Application {
             System.out.println("Ingrese la posición de la columna (0-3) para la segunda carta:");
             int col2 = scanner.nextInt();
             
-            jugador1 = false;
+            player1Turn = false;
             
-             int card1 = row1*4+col1;
-             int card2 = row2*4+col2;
+            int card1 = row1*4+col1;
+            int card2 = row2*4+col2;
              
-             if(Deck.get(card1).equals(Deck.get(card2))){
-                 System.out.println("hola joseANgel");
-                 jugador1 = true;
+            if(Deck.get(card1).equals(Deck.get(card2))){
+                System.out.println("Match!");
+                player1Turn = true;
+                
                  
              }else{
-                 System.out.println("Anaalcantara");
+                 System.out.println("Unmatch");
+                 player1Turn = true;
              }
+            
+            int index = 0;
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    Card card = Deck.get(index++);
+                    cards[i][j] = card.getName(); // Asignar el nombre de la carta a la posición correspondiente en la matriz
+                    System.out.print(card + "\t"); // Imprimir la carta y agregar un tabulador para mantener las columnas alineadas
+                }
+                System.out.println(); // Imprimir una nueva línea después de imprimir todas las cartas de una fila
+            }
 //           
         }
         
