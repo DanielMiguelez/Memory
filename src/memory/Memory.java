@@ -129,9 +129,10 @@ public class Memory extends Application {
           //REGISTRO DE LOS JUGADORES CON DOS BUCLES WHILE
           
         System.out.println();
+        Scanner scanner = new Scanner(System.in);
         boolean player1Turn = true;
         boolean player2Turn = false;
-        Scanner scanner = new Scanner(System.in);
+        boolean gameFinished = false;
         int row1 = 0;
         int col1 = 0;
         int row2 = 0;
@@ -139,54 +140,13 @@ public class Memory extends Application {
         int card1 = 0;
         int card2 = 0;
         
-        boolean gameFinished = false;
+       
         
-        
-        
-        while(player1Turn){
-            
-            System.out.println("TURNO DEL JUGADOR 1!");
-            
-            System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
-            row1 = scanner.nextInt();
+        while(gameFinished){
+           
+            while(player1Turn){
 
-            System.out.println("Ingrese la posición de la columna (0-3) para la primera carta:");
-            col1 = scanner.nextInt();
-
-            System.out.println("Ingrese la posición de la fila (0-3) para la segunda carta:");
-            row2 = scanner.nextInt();
-
-            System.out.println("Ingrese la posición de la columna (0-3) para la segunda carta:");
-            col2 = scanner.nextInt();
-            
-            player1Turn = false;
-            
-            card1 = row1*4+col1;
-            card2 = row2*4+col2;
-             
-            if( Deck.get(card1).isTurned()== true && Deck.get(card2).isTurned()== true){
-                System.out.println("NOT POSSIBLE!!!");
-            }else{
-               if(Deck.get(card1).equals(Deck.get(card2))){
-                System.out.println("Match!");
-                player1Turn = true;
-                Deck.get(card1).setTurned();
-                Deck.get(card2).setTurned();
-                player1.sumPoints(1);
-                System.out.println("PUNTOS! : " +player1.getPoints());
-                // aumentar points
-                // gira carta
-                 
-             }else{
-                 System.out.println("NOT MATCH");
-                 player1Turn = false;
-                 player2Turn = true;
-             } 
-            }
-        }
-        while(player2Turn){
-
-                System.out.println("TURNO DEL JUGADOR 2!");
+                System.out.println("TURNO DEL JUGADOR 1!");
 
                 System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
                 row1 = scanner.nextInt();
@@ -200,7 +160,7 @@ public class Memory extends Application {
                 System.out.println("Ingrese la posición de la columna (0-3) para la segunda carta:");
                 col2 = scanner.nextInt();
 
-                player2Turn = false;
+                player1Turn = false;
 
                 card1 = row1*4+col1;
                 card2 = row2*4+col2;
@@ -210,31 +170,73 @@ public class Memory extends Application {
                 }else{
                    if(Deck.get(card1).equals(Deck.get(card2))){
                     System.out.println("Match!");
-                    player2Turn = true;
+                    player1Turn = true;
                     Deck.get(card1).setTurned();
                     Deck.get(card2).setTurned();
-                    player2.sumPoints(1);
-                    System.out.println("PUNTOS! : " +player2.getPoints());
-                    
+                    player1.sumPoints(1);
+                    System.out.println("PUNTOS! : " +player1.getPoints());
+                    // aumentar points
+                    // gira carta
 
                  }else{
                      System.out.println("NOT MATCH");
-                     player1Turn = true;
-                     player2Turn = false;
+                     player1Turn = false;
+                     player2Turn = true;
                  } 
                 }
+            }
+            while(player2Turn){
+
+                    System.out.println("TURNO DEL JUGADOR 2!");
+
+                    System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
+                    row1 = scanner.nextInt();
+
+                    System.out.println("Ingrese la posición de la columna (0-3) para la primera carta:");
+                    col1 = scanner.nextInt();
+
+                    System.out.println("Ingrese la posición de la fila (0-3) para la segunda carta:");
+                    row2 = scanner.nextInt();
+
+                    System.out.println("Ingrese la posición de la columna (0-3) para la segunda carta:");
+                    col2 = scanner.nextInt();
+
+                    player2Turn = false;
+
+                    card1 = row1*4+col1;
+                    card2 = row2*4+col2;
+
+                    if( Deck.get(card1).isTurned()== true && Deck.get(card2).isTurned()== true){
+                        System.out.println("NOT POSSIBLE!!!");
+                    }else{
+                       if(Deck.get(card1).equals(Deck.get(card2))){
+                        System.out.println("Match!");
+                        player2Turn = true;
+                        Deck.get(card1).setTurned();
+                        Deck.get(card2).setTurned();
+                        player2.sumPoints(1);
+                        System.out.println("PUNTOS! : " +player2.getPoints());
 
 
-                    int index = 0;
-                    for (int i = 0; i < 4; i++) {
-                        for (int j = 0; j < 4; j++) {
+                        }else{
+                             System.out.println("NOT MATCH");
+                             player1Turn = true;
+                             player2Turn = false;
+                        } 
+                    }
+
+
+                int index = 0;
+                    
+                for (int i = 0; i < 4; i++) {
+                    for (int j = 0; j < 4; j++) {
                             Card card = Deck.get(index++);
                             cards[i][j] = card.getName(); // Asignar el nombre de la carta a la posición correspondiente en la matriz
                             System.out.print(card + "\t"); // Imprimir la carta y agregar un tabulador para mantener las columnas alineadas
-                        }
-                        System.out.println(); // Imprimir una nueva línea después de imprimir todas las cartas de una fila
-                    }          
-                }
-        // AQUI ACABA WHILE2
+                    }
+                    System.out.println(); // Imprimir una nueva línea después de imprimir todas las cartas de una fila
+                }          
+            }
+        } 
     }
 }
