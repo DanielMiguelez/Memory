@@ -41,11 +41,10 @@ public class Memory extends Application {
         passPlayer1 = scanner.nextLine();
           
         player1Registered = true;
+        
        }
        
        Player player1 = new Player(playerName, passPlayer1);
-       
-       
        
        while(!player2Registered && player1Registered ){ 
            
@@ -127,7 +126,7 @@ public class Memory extends Application {
         boolean player1Turn = true;
         boolean player2Turn = false;
         
-        while(player1Turn ){
+        while(player1Turn){
             Scanner scanner = new Scanner(System.in);
             System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
             int row1 = scanner.nextInt();
@@ -149,11 +148,14 @@ public class Memory extends Application {
             if(Deck.get(card1).equals(Deck.get(card2))){
                 System.out.println("Match!");
                 player1Turn = true;
+                // aumentar points
+                // gira carta
                 
                  
              }else{
                  System.out.println("Unmatch");
-                 player1Turn = true;
+                 player1Turn = false;
+                 player2Turn = true;
              }
             
             int index = 0;

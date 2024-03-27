@@ -31,10 +31,12 @@ public class Card {
         return turned;
     }
     
-    public boolean flip(){
-        return !turned;
+    public void setTurned(){
+        this.turned = true;
     }
-    
+     public void setCovered(){
+        this.turned = false;
+    }
     public String getImage() {
         return image;
     }
