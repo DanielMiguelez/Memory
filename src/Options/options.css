@@ -1,0 +1,25 @@
+
+.button{
+	-fx-background-image:url("bloques.png");
+	-fx-background-size:cover;
+	-fx-background-repeat: no-repeat;
+    
+}
+
+.arrowButton{
+        -fx-background-image:url("flecha1.png");
+        -fx-background-color: transparent;
+        -fx-background-size:100%;
+        -fx-background-position:center; 
+	-fx-background-repeat: no-repeat;
+}
+
+.arrowButtonLeft{
+        -fx-background-image:url("flecha2.png");
+        -fx-background-color: transparent;
+        -fx-background-size:100%;
+        -fx-background-position:center; 
+	-fx-background-repeat: no-repeat;
+     
+}
+

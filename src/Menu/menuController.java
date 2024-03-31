@@ -5,7 +5,6 @@
  */
 package Menu;
 
-import Game.gameController;
 import java.io.File;
 import java.io.IOException;
 import javafx.scene.media.Media;
@@ -21,7 +20,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
+import javafx.scene.input.KeyEvent;
 
 /**
  * FXML Controller class
@@ -50,7 +51,7 @@ public class menuController implements Initializable {
         }
     
     @FXML
-    private void openGame(ActionEvent event) {
+    private void openGame() {
         try {
             String path = "@/../src/Menu/jump.mp3";
    
@@ -69,12 +70,6 @@ public class menuController implements Initializable {
             stage.setScene(scene);
             stage.show();
             mediaPlayer.play();
-            /*
-            stage.setOnCloseRequest(e -> controller.closeWindows());
-            
-            Stage myStage = (Stage) this.playButton.getScene().getWindow();
-            myStage.close();
-            */
             
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -99,11 +94,36 @@ public class menuController implements Initializable {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
         }   
     }
-
+    
+    @FXML
+    public void registerPress(KeyEvent event) {
+        if (event.getCode() == KeyCode.A) {
+            System.out.println("PRIMER");
+            // Aquí abrirías la nueva ventana
+            openRules();
+        }
+    }
+    
     @FXML
     private void openSettings(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Options/Options.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            
+            stage.setScene(scene);
+            stage.show();
+           
+        } catch (IOException ex) {
+            Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }
+
+    private void openRules() {
+        System.out.println("SEEEEGOND");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu/Rules.fxml"));
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();

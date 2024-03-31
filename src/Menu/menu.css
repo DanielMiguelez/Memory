@@ -1,10 +1,9 @@
 
 .button{
-	-fx-background-image:url("boton.png");
-	-fx-background-size:cover;
+	-fx-background-image:url("fog.png");
+	-fx-background-size:100%;
+        -fx-background-color: transparent;
 	-fx-background-repeat: no-repeat;
-        
-        -fx-background-radius:50px;
-        -fx-border-radius:50px;
-        -fx-background-attatchment:fixed;
+        -fx-background-position: top;
+    
 }
