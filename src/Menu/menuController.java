@@ -23,6 +23,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -37,6 +38,8 @@ public class menuController implements Initializable {
     private Button rankingButton;
     @FXML
     private Button settingsButton;
+    @FXML
+    private MediaPlayer mediaPlayer;
 
     /**
      * Initializes the controller class.
@@ -45,18 +48,23 @@ public class menuController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    @FXML
-    private void playSound(Media sound) {
-        
-        }
     
     @FXML
     private void openGame() {
         try {
-            String path = "@/../src/Menu/jump.mp3";
-   
+           
+            String path = "@/../src/media/koopa.mp3";
+            
             Media sound = new Media(new File(path).toURI().toString());
-            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer = new MediaPlayer(sound);
+            
+            //Para repetir el sonido en bucle
+            /*
+            mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.seek(Duration.ZERO);
+            });*/
+            
+            mediaPlayer.play();
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Game/game.fxml"));
             
@@ -69,7 +77,8 @@ public class menuController implements Initializable {
             
             stage.setScene(scene);
             stage.show();
-            mediaPlayer.play();
+            
+            
             
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,6 +98,18 @@ public class menuController implements Initializable {
             
             stage.setScene(scene);
             stage.show();
+            
+            String path = "@/../src/media/peach.mp3";
+   
+            Media sound = new Media(new File(path).toURI().toString());
+            mediaPlayer = new MediaPlayer(sound);
+            
+            /*
+            mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.seek(Duration.ZERO);
+            });*/
+            
+            mediaPlayer.play();
            
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -114,6 +135,8 @@ public class menuController implements Initializable {
             
             stage.setScene(scene);
             stage.show();
+            
+            
            
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);

@@ -7,12 +7,15 @@ package memory;
  */
 
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import utilidades.bbdd.Bd;
 import static utilidades.bbdd.Bd.crearBBDD;
 import utilidades.bbdd.Gestor_conexion_POSTGRE;
@@ -40,5 +43,13 @@ public class FXMLDocumentController implements Initializable {
             mostrar(vec);
         else
             System.out.println("vacio"); 
-    }    
+    }
+
+    public void menuMusic(){
+        String path = "@/../src/memory/troopa.mp3";
+        Media sound = new Media(new File(path).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        //mediaPlayer.seek(Duration.ZERO);
+        mediaPlayer.play();
+        }
 }

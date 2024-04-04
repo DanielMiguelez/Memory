@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="720.0" fitWidth="1280.0" opacity="0.61" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@shuffle.gif" />
+            <Image url="@../media/shuffle.gif" />
          </image>
          <effect>
             <DropShadow />
@@ -38,17 +38,17 @@
       </ImageView>
       <ImageView fitHeight="90.0" fitWidth="91.0" layoutX="839.0" layoutY="290.0" pickOnBounds="true">
          <image>
-            <Image url="@king.png" />
+            <Image url="@../media/king.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="81.0" fitWidth="81.0" layoutX="843.0" layoutY="384.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@round.png" />
+            <Image url="@../media/round.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="150.0" fitWidth="941.0" layoutX="170.0" layoutY="-7.0" opacity="0.85" pickOnBounds="true">
          <image>
-            <Image url="@logo.png" />
+            <Image url="@../media/logo.png" />
          </image>
       </ImageView>
    </children>

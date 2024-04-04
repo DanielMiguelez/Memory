@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,21 +14,15 @@
 
 <AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.gameController">
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1280.0" opacity="0.47" pickOnBounds="true" smooth="false">
-         <effect>
-            <DropShadow />
-         </effect>
-      </ImageView>
-      <ImageView fitHeight="322.0" fitWidth="1324.0" layoutX="-1.0" layoutY="47.0" pickOnBounds="true" smooth="false">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#140743" height="738.0" layoutY="-1.0" smooth="false" stroke="BLACK" strokeType="INSIDE" style="-fx-border-width-: 0;" width="1329.0" />
+      <ImageView fitHeight="737.0" fitWidth="730.0" layoutX="299.0" layoutY="-1.0" pickOnBounds="true" smooth="false">
          <image>
-            <Image url="@../media/LuigiCroupier.jpg" />
+            <Image url="@../media/soul.gif" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#0a512a" height="351.0" layoutY="369.0" stroke="BLACK" strokeType="INSIDE" width="1323.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#011528" height="46.0" stroke="BLACK" strokeType="INSIDE" width="1323.0" />
-      <Label layoutX="37.0" layoutY="-1.0" text="MOVEMENTS">
+      <Label layoutX="12.0" layoutY="14.0" prefHeight="39.0" prefWidth="250.0" text="MOVEMENTS:">
          <font>
-            <Font name="Gill Sans Ultra Bold" size="31.0" />
+            <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
          <textFill>
             <LinearGradient endX="1.0" endY="1.0">
@@ -49,105 +41,89 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Label layoutX="623.0" layoutY="-3.0" prefHeight="48.0" prefWidth="143.0" text="TIMER : " textFill="#e1ff00">
+      <Label layoutX="1038.0" layoutY="14.0" prefHeight="31.0" prefWidth="143.0" text="TIMER : " textFill="#e1ff00">
          <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="37.0" />
+            <Font name="Gill Sans Ultra Bold Condensed" size="30.0" />
          </font>
       </Label>
-      <Label layoutX="1053.0" layoutY="1.0" prefHeight="48.0" prefWidth="143.0" text="POINTS" textFill="#e1ff00">
-         <font>
-            <Font name="Gill Sans Ultra Bold Condensed" size="37.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="326.0" layoutX="31.0" layoutY="376.0" opacity="0.75" stroke="BLACK" strokeType="INSIDE" width="277.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="582.0" layoutX="1029.0" layoutY="154.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0">
          <fill>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.6539924244463671" startY="0.38022813688212925">
+            <LinearGradient endX="0.7585227272727273" endY="1.0" startX="0.7926136363636362" startY="0.10371294201814517">
                <stops>
                   <Stop>
                      <color>
-                        <Color red="1.0" />
-                     </color>
-                  </Stop>
-                  <Stop offset="0.006729475100942127">
-                     <color>
-                        <Color red="1.0" />
+                        <Color red="0.08907601982355118" green="0.03929824382066727" blue="0.2526315748691559" opacity="0.9200000166893005" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color red="0.003703703638166189" green="0.10333333164453506" blue="1.0" />
+                        <Color green="1.0" blue="0.43274107575416565" />
                      </color>
                   </Stop>
                </stops>
             </LinearGradient>
          </fill></Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="333.0" layoutX="1015.0" layoutY="377.0" mouseTransparent="true" opacity="0.75" stroke="BLACK" strokeType="INSIDE" width="272.0">
+      <Label layoutX="1069.0" layoutY="394.0" text="PLAYER 2" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="31.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="611.0" layoutX="-1.0" layoutY="125.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0">
          <fill>
-            <LinearGradient endX="1.0" endY="1.0" startX="0.6539924244463671" startY="0.38022813688212925">
+            <LinearGradient endX="0.897727243828051" endY="1.0" startX="0.6842954619742028" startY="0.22113727114005272">
                <stops>
                   <Stop>
                      <color>
-                        <Color red="0.378947377204895" green="0.3008421063423157" blue="0.15578947961330414" />
+                        <Color red="0.08907601982355118" green="0.03929824382066727" blue="0.2526315748691559" opacity="0.9200000166893005" />
                      </color>
                   </Stop>
                   <Stop offset="1.0">
                      <color>
-                        <Color red="0.13333334028720856" green="1.0" />
+                        <Color green="1.0" blue="0.43274107575416565" />
                      </color>
                   </Stop>
                </stops>
             </LinearGradient>
-         </fill></Rectangle>
-      <Label layoutX="73.0" layoutY="397.0" text="PLAYER 1">
-         <font>
-            <Font name="Gill Sans Ultra Bold" size="31.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" endY="1.0">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="1.0" green="0.9833333492279053" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="1.0" green="0.9166666865348816" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Label>
-      <Label layoutX="1055.0" layoutY="410.0" text="PLAYER 2" textFill="WHITE">
+         </fill>
+      </Rectangle>
+      <Label layoutX="57.0" layoutY="394.0" text="PLAYER 1" textFill="WHITE">
          <font>
             <Font name="Gill Sans Ultra Bold" size="31.0" />
          </font>
       </Label>
-      <Circle fill="WHITE" layoutX="170.0" layoutY="511.0" radius="66.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fill="WHITE" layoutX="1149.0" layoutY="521.0" radius="66.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="70.0" layoutY="588.0" text="LEVEL" textFill="#f2ff00">
+      <Circle fill="WHITE" layoutX="154.0" layoutY="515.0" radius="66.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fitHeight="132.0" fitWidth="132.0" layoutX="87.0" layoutY="446.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../media/marioSide.png" />
+         </image>
+      </ImageView>
+      <Circle fill="WHITE" layoutX="1166.0" layoutY="523.0" radius="66.0" stroke="BLACK" strokeType="INSIDE" />
+      <ImageView fitHeight="139.0" fitWidth="143.0" layoutX="1097.0" layoutY="451.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../media/setaZul.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="57.0" layoutY="601.0" text="LEVEL" textFill="#f2ff00">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="1037.0" layoutY="591.0" text="LEVEL" textFill="WHITE">
+      <Label layoutX="57.0" layoutY="646.0" text="POINTS" textFill="#ffee00">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="64.0" layoutY="624.0" text="POINTS" textFill="#ffee00">
+      <Label layoutX="1071.0" layoutY="601.0" text="LEVEL" textFill="WHITE">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="1037.0" layoutY="636.0" text="POINTS" textFill="WHITE">
+      <Label layoutX="1071.0" layoutY="648.0" text="POINTS" textFill="WHITE">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Button layoutX="1254.0" layoutY="-3.0" mnemonicParsing="false" prefHeight="48.0" prefWidth="73.0" styleClass="exitButton" stylesheets="@game.css" />
-      <FlowPane fx:id="board" alignment="CENTER" hgap="10.0" layoutX="467.0" layoutY="376.0" prefHeight="326.0" prefWidth="360.0">
+      <FlowPane fx:id="board" alignment="CENTER" hgap="10.0" layoutX="463.0" layoutY="394.0" prefHeight="326.0" prefWidth="396.0">
          <children>
             <ImageView fitHeight="81.0" fitWidth="73.0" pickOnBounds="true">
                <image>

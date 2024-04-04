@@ -10,12 +10,12 @@
    <children>
       <ImageView fitHeight="720.0" fitWidth="1280.0" pickOnBounds="true">
          <image>
-            <Image url="@arena.png" />
+            <Image url="@../media/arena.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="114.0" fitWidth="520.0" layoutX="380.0" layoutY="84.0" pickOnBounds="true">
+      <ImageView fitHeight="188.0" fitWidth="835.0" layoutX="223.0" layoutY="24.0" pickOnBounds="true">
          <image>
-            <Image url="@options.png" />
+            <Image url="@../media/options.png" />
          </image>
       </ImageView>
       <Label layoutX="475.0" layoutY="294.0" prefHeight="85.0" prefWidth="337.0" styleClass="button" stylesheets="@options.css" />

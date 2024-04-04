@@ -1,6 +1,6 @@
 
 .button{
-	-fx-background-image:url("fog.png");
+	-fx-background-image: url("../media/fog.png");
 	-fx-background-size:100%;
         -fx-background-color: transparent;
 	-fx-background-repeat: no-repeat;
