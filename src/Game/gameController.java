@@ -12,6 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -60,7 +61,7 @@ private void initializeImageView()
         }
     }
 
-public void closeWindows(){
+public void closeWindows(ActionEvent event){
     
      try {
             
@@ -74,8 +75,8 @@ public void closeWindows(){
             stage.setScene(scene);
             stage.show();
             
-            Stage myStage = (Stage) this.exitButton.getScene().getWindow();
-            myStage.close();
+            Stage previousStage = (Stage) ((javafx.scene.Node)event.getSource()).getScene().getWindow();
+            previousStage.close();
             
             
         } catch (IOException ex) {
