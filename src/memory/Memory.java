@@ -1,7 +1,4 @@
 package memory;
-
-
-import java.io.File;
 import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -9,34 +6,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.util.Scanner;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.util.Duration;
 
 public class Memory extends Application {
-
     
     @Override
     public void start(Stage stage) throws Exception {
-        
-        
         Parent root = FXMLLoader.load(getClass().getResource("/Menu/menu.fxml")); 
-        
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-        
-           //SONIDO AL INICIAR EL JUEGO
-//        String path = "@/../src/media/jump.mp3";
-//   
-//            Media sound = new Media(new File(path).toURI().toString());
-//            MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//            
-//            mediaPlayer.setOnEndOfMedia(() -> {
-//            mediaPlayer.seek(Duration.ZERO);
-//            });
-//            
-//            mediaPlayer.play();
     }
      
     public static void main(String[] args) {
@@ -169,119 +147,151 @@ public class Memory extends Application {
        // FLUJO DEL JUEGO Y TURNOS
         
         while(!gameFinished){
-            
-            if(player1.getPoints()+ player2.getPoints()== 8 && player1.getPoints() > player2.getPoints() ){
+  
+            if(player1.getPoints()+ player2.getPoints()> 7 && player1.getPoints() > player2.getPoints() ){
                 player1.sumVictories(1);
                 player1Wins = true;
                 gameFinished = true;
                 System.out.println("PLAYER 1 WINS!!!!");
                 
                 
-            }else if(player1.getPoints()+ player2.getPoints()== 8 && player1.getPoints() < player2.getPoints() ){
+            }else if(player1.getPoints()+ player2.getPoints()>7 && player1.getPoints() < player2.getPoints() ){
                 player2.sumVictories(1);
                 player2Wins = true;
                 gameFinished = true;
                 System.out.println("PLAYER 2 WINS!!!!");
-            }else {
+            }else if(player1.getPoints()+ player2.getPoints()>7 && player1.getPoints() == player2.getPoints() ) {
                 gameFinished = true;
                 System.out.println("Match tied!!!!");
             }
              
             while(player1Turn){
-
-                System.out.println("TURNO DEL JUGADOR 1!");
-
-                System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
-                row1 = scanner.nextInt();
-
-                System.out.println("Ingrese la posición de la columna (0-3) para la primera carta:");
-                col1 = scanner.nextInt();
-
-                System.out.println("Ingrese la posición de la fila (0-3) para la segunda carta:");
-                row2 = scanner.nextInt();
-
-                System.out.println("Ingrese la posición de la columna (0-3) para la segunda carta:");
-                col2 = scanner.nextInt();
-
+                
                 player1Turn = false;
+                
+                if (player1.getPoints()+ player2.getPoints()<8){
 
-                card1 = row1*4+col1;
-                card2 = row2*4+col2;
-
-                if( Deck.get(card1).isTurned()== true && Deck.get(card2).isTurned()== true){
-                    System.out.println("NOT POSSIBLE!!!");
-                }else{
-                   if(Deck.get(card1).equals(Deck.get(card2))){
-                    System.out.println("Match!");
-                    player1Turn = true;
-                    Deck.get(card1).setTurned();
-                    Deck.get(card2).setTurned();
-                    player1.sumPoints(1);
-                    System.out.println("PUNTOS JUGADOR 1! : " + player1.getPoints());
-                    System.out.println("PUNTOS JUGADOR 2! : " + player2.getPoints());
-                    
-                    deck.printCardsMatrix(Deck, cards);
-
-                 }else{
-                     System.out.println("NOT MATCH");
-                     player1Turn = false;
-                     player2Turn = true;
-                     
-                     deck.printCardsMatrix(Deck, cards);
-                 } 
-                }
-            }
-            
-            while(player2Turn){
-
-                    System.out.println("TURNO DEL JUGADOR 2!");
+                    System.out.println("TURNO DEL JUGADOR 1!");
 
                     System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
                     row1 = scanner.nextInt();
 
                     System.out.println("Ingrese la posición de la columna (0-3) para la primera carta:");
                     col1 = scanner.nextInt();
+                    
+                    card1 = row1*4+col1;
+                    Deck.get(card1).setTurned();
+                    deck.printCardsMatrix(Deck, cards);
 
                     System.out.println("Ingrese la posición de la fila (0-3) para la segunda carta:");
                     row2 = scanner.nextInt();
 
                     System.out.println("Ingrese la posición de la columna (0-3) para la segunda carta:");
                     col2 = scanner.nextInt();
-
-                    player2Turn = false;
-
-                    card1 = row1*4+col1;
+                    
                     card2 = row2*4+col2;
+                    Deck.get(card2).setTurned();
+                    deck.printCardsMatrix(Deck, cards);
 
-                    if( Deck.get(card1).isTurned()== true && Deck.get(card2).isTurned()== true){
+                    if( Deck.get(card1).getMatched() == false )
+                        Deck.get(card1).setCovered();
+                    if( Deck.get(card2).getMatched() == false )
+                        Deck.get(card2).setCovered();
+
+                    if( Deck.get(card1).isTurned()== true || Deck.get(card2).isTurned()== true || row1 == row2 && col1 == col2 ){
                         System.out.println("NOT POSSIBLE!!!");
-                        
                         deck.printCardsMatrix(Deck, cards);
+                        player1Turn = true;
+                        
                     }else{
                        if(Deck.get(card1).equals(Deck.get(card2))){
-                        System.out.println("Match!");
-                        player2Turn = true;
-                        Deck.get(card1).setTurned();
-                        Deck.get(card2).setTurned();
-                        player2.sumPoints(1);
-                        System.out.println("PUNTOS JUGADOR 1! : " + player1.getPoints());
-                        System.out.println("PUNTOS JUGADOR 2! : " + player2.getPoints());
-                        
-                        deck.printCardsMatrix(Deck, cards);
+                            System.out.println("Match!");         
+                            player1Turn = true;
+                            Deck.get(card1).setTurned();
+                            Deck.get(card2).setTurned();
+                            Deck.get(card1).setMatched();
+                            Deck.get(card2).setMatched();
+                            player1.sumPoints(1);
+                            System.out.println("PUNTOS JUGADOR 1! : " + player1.getPoints());
+                            System.out.println("PUNTOS JUGADOR 2! : " + player2.getPoints());
+
+                            deck.printCardsMatrix(Deck, cards);
+
 
                         }else{
-                             System.out.println("NOT MATCH");
-                             player1Turn = true;
-                             player2Turn = false;
-                             System.out.println("PUNTOS JUGADOR 1! : " + player1.getPoints());
-                             System.out.println("PUNTOS JUGADOR 2! : " + player2.getPoints());
-                             
-                             deck.printCardsMatrix(Deck, cards);
-                        } 
-                    }  
+                            System.out.println("NOT MATCH");
+                            player1Turn = false;
+                            player2Turn = true;
+                            System.out.println("PUNTOS JUGADOR 1! : " + player1.getPoints());
+                            System.out.println("PUNTOS JUGADOR 2! : " + player2.getPoints());
+
+                            deck.printCardsMatrix(Deck, cards);
+                     } 
+                    }
+                }
+            }
+            
+            while(player2Turn){
+                
+                player2Turn = false;
+                
+                if (player1.getPoints()+ player2.getPoints()<8){
+
+                        System.out.println("TURNO DEL JUGADOR 2!");
+
+                        System.out.println("Ingrese la posición de la fila (0-3) para la primera carta:");
+                        row1 = scanner.nextInt();
+
+                        System.out.println("Ingrese la posición de la columna (0-3) para la primera carta:");
+                        col1 = scanner.nextInt();
+                        
+                        card1 = row1*4+col1;
+                        Deck.get(card1).setTurned();
+                        deck.printCardsMatrix(Deck, cards);
+
+                        System.out.println("Ingrese la posición de la fila (0-3) para la segunda carta:");
+                        row2 = scanner.nextInt();
+
+                        System.out.println("Ingrese la posición de la columna (0-3) para la segunda carta:");
+                        col2 = scanner.nextInt();
+                        
+                        card2 = row2*4+col2;
+                        Deck.get(card2).setTurned();
+                        deck.printCardsMatrix(Deck, cards);
+                        
+                        Deck.get(card1).setCovered();
+                        Deck.get(card2).setCovered();
+
+                        if( Deck.get(card1).isMatched()== true || Deck.get(card2).isMatched()== true){
+                            System.out.println("NOT POSSIBLE!!!");
+                            deck.printCardsMatrix(Deck, cards);
+                            player2Turn = true;
+
+                        }else{
+                           if(Deck.get(card1).equals(Deck.get(card2))){
+                                System.out.println("Match!");
+                                player2Turn = true;
+                                Deck.get(card1).setMatched();
+                                Deck.get(card2).setMatched();
+                                player2.sumPoints(1);
+                                System.out.println("PUNTOS JUGADOR 1! : " + player1.getPoints());
+                                System.out.println("PUNTOS JUGADOR 2! : " + player2.getPoints());
+
+                                deck.printCardsMatrix(Deck, cards);
+
+
+                            }else{
+                                System.out.println("NOT MATCH");                                
+                                player1Turn = true;
+                                player2Turn = false;
+                                System.out.println("PUNTOS JUGADOR 1! : " + player1.getPoints());
+                                System.out.println("PUNTOS JUGADOR 2! : " + player2.getPoints());
+
+                                deck.printCardsMatrix(Deck, cards);
+                            } 
+                        }  
+                }
             }
         } 
     }
-
-    
 }
