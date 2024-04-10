@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -29,6 +30,12 @@ public class registerController implements Initializable {
     private PasswordField passwordP1;
     @FXML
     private PasswordField passwordP2;
+    @FXML 
+    private Button registerLeft;
+    @FXML 
+    private Button registerRight;
+    
+    private boolean consulta;
     
     String user1;
     String password1;
@@ -41,24 +48,61 @@ public class registerController implements Initializable {
     }
 
     @FXML
-    public void registerUser() {
+    public void registerUser1() {
         user1 = labelP1.getText().toLowerCase();
-        user2 = labelP2.getText().toLowerCase();
         password1 = passwordP1.getText().toLowerCase();
-        password2 = passwordP2.getText().toLowerCase();
-
-        Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("abpdefault", true);
+        
+        if (user1.length()>0 && password1.length()>=5){
+                Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("abpdefault", true);
+                String query = String.format("insert into jugadores (name,contraseña) values (" + "'" + user1 + "'" + " , " + "'" + password1 + "'" + ")");
+                consulta = Bd.consultaModificacion(gestor, query);
+                gestor.cerrar_Conexion(true);
+                if (consulta){
+                    registerLeft.setStyle("-fx-background-color: green;");
+                    labelP1.setStyle("-fx-border-color: green;");
+                    }
+                else if (!consulta){
+                    registerLeft.setStyle("-fx-background-color: red;");
+                    labelP1.setStyle("-fx-border-color: red;");
+                    }
+                }
+        else {
+            // Establecer estilo de error al botón
+            registerLeft.setStyle("-fx-background-color: red;");
+            labelP1.setStyle("-fx-border-color: red;");
+            }
+        }
     
-        String query = String.format("insert into jugadores (name,contraseña) values (" + " ' " + user1 + " ' " + " , " + " ' " + password1 + " ' " + ")");
-        boolean consulta = Bd.consultaModificacion(gestor, query);
-        gestor.cerrar_Conexion(true);
-        System.out.println(user1 + "  " + password1);
+    @FXML
+    public void registerUser2() {
+        user2 = labelP2.getText().toLowerCase();
+        password2 = passwordP2.getText().toLowerCase();
+        
+          if (user2.length()>0 && password2.length()>=5){
+                Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("abpdefault", true);
+                String query = String.format("insert into jugadores (name,contraseña) values (" + "'" + user2 + "'" + " , " + "'" + password2 + "'" + ")");
+                consulta = Bd.consultaModificacion(gestor, query);
+                gestor.cerrar_Conexion(true);
+                if (consulta){
+                    registerRight.setStyle("-fx-background-color: green;");
+                    labelP2.setStyle("-fx-border-color: green;");
+                }
+                else if (!consulta){
+                    registerRight.setStyle("-fx-background-color: red;");
+                    labelP2.setStyle("-fx-border-color: red;");
+                    }
+                }
+            else {
+            // Establecer estilo de error al botón
+            registerRight.setStyle("-fx-background-color: red;");
+            labelP2.setStyle("-fx-border-color: red;");
+            }
         }
     
 //     public void loginUser(String nickName, String password) {
 //        Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("defaultabp", true);
 //    
-//        String query = String.format("select jugadores where (name, contraseña) VALUES ("+nickName+password+")");
+//        String query = String.format("select jugadores where (name) VALUES ("+nickName+")");
 //    
 //        boolean consulta = Bd.consultaModificacion(gestor, query);
 //    
