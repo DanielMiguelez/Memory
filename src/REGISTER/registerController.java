@@ -46,7 +46,7 @@ public class registerController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         
     }
-
+    
     @FXML
     public void registerUser1() {
         user1 = labelP1.getText().toLowerCase();
@@ -99,15 +99,25 @@ public class registerController implements Initializable {
             }
         }
     
-//     public void loginUser(String nickName, String password) {
-//        Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("defaultabp", true);
-//    
-//        String query = String.format("select jugadores where (name) VALUES ("+nickName+")");
-//    
-//        boolean consulta = Bd.consultaModificacion(gestor, query);
-//    
-//        gestor.cerrar_Conexion(true);
-//    }    
+     public void loginUser1() {
+        Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("abpdefault", true);
+        user1 = labelP1.getText().toLowerCase();
+        password1 = passwordP1.getText().toLowerCase();
+        
+        //String query = String.format("SELECT name, contraseña FROM jugadores WHERE name =" + "'" + user2 + "'" +  AND contraseña = '%s'", , password2);
+        String query = String.format("select (name , contraseña) from jugadores where name = " + "'" + user1 + "'" + " AND contraseña=" + "'" + password1 + "'");
+        String[][]resultados  = Bd.consultaSelect(gestor, query);
+        gestor.cerrar_Conexion(true);
+        
+         for (int i = 0; i < resultados.length; i++) {
+             for (int j = 0; j < resultados.length; j++) {
+                 System.out.println(resultados[i][j]);
+             }
+         }
+            
+            
+        }    
     
+     
     
 }
