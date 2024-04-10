@@ -9,12 +9,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login.FXMLDocumentController">
+<AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="REGISTER.registerController">
     <stylesheets>
         <URL value="@fxmldocument.css" />
     </stylesheets>
    <children>
-      <ImageView fitHeight="720.0" fitWidth="1280.0" opacity="0.64" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="720.0" fitWidth="1280.0" opacity="0.49" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@../media/castle.jpg" />
          </image>
@@ -22,18 +22,18 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <ImageView fitHeight="396.0" fitWidth="963.0" layoutX="158.0" layoutY="57.0" opacity="0.87" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="220.0" fitWidth="1061.0" layoutX="111.0" layoutY="51.0" opacity="0.87" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/register.png" />
          </image></ImageView>
-      <TextField layoutX="279.0" layoutY="470.0" prefHeight="40.0" prefWidth="250.0" />
-      <PasswordField layoutX="279.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" />
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="279.0" layoutY="587.0" mnemonicParsing="false" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="413.0" layoutY="587.0" mnemonicParsing="false" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
-      <TextField layoutX="749.0" layoutY="470.0" prefHeight="40.0" prefWidth="250.0" />
-      <PasswordField layoutX="749.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" />
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="749.0" layoutY="587.0" mnemonicParsing="false" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="883.0" layoutY="587.0" mnemonicParsing="false" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
+      <TextField fx:id="labelP1" layoutX="279.0" layoutY="470.0" prefHeight="40.0" prefWidth="250.0" />
+      <PasswordField fx:id="passwordP1" layoutX="279.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" />
+      <Button fx:id="loginLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="279.0" layoutY="587.0" mnemonicParsing="false" onAction="#loginUser1" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
+      <Button fx:id="registerLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="413.0" layoutY="587.0" mnemonicParsing="false"  onAction="#registerUser1" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
+      <TextField fx:id="labelP2" layoutX="749.0" layoutY="470.0" prefHeight="40.0" prefWidth="250.0" />
+      <PasswordField fx:id="passwordP2" layoutX="749.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" />
+      <Button fx:id="loginRight" alignment="CENTER" contentDisplay="CENTER" layoutX="749.0" layoutY="587.0" mnemonicParsing="false" onAction="#loginUser2" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
+      <Button fx:id="registerRight" alignment="CENTER" contentDisplay="CENTER" layoutX="883.0" layoutY="587.0" mnemonicParsing="false" onAction="#registerUser2" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
       <ImageView fitHeight="67.0" fitWidth="250.0" layoutX="279.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/player1.png" />

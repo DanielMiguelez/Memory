@@ -12,33 +12,130 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import utilidades.bbdd.Bd;
 import static utilidades.bbdd.Bd.crearBBDD;
 import utilidades.bbdd.Gestor_conexion_POSTGRE;
 
 public class registerController implements Initializable {
     
-    public static void mostrar(String [][] vec){
-        for(int i=0; i<vec.length; i++){
-            for(int j=0; j<vec.length; j++)
-                System.out.println(vec[i][j]+" ");
-            System.out.println();
-        }
+    @FXML
+    private TextField labelP1;
+    @FXML
+    private TextField labelP2;
+    @FXML
+    private PasswordField passwordP1;
+    @FXML
+    private PasswordField passwordP2;
+    @FXML 
+    private Button registerLeft;
+    @FXML 
+    private Button registerRight;
+    
+    private boolean consulta;
+    
+    String user1;
+    String password1;
+    String user2;
+    String password2;
+        
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
     }
     
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        String vec[][];
-       
-       
-        Gestor_conexion_POSTGRE gestor= new Gestor_conexion_POSTGRE("defaultabp",true);
-        //Bd.consultaModificacion(gestor, "delete from jugadores where nick='jose' ");
-        vec=Bd.consultaSelect(gestor, "select * from jugadores");
+    @FXML
+    public void registerUser1() {
+        user1 = labelP1.getText().toLowerCase();
+        password1 = passwordP1.getText().toLowerCase();
+        
+        if (user1.length()>0 && password1.length()>=5){
+                Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
+                String query = String.format("insert into jugadores (nick_jugador,contraseña) values (" + "'" + user1 + "'" + " , " + "'" + password1 + "'" + ")");
+                consulta = Bd.consultaModificacion(gestor, query);
+                gestor.cerrar_Conexion(true);
+                if (consulta){
+                    registerLeft.setStyle("-fx-background-color: green;");
+                    labelP1.setStyle("-fx-border-color: green;");
+                    }
+                else if (!consulta){
+                    registerLeft.setStyle("-fx-background-color: red;");
+                    labelP1.setStyle("-fx-border-color: red;");
+                    }
+                }
+        else {
+            // Establecer estilo de error al botón
+            registerLeft.setStyle("-fx-background-color: red;");
+            labelP1.setStyle("-fx-border-color: red;");
+            }
+        }
+    
+    @FXML
+    public void registerUser2() {
+        user2 = labelP2.getText().toLowerCase();
+        password2 = passwordP2.getText().toLowerCase();
+        
+          if (user2.length()>0 && password2.length()>=5){
+                Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
+                String query = String.format("insert into jugadores (nick_jugador,contraseña) values (" + "'" + user2 + "'" + " , " + "'" + password2 + "'" + ")");
+                consulta = Bd.consultaModificacion(gestor, query);
+                gestor.cerrar_Conexion(true);
+                if (consulta){
+                    registerRight.setStyle("-fx-background-color: green;");
+                    labelP2.setStyle("-fx-border-color: green;");
+                }
+                else if (!consulta){
+                    registerRight.setStyle("-fx-background-color: red;");
+                    labelP2.setStyle("-fx-border-color: red;");
+                    }
+                }
+            else {
+            // Establecer estilo de error al botón
+            registerRight.setStyle("-fx-background-color: red;");
+            labelP2.setStyle("-fx-border-color: red;");
+            }
+        }
+    
+     public void loginUser1() {
+        Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
+        user1 = labelP1.getText().toLowerCase();
+        password1 = passwordP1.getText().toLowerCase();
+        
+        String temp = "";
+        
+        String query = String.format("select (nick_jugador , contraseña) from jugadores where nick_jugador = " + "'" + user1 + "'" + " AND contraseña=" + "'" + password1 + "'");
+        String[][]resultados  = Bd.consultaSelect(gestor, query);
         gestor.cerrar_Conexion(true);
-        if(vec!=null)
-            mostrar(vec);
-        else
-            System.out.println("vacio"); 
-    }    
+        
+        for (int i = 0; i < resultados.length; i++) {
+             for (int j = 0; j < resultados.length; j++) {
+                 //System.out.println(resultados[i][j]);
+                 if (resultados[i][j]!=null)
+                    temp += resultados[i][j];
+                }
+            }
+        System.out.println(temp);
+        }    
+    
+     public void loginUser2() {
+        Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
+        user2 = labelP2.getText().toLowerCase();
+        password2 = passwordP2.getText().toLowerCase();
+        
+        String query = String.format("select (nick_jugador , contraseña) from jugadores where nick_jugador = " + "'" + user2 + "'" + " AND contraseña=" + "'" + password2 + "'");
+        String[][]resultados  = Bd.consultaSelect(gestor, query);
+        gestor.cerrar_Conexion(true);
+        
+         for (int i = 0; i < resultados.length; i++) {
+             for (int j = 0; j < resultados.length; j++) {
+                 System.out.println(resultados[i][j]);
+                }
+            }   
+        }    
+    
+     
+    
 }
