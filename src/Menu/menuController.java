@@ -64,19 +64,14 @@ public class menuController implements Initializable {
 //            mediaPlayer.play();
             
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/REGISTER/register.fxml"));
-            
             Parent root = loader.load();
-            
-//            Game.gameController controller = loader.getController();
-            
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            
-            stage.setScene(scene);
-            stage.show();
-            
-            
-            
+            // Obtener la escena actual y el escenario
+            Scene currentScene = playButton.getScene();
+            Stage stage = (Stage) currentScene.getWindow();
+
+            // Reemplazar la escena actual con la escena del registro
+            currentScene.setRoot(root);
+            stage.show(); 
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
         }  
@@ -87,10 +82,12 @@ public class menuController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ranking/ranking.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            
-            stage.setScene(scene);
+            // Obtener la escena actual y el escenario
+            Scene currentScene = rankingButton.getScene();
+            Stage stage = (Stage) currentScene.getWindow();
+
+            // Reemplazar la escena actual con la escena del registro
+            currentScene.setRoot(root);
             stage.show();
             
             String path = "@/../src/media/peach.mp3";
@@ -124,10 +121,12 @@ public class menuController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Options/Options.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            
-            stage.setScene(scene);
+            // Obtener la escena actual y el escenario
+            Scene currentScene = settingsButton.getScene();
+            Stage stage = (Stage) currentScene.getWindow();
+
+            // Reemplazar la escena actual con la escena del registro
+            currentScene.setRoot(root);
             stage.show();
             
             
@@ -142,11 +141,13 @@ public class menuController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu/Rules.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            
-            stage.setScene(scene);
-            stage.show();
+            // Obtener la escena actual y el escenario
+//            Scene currentScene = settingsButton.getScene();
+//            Stage stage = (Stage) currentScene.getWindow();
+//
+//            // Reemplazar la escena actual con la escena del registro
+//            currentScene.setRoot(root);
+//            stage.show();
            
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);

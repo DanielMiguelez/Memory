@@ -177,13 +177,16 @@ public class registerController implements Initializable {
     
      public void openGame(){
         try {
-           
 //            currentStage.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Game/game.fxml"));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
+            // Obtener la escena actual y el escenario
+            Scene currentScene = loginLeft.getScene();
+            Scene currentScene2 = loginRight.getScene();
+            Stage stage = (Stage) currentScene.getWindow();
+            Stage stage2 = (Stage) currentScene2.getWindow();
+            // Reemplazar la escena actual con la escena del registro
+            currentScene.setRoot(root);
             stage.show();
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
