@@ -47,6 +47,8 @@ public class registerController implements Initializable {
     private Button loginLeft;
     @FXML 
     private Button loginRight;
+    @FXML 
+    private Button back;
     
     private boolean consulta;
     boolean logged = false;
@@ -179,6 +181,24 @@ public class registerController implements Initializable {
         try {
 //            currentStage.close();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Game/game.fxml"));
+            Parent root = loader.load();
+            // Obtener la escena actual y el escenario
+            Scene currentScene = loginLeft.getScene();
+            Scene currentScene2 = loginRight.getScene();
+            Stage stage = (Stage) currentScene.getWindow();
+            Stage stage2 = (Stage) currentScene2.getWindow();
+            // Reemplazar la escena actual con la escena del registro
+            currentScene.setRoot(root);
+            stage.show();
+        } catch (IOException ex) {
+            Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+     
+     public void openMenu(){
+        try {
+//            currentStage.close();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu/menu.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual y el escenario
             Scene currentScene = loginLeft.getScene();

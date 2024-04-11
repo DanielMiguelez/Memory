@@ -14,7 +14,7 @@
             <Image url="@../media/shuffle.gif" />
          </image>
          <effect>
-            <DropShadow />
+            <DropShadow/>
          </effect>
       </ImageView>
       <Button fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" layoutX="877.0" layoutY="184.0" mnemonicParsing="false" onAction="#openRegister" opacity="0.84" prefHeight="72.0" prefWidth="363.0" stylesheets="@menu.css" text="PLAY">
