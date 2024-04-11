@@ -6,7 +6,6 @@
 package Game;
 
 import Menu.menuController;
-import REGISTER.registerController;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -20,15 +19,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
-import memory.Card;
-import memory.Deck;
 
 /**
  * FXML Controller class
@@ -43,105 +39,24 @@ public class gameController implements Initializable {
     @FXML
     private FlowPane board;
     
-    @FXML
-    private Deck deck;
-    
-    @FXML
-    private Label nameP1;
-    
-    @FXML
-    private Label nameP2;
-    
-    private int tamTab;
-    private int desp;
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        deck = new Deck();
-
-        Card Mario = new Card("Mario", 1, new Image("/media/mario.png"));
-        Card Luigi = new Card("Luigi", 2, new Image("/media/luigi.png"));
-        Card Wario = new Card("Wario", 3, new Image("/media/wario.png"));
-        Card Toad = new Card("Toad", 4, new Image("/media/toad.png"));
-        Card Yoshi = new Card("Yoshi", 5, new Image("/media/yoshi.png"));
-        Card Peach = new Card("Peach", 6, new Image("/media/peach.png"));
-        Card Bowser = new Card("Bowser", 7, new Image("/media/donkeyKong.png"));
-        Card Koopa = new Card("Koopa", 8, new Image("/media/koopa.png"));
-
-        // AGREGAR CARTAS AL MAZO 2 VECES, Y TENEMOS LAS 16.
-        deck.addCards(Mario);
-        deck.addCards(Luigi);
-        deck.addCards(Wario);
-        deck.addCards(Toad);
-        deck.addCards(Yoshi);
-        deck.addCards(Peach);
-        deck.addCards(Bowser);
-        deck.addCards(Koopa);
-        
-        deck.addCards(Mario);
-        deck.addCards(Luigi);
-        deck.addCards(Wario);
-        deck.addCards(Toad);
-        deck.addCards(Yoshi);
-        deck.addCards(Peach);
-        deck.addCards(Bowser);
-        deck.addCards(Koopa);
-        
-        //REPETIDAS 3 VECES
-        deck.addCards(Mario);
-        deck.addCards(Luigi);
-        deck.addCards(Wario);
-        deck.addCards(Toad);
-        deck.addCards(Yoshi);
-        deck.addCards(Peach);
-        deck.addCards(Bowser);
-        deck.addCards(Koopa); 
-//        deck.addCards(Mario);
-//        deck.addCards(Luigi);
-//        deck.addCards(Wario);
-//        deck.addCards(Toad);
-//        deck.addCards(Yoshi);
-//        deck.addCards(Peach);
-//        deck.addCards(Bowser);
-//        deck.addCards(Koopa);
-     
-        
-        // Barajar el mazo
-        deck.shuffle();
-        
-        tamTab = deck.getCards().size();
-       
-        
-        initializeImageView(tamTab);
+        initializeImageView();
     }
     
-    public void setNameP1(String n1) {
-        nameP1.setText(n1);
-        }
-    public void setNameP2(String n2) {
-        nameP2.setText(n2);
-        }
-    
-private void initializeImageView(int tamTab)
+private void initializeImageView()
     {
-        
-        
-        
-        if (tamTab==16)
-            desp = 8;
-        for (int i=0+desp; i<tamTab+desp;i++)
+        for (int i=0; i<board.getChildren().size();i++)
         {
             //"cast" the Node to be of type ImageView
-            ImageView imageView = (ImageView) board.getChildren().get(i-desp);
+            ImageView imageView = (ImageView) board.getChildren().get(i);
             imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
             imageView.setUserData(i);
 
             //Al pulsar una carta te dice su indice de 0 a 15 !
             
             imageView.setOnMouseClicked(event -> {
-                int index = (int) imageView.getUserData()-desp;
-                System.out.println(index);
-                imageView.setImage(deck.getCards().get(index).getImage());
+                System.out.println((int) imageView.getUserData());
             });
         }
     }

@@ -12,6 +12,7 @@ public class Card {
     private boolean turned;
     private String image;
     
+    
     public Card (String name, int id){
         this.name = name;
         this.id = id;
@@ -44,7 +45,7 @@ public class Card {
     public String getImage() {
         return image;
     }
-    
+    @Override
     public String toString(){
         String info = "";
         return info + name + " " + id + " " +turned;

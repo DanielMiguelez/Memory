@@ -50,27 +50,24 @@ public class menuController implements Initializable {
     }    
     
     @FXML
-    private void openGame() {
+    private void openRegister() {
         try {
-           
-            String path = "@/../src/media/koopa.mp3";
+//            String path = "@/../src/media/koopa.mp3";
+//            Media sound = new Media(new File(path).toURI().toString());
+//            mediaPlayer = new MediaPlayer(sound);
+//            //Para repetir el sonido en bucle
+//            /*
+//            mediaPlayer.setOnEndOfMedia(() -> {
+//            mediaPlayer.seek(Duration.ZERO);
+//            });*/
+//            
+//            mediaPlayer.play();
             
-            Media sound = new Media(new File(path).toURI().toString());
-            mediaPlayer = new MediaPlayer(sound);
-            
-            //Para repetir el sonido en bucle
-            /*
-            mediaPlayer.setOnEndOfMedia(() -> {
-            mediaPlayer.seek(Duration.ZERO);
-            });*/
-            
-            mediaPlayer.play();
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Game/game.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/REGISTER/register.fxml"));
             
             Parent root = loader.load();
             
-            Game.gameController controller = loader.getController();
+//            Game.gameController controller = loader.getController();
             
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -82,10 +79,7 @@ public class menuController implements Initializable {
             
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-
-        
+        }  
     }
 
     @FXML

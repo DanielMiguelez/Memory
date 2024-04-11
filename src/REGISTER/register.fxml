@@ -9,10 +9,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
+
 <AnchorPane id="AnchorPane" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="REGISTER.registerController">
-    <stylesheets>
-        <URL value="@fxmldocument.css" />
-    </stylesheets>
    <children>
       <ImageView fitHeight="720.0" fitWidth="1280.0" opacity="0.49" pickOnBounds="true" smooth="false">
          <image>
