@@ -100,7 +100,6 @@ private void initializeImageView(int tamTab)
             
             imageView.setOnMouseClicked(event -> {
                 int index = (int) imageView.getUserData()-desp;
-                System.out.println(index);
                 imageView.setImage(deck.getCards().get(index).getImage());
             });
         }
