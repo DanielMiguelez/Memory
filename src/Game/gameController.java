@@ -53,19 +53,19 @@ public class gameController implements Initializable {
         
         deck = new Deck();
 
-        Card Mario = new Card("Mario", 1, new Image("/media/mario.png"));
-        Card Luigi = new Card("Luigi", 2, new Image("/media/luigi.png"));
-        Card Wario = new Card("Wario", 3, new Image("/media/wario.png"));
-        Card Toad = new Card("Toad", 4, new Image("/media/toad.png"));
-        Card Yoshi = new Card("Yoshi", 5, new Image("/media/yoshi.png"));
-        Card Peach = new Card("Peach", 6, new Image("/media/peach.png"));
-        Card Bowser = new Card("Bowser", 7, new Image("/media/donkeyKong.png"));
-        Card Koopa = new Card("Koopa", 8, new Image("/media/koopa.png"));
+        Card Mario = new Card("Mario", 1, new Image("/media/800px-Mario_Mario_Party_Superstars.png"));
+        Card Luigi = new Card("Luigi", 2, new Image("/media/Luigi1.png"));
+        Card donkeyKong = new Card("donkeyKong", 3, new Image("/media/donkeyKong.png"));
+        Card Toad = new Card("Toad", 4, new Image("/media/download.jpg"));
+        Card Yoshi = new Card("Yoshi", 5, new Image("/media/setaZul.png"));
+        Card Peach = new Card("Peach", 6, new Image("/media/luigiSide_1.png"));
+        Card Bowser = new Card("Bowser", 7, new Image("/media/marioSide.png"));
+        Card Koopa = new Card("Koopa", 8, new Image("/media/unnamed.png"));
 
         // AGREGAR CARTAS AL MAZO 2 VECES, Y TENEMOS LAS 16.
         deck.addCards(Mario);
         deck.addCards(Luigi);
-        deck.addCards(Wario);
+        deck.addCards(donkeyKong);
         deck.addCards(Toad);
         deck.addCards(Yoshi);
         deck.addCards(Peach);
@@ -74,32 +74,32 @@ public class gameController implements Initializable {
         
         deck.addCards(Mario);
         deck.addCards(Luigi);
-        deck.addCards(Wario);
+        deck.addCards(donkeyKong);
         deck.addCards(Toad);
         deck.addCards(Yoshi);
         deck.addCards(Peach);
         deck.addCards(Bowser);
         deck.addCards(Koopa);
+        
+        deck.shuffle();
     
         tamTab = deck.getCards().size();
-        initializeImageView(tamTab);
+        flipCards(tamTab);
     }
     
-private void initializeImageView(int tamTab)
-    {
+private void flipCards(int tamTab){
         if (tamTab==16)
             desp = 8;
-        for (int i=0+desp; i<tamTab+desp;i++)
-        {
+        for (int i=0+desp; i<tamTab+desp;i++){
             ImageView imageView = (ImageView) board.getChildren().get(i);
             imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
-            imageView.setStyle("-fx-border-color: black; -fx-border-width: 150px; -fx-background-color: transparent;");
             imageView.setUserData(i);
 
             //Al pulsar una carta te dice su indice de 0 a 15 !
             
             imageView.setOnMouseClicked(event -> {
                 int index = (int) imageView.getUserData()-desp;
+                System.out.println(index);
                 imageView.setImage(deck.getCards().get(index).getImage());
             });
         }
@@ -143,14 +143,30 @@ private void hoverCards(MouseEvent event) {
 }
 @FXML
 private void unhoverCards(MouseEvent event) {
-
   // Get the ImageView that was hovered over
   ImageView hoveredCard = (ImageView) event.getTarget();
-
   // Check if the hovered target is actually an ImageView
   if (hoveredCard != null) {
     // Apply shadow effect to the hovered card
     hoveredCard.setEffect(null);
         }
     }
+// Logica de acierto de cartas
+
+private void matchCards(){
+       
+    
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 }

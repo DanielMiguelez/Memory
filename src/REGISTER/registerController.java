@@ -25,6 +25,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import memory.Player;
 import utilidades.bbdd.Bd;
 import static utilidades.bbdd.Bd.crearBBDD;
 import utilidades.bbdd.Gestor_conexion_POSTGRE;
@@ -56,9 +57,18 @@ public class registerController implements Initializable {
     
     String user1;
     String password1;
+    int id;
+    String nick_jugador;
+    int playerPoints1;
+    int victories;
+    
     String user2;
     String password2;
+    int id2;
+    int playerPoints2;
+    int victories2;
 
+    
         
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -124,7 +134,8 @@ public class registerController implements Initializable {
         user1 = labelP1.getText().toLowerCase();
         password1 = passwordP1.getText().toLowerCase();
         
-        String query = String.format("select (nick_jugador , contraseña) from jugadores where nick_jugador = " + "'" + user1 + "'" + " AND contraseña=" + "'" + password1 + "'");
+        
+        String query = String.format("select id_jugador, nick_jugador, nivel_jugador, contraseña from jugadores where nick_jugador = " + "'" + user1 + "'" + " AND contraseña=" + "'" + password1 + "'");
         String[][]resultados   = Bd.consultaSelect(gestor, query);
         gestor.cerrar_Conexion(true);
         
@@ -137,6 +148,16 @@ public class registerController implements Initializable {
                     loginLeft.setStyle("-fx-background-color: green;");
                     labelP1.setStyle("-fx-border-color: green;");
                     logged = true;
+                   
+                   Player player1 = new Player(id, nick_jugador,playerPoints1, victories2 ); 
+ 
+                   id = Integer.parseInt(resultados[0][0]);
+                   nick_jugador = (resultados[0][1]);
+                   //playerPoints1 = Integer.parseInt(resultados[0][2]);
+                   victories2 = Integer.parseInt(resultados[0][3]);
+                           
+                   System.out.println(player1);
+                   
                     if (logged2)
                        openGame();
             } 
@@ -184,9 +205,7 @@ public class registerController implements Initializable {
             Parent root = loader.load();
             // Obtener la escena actual y el escenario
             Scene currentScene = loginLeft.getScene();
-            Scene currentScene2 = loginRight.getScene();
             Stage stage = (Stage) currentScene.getWindow();
-            Stage stage2 = (Stage) currentScene2.getWindow();
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
             stage.show();
@@ -202,9 +221,7 @@ public class registerController implements Initializable {
             Parent root = loader.load();
             // Obtener la escena actual y el escenario
             Scene currentScene = loginLeft.getScene();
-            Scene currentScene2 = loginRight.getScene();
             Stage stage = (Stage) currentScene.getWindow();
-            Stage stage2 = (Stage) currentScene2.getWindow();
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
             stage.show();

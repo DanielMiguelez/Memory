@@ -5,15 +5,17 @@
  */
 package memory;
 
+import javafx.scene.image.Image;
+
 public class Card {
     
     public String name;
     private int id;
     private boolean turned;
-    private String image;
+    private Image image;
     
     
-    public Card (String name, int id){
+    public Card (String name, int id,Image image){
         this.name = name;
         this.id = id;
         this.turned = false;
@@ -42,7 +44,7 @@ public class Card {
      public void setCovered(){
         this.turned = false;
     }
-    public String getImage() {
+    public Image getImage() {
         return image;
     }
     @Override
