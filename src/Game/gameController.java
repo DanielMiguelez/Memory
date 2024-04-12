@@ -43,6 +43,14 @@ public class gameController implements Initializable {
     @FXML
     private Label nameP2;
     @FXML
+     private Label levelP1;
+    @FXML
+    private Label levelP2;
+    @FXML
+     private Label victoriesP1;
+    @FXML
+    private Label victoriesP2;
+    @FXML
     private Button exitButton;
     
     @FXML
@@ -156,19 +164,14 @@ private void unhoverCards(MouseEvent event) {
         }
     }
 
-public void labelNames(String n1,String n2){
+public void labelNames(String n1, String n2, String l1, String l2, String V1, String V2){
     nameP1.setText(n1);
     nameP2.setText(n2);
+    levelP1.setText(levelP1.getText() + " : " + l1);
+    levelP2.setText(levelP2.getText() + " : " + l2);
+    victoriesP1.setText(victoriesP1.getText() + " : " + V1);
+    victoriesP2.setText(victoriesP2.getText() + " : " + V1);
+   }
 }
 
 
-
-
-
-
-
-
-
-
-
-}

@@ -103,12 +103,12 @@
          </font>
       </Label>
       <Circle fill="WHITE" layoutX="154.0" layoutY="515.0" radius="66.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label layoutX="57.0" layoutY="601.0" text="LEVEL" textFill="#f2ff00">
+      <Label fx:id="levelP1" layoutX="57.0" layoutY="601.0" text="LEVEL" textFill="#f2ff00">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="57.0" layoutY="646.0" text="POINTS" textFill="#ffee00">
+      <Label fx:id="victoriesP1" layoutX="57.0" layoutY="646.0" text="POINTS" textFill="#ffee00">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
@@ -124,12 +124,12 @@
             <Image url="@../media/setaZul.png" />
          </image>
       </ImageView>
-      <Label layoutX="1071.0" layoutY="601.0" text="LEVEL" textFill="WHITE">
+      <Label fx:id="levelP2" layoutX="1071.0" layoutY="601.0" text="LEVEL" textFill="WHITE">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Label layoutX="1071.0" layoutY="648.0" text="POINTS" textFill="WHITE">
+      <Label fx:id="victoriesP2" layoutX="1071.0" layoutY="648.0" text="POINTS" textFill="WHITE">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>

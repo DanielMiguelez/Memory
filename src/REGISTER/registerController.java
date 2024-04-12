@@ -51,10 +51,18 @@ public class registerController implements Initializable {
     private Button loginRight;
     @FXML 
     private Button back;
-
+    @FXML
     private String nameP1;
- 
+    @FXML
     private String nameP2;
+    //victorias y nivel de jugadores
+  
+
+    private String levelP1;
+    private String levelP2;
+
+    private String victoriesP1;
+    private String victoriesP2;
     
     private boolean consulta;
     boolean logged = false;
@@ -147,7 +155,7 @@ public class registerController implements Initializable {
                     loginLeft.setStyle("-fx-background-color: green;");
                     labelP1.setStyle("-fx-border-color: green;");
                     logged = true;
-                    nameP1=user1;
+
                    id = Integer.parseInt(resultados[0][0]);
                    name = (resultados[0][1]);
                    nivel= Integer.parseInt(resultados[0][2]);
@@ -155,6 +163,9 @@ public class registerController implements Initializable {
                    password = (resultados[0][4]);
                    Player player1 = new Player(id,name,victories,nivel,password);  
                    System.out.println(player1);
+                   nameP1 = name;
+                   levelP1 = nivel+"";
+                   victoriesP1 = victories+"";
                     if (logged2)
                        openGame();
             } 
@@ -184,7 +195,7 @@ public class registerController implements Initializable {
                     loginRight.setStyle("-fx-background-color: green;");
                     labelP2.setStyle("-fx-border-color: green;");
                     logged2 = true;
-                    nameP2=user2;
+                    
                    id = Integer.parseInt(resultados[0][0]);
                    name = (resultados[0][1]);
                    nivel = Integer.parseInt(resultados[0][2]);
@@ -192,6 +203,9 @@ public class registerController implements Initializable {
                    password = (resultados[0][4]);
                    Player player2 = new Player(id,name,victories,nivel,password);
                    System.out.println(player2);
+                    nameP2 = name;
+                    levelP2 = nivel+"";
+                    victoriesP2 = victories+"";
                     if (logged)
                         openGame();
             }
@@ -213,7 +227,8 @@ public class registerController implements Initializable {
             Stage stage = (Stage) currentScene.getWindow();
             //cogemos los textos de los labels y se los pasamos al metodo del game controler
             gameController game = loader.getController();
-            game.labelNames(nameP1,nameP2);
+            game.labelNames(nameP1,nameP2,victoriesP1,levelP1,victoriesP2,levelP2);
+
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
             stage.show();
