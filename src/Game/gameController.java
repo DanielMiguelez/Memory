@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,7 +38,10 @@ import memory.Deck;
  * @author aronbp
  */
 public class gameController implements Initializable {
-    
+    @FXML
+    private Label nameP1;
+    @FXML
+    private Label nameP2;
     @FXML
     private Button exitButton;
     
@@ -151,12 +155,10 @@ private void unhoverCards(MouseEvent event) {
     hoveredCard.setEffect(null);
         }
     }
-// Logica de acierto de cartas
 
-private void matchCards(){
-       
-    
-    
+public void labelNames(String n1,String n2){
+    nameP1.setText(n1);
+    nameP2.setText(n2);
 }
 
 

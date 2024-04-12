@@ -6,20 +6,20 @@
 package memory;
 
 public class Player {
-    
-    public String name;
-    public String password;
-    public int victories;
-    public int points;
     public int id;
-    
-    public Player (int id,String name,int points, int victories){
+    public String name;
+    public int victories;
+    public int nivel;
+    public String password;
+
+    public Player (int id,String name,int victories,int nivel,String password){
+        this.id = id;
         this.name = name;
+        this.victories = victories;
+        this.nivel = nivel;
         this.password = password;
-        this.points = 0;
-        this.victories = 0;
-        this.id = 0;
     }
+    
  
     public String getName(){
         return name;
@@ -29,16 +29,13 @@ public class Player {
         return password;
     }
     
-     public int getPoints(){
-        return points;
-    }
-     
-      public int getVictories(){
+     public int getVictories(){
         return victories;
     }
+
     
     public void sumPoints(int points){
-        this.points += points;
+        this.victories += victories;
     }
     
     public void sumVictories(int victories){
@@ -47,7 +44,7 @@ public class Player {
     
     public String toString(){
         String info = "";
-        return info + "name : " + name + "password : " + password + "points : " + points + "Victories : " + victories;
+        return info + "id : " + id + " name : " + name + " victories : " + victories + " Nivel : "+nivel + " password : " + password ;
     }
 
 }

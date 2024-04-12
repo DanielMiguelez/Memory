@@ -7,6 +7,7 @@ package REGISTER;
  */
 
 
+import Game.gameController;
 import Menu.menuController;
 import java.io.IOException;
 import java.net.URL;
@@ -50,6 +51,10 @@ public class registerController implements Initializable {
     private Button loginRight;
     @FXML 
     private Button back;
+
+    private String nameP1;
+ 
+    private String nameP2;
     
     private boolean consulta;
     boolean logged = false;
@@ -57,19 +62,15 @@ public class registerController implements Initializable {
     
     String user1;
     String password1;
-    int id;
-    String nick_jugador;
-    int playerPoints1;
-    int victories;
+    public int id;
+    public String name;
+    public int victories;
+    public int nivel;
+    public String password;
     
     String user2;
     String password2;
-    int id2;
-    int playerPoints2;
-    int victories2;
 
-    
-        
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
@@ -133,9 +134,7 @@ public class registerController implements Initializable {
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
         user1 = labelP1.getText().toLowerCase();
         password1 = passwordP1.getText().toLowerCase();
-        
-        
-        String query = String.format("select id_jugador, nick_jugador, nivel_jugador, contraseña from jugadores where nick_jugador = " + "'" + user1 + "'" + " AND contraseña=" + "'" + password1 + "'");
+        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), COALESCE(nivel_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + user1 + "'" + " AND contraseña=" + "'" + password1 + "'");
         String[][]resultados   = Bd.consultaSelect(gestor, query);
         gestor.cerrar_Conexion(true);
         
@@ -148,16 +147,14 @@ public class registerController implements Initializable {
                     loginLeft.setStyle("-fx-background-color: green;");
                     labelP1.setStyle("-fx-border-color: green;");
                     logged = true;
-                   
-                   Player player1 = new Player(id, nick_jugador,playerPoints1, victories2 ); 
- 
+                    nameP1=user1;
                    id = Integer.parseInt(resultados[0][0]);
-                   nick_jugador = (resultados[0][1]);
-                   //playerPoints1 = Integer.parseInt(resultados[0][2]);
-                   victories2 = Integer.parseInt(resultados[0][3]);
-                           
+                   name = (resultados[0][1]);
+                   nivel= Integer.parseInt(resultados[0][2]);
+                   victories = Integer.parseInt(resultados[0][3]);
+                   password = (resultados[0][4]);
+                   Player player1 = new Player(id,name,victories,nivel,password);  
                    System.out.println(player1);
-                   
                     if (logged2)
                        openGame();
             } 
@@ -174,19 +171,27 @@ public class registerController implements Initializable {
         user2 = labelP2.getText().toLowerCase();
         password2 = passwordP2.getText().toLowerCase();
  
-        String query = String.format("select (nick_jugador , contraseña) from jugadores where nick_jugador = " + "'" + user2 + "'" + " AND contraseña=" + "'" + password2 + "'");
+        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), COALESCE(nivel_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + user2 + "'" + " AND contraseña=" + "'" + password2 + "'");
         String[][]resultados  = Bd.consultaSelect(gestor, query);
         gestor.cerrar_Conexion(true);
-        
+
         if (resultados!=null){
             if(user2.equals(user1)){
                 loginRight.setStyle("-fx-background-color: red;");
                 labelP2.setStyle("-fx-border-color: red;");
-                logged = false;
+                logged2 = false;
             }else{
                     loginRight.setStyle("-fx-background-color: green;");
                     labelP2.setStyle("-fx-border-color: green;");
                     logged2 = true;
+                    nameP2=user2;
+                   id = Integer.parseInt(resultados[0][0]);
+                   name = (resultados[0][1]);
+                   nivel = Integer.parseInt(resultados[0][2]);
+                   victories = Integer.parseInt(resultados[0][3]);
+                   password = (resultados[0][4]);
+                   Player player2 = new Player(id,name,victories,nivel,password);
+                   System.out.println(player2);
                     if (logged)
                         openGame();
             }
@@ -194,9 +199,9 @@ public class registerController implements Initializable {
         else{
                     loginRight.setStyle("-fx-background-color: red;");
                     labelP2.setStyle("-fx-border-color: red;");
-                    logged = false;
+                    logged2 = false;
         }
-    }    
+    }
     
      public void openGame(){
         try {
@@ -206,6 +211,9 @@ public class registerController implements Initializable {
             // Obtener la escena actual y el escenario
             Scene currentScene = loginLeft.getScene();
             Stage stage = (Stage) currentScene.getWindow();
+            //cogemos los textos de los labels y se los pasamos al metodo del game controler
+            gameController game = loader.getController();
+            game.labelNames(nameP1,nameP2);
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
             stage.show();
