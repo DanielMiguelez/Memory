@@ -59,6 +59,11 @@ public class gameController implements Initializable {
     private Deck deck;
     private int tamTab;
     private int desp;
+    private int turnoJugador = 1;
+    
+    private boolean click1 = true;
+    private int idCard;
+    private int temp;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -96,26 +101,79 @@ public class gameController implements Initializable {
         deck.shuffle();
     
         tamTab = deck.getCards().size();
-        flipCards(tamTab);
+        setBackground(tamTab);
+        setBoard(tamTab);
+        
+        
+        
+        
+        
     }
     
-private void flipCards(int tamTab){
-        if (tamTab==16)
-            desp = 8;
-        for (int i=0+desp; i<tamTab+desp;i++){
-            ImageView imageView = (ImageView) board.getChildren().get(i);
-            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
-            imageView.setUserData(i);
+    
 
-            //Al pulsar una carta te dice su indice de 0 a 15 !
-            
-            imageView.setOnMouseClicked(event -> {
-                int index = (int) imageView.getUserData()-desp;
-                System.out.println(index);
-                imageView.setImage(deck.getCards().get(index).getImage());
-            });
+    private void setBoard(int tamTab){
+
+            if (tamTab==16)
+                desp = 8;
+            for (int i=0+desp; i<tamTab+desp;i++){
+                ImageView imageView = (ImageView) board.getChildren().get(i);
+    //            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
+                imageView.setUserData(i);
+
+                //Al pulsar una carta te dice su indice de 0 a 15 !
+
+                imageView.setOnMouseClicked(event -> {
+                    int index = (int) imageView.getUserData()-desp;
+                    //System.out.println(index);
+                    imageView.setImage(deck.getCards().get(index).getImage());
+
+                    if (click1){
+                        idCard = deck.getCards().get(index).getId();
+                        click1 = false;
+                        System.out.println("First : "  + idCard);
+                    }
+                    else if (!click1){
+                        temp = deck.getCards().get(index).getId();
+                        click1 = true;
+                        System.out.println("Seeegond: "  + temp);
+                        compareCards();
+                    }
+
+
+                });
+            }
+        }
+
+    public void compareCards(){
+        if ( idCard == temp){
+            System.out.println("Acertada");
+            }
+        else if ( idCard != temp ){
+            System.out.println("Fallo");
+            System.out.println();
+            if (turnoJugador <2 ) {
+                turnoJugador += 1;
+                System.out.println("Turn: " + turnoJugador);
+            }
+            else {
+                turnoJugador = 1;
+                System.out.println("Turn: " + turnoJugador);
+                }
+            }
+        }
+
+    private void setBackground(int tamTab){
+            if (tamTab==16)
+                desp = 8;
+            for (int i=0+desp; i<tamTab+desp;i++){
+                ImageView imageView = (ImageView) board.getChildren().get(i);
+                imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
+
         }
     }
+
+
 
 public void closeWindows(ActionEvent event){
     

@@ -99,6 +99,8 @@ public class registerController implements Initializable {
                 if (consulta){
                     registerLeft.setStyle("-fx-background-color: green;");
                     labelP1.setStyle("-fx-border-color: green;");
+                    loginLeft.setStyle(null);
+                    passwordP1.setStyle(null);
                     }
                 else if (!consulta){
                     registerLeft.setStyle("-fx-background-color: red;");
@@ -110,6 +112,13 @@ public class registerController implements Initializable {
             registerLeft.setStyle("-fx-background-color: red;");
             labelP1.setStyle("-fx-border-color: red;");
             }
+                if (passwordP1.getText().length() < 5){
+                    passwordP1.setStyle("-fx-border-color: red;");
+                    }
+                if (labelP1.getText().length() == 0){
+                    labelP1.setPromptText("nickname cannot be empty");
+                    labelP1.setStyle("-fx-prompt-text-fill: red;");
+                    }
         }
     
     @FXML
@@ -125,6 +134,8 @@ public class registerController implements Initializable {
                 if (consulta){
                     registerRight.setStyle("-fx-background-color: green;");
                     labelP2.setStyle("-fx-border-color: green;");
+                    loginRight.setStyle(null);
+                    passwordP2.setStyle(null);
                 }
                 else if (!consulta){
                     registerRight.setStyle("-fx-background-color: red;");
@@ -136,6 +147,13 @@ public class registerController implements Initializable {
             registerRight.setStyle("-fx-background-color: red;");
             labelP2.setStyle("-fx-border-color: red;");
             }
+                if (passwordP2.getText().length() < 5){
+                    passwordP2.setStyle("-fx-border-color: red;");
+                    }
+                if (labelP2.getText().length() == 0){
+                    labelP2.setPromptText("nickname cannot be empty");
+                    labelP2.setStyle("-fx-prompt-text-fill: red;");
+                    }
         }
     
      public void loginUser1() {

@@ -23,11 +23,11 @@
             <Image url="@../media/register.png" />
          </image></ImageView>
       <TextField fx:id="labelP1" layoutX="279.0" layoutY="470.0" prefHeight="40.0" prefWidth="250.0" />
-      <PasswordField fx:id="passwordP1" layoutX="279.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" />
+      <PasswordField fx:id="passwordP1" layoutX="279.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" promptText="Password must be &gt; 5" />
       <Button fx:id="loginLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="279.0" layoutY="587.0" mnemonicParsing="false" onAction="#loginUser1" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
       <Button fx:id="registerLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="413.0" layoutY="587.0" mnemonicParsing="false" onAction="#registerUser1" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
       <TextField fx:id="labelP2" layoutX="749.0" layoutY="470.0" prefHeight="40.0" prefWidth="250.0" />
-      <PasswordField fx:id="passwordP2" layoutX="749.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" />
+      <PasswordField fx:id="passwordP2" layoutX="749.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" promptText="Password must be &gt; 5" />
       <Button fx:id="loginRight" alignment="CENTER" contentDisplay="CENTER" layoutX="749.0" layoutY="587.0" mnemonicParsing="false" onAction="#loginUser2" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
       <Button fx:id="registerRight" alignment="CENTER" contentDisplay="CENTER" layoutX="883.0" layoutY="587.0" mnemonicParsing="false" onAction="#registerUser2" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
       <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" layoutX="584.0" layoutY="626.0" mnemonicParsing="false" onAction="#openMenu" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="back" />

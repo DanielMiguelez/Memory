@@ -18,7 +18,7 @@ public class Memory extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/Menu/menu.fxml")); 
+        Parent root = FXMLLoader.load(getClass().getResource("/Game/game.fxml")); 
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
