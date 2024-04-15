@@ -55,6 +55,11 @@ public class gameController implements Initializable {
     
     @FXML
     private FlowPane board;
+     @FXML
+    private Label labelPointsP1;
+    @FXML
+    private Label labelPointsP2;
+    
     
     private Deck deck;
     private int tamTab;
@@ -64,6 +69,11 @@ public class gameController implements Initializable {
     private boolean click1 = true;
     private int idCard;
     private int temp;
+   
+    
+    private int pointsP1;
+    private int pointsP2;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -81,23 +91,55 @@ public class gameController implements Initializable {
 
         // AGREGAR CARTAS AL MAZO 2 VECES, Y TENEMOS LAS 16.
         deck.addCards(Mario);
-        deck.addCards(Luigi);
-        deck.addCards(donkeyKong);
-        deck.addCards(Toad);
-        deck.addCards(Yoshi);
-        deck.addCards(Peach);
-        deck.addCards(Bowser);
-        deck.addCards(Koopa);
-        
         deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario); 
+ 
         deck.addCards(Luigi);
-        deck.addCards(donkeyKong);
-        deck.addCards(Toad);
-        deck.addCards(Yoshi);
-        deck.addCards(Peach);
-        deck.addCards(Bowser);
-        deck.addCards(Koopa);
-        
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi);
+        deck.addCards(Luigi); 
+//        deck.addCards(Luigi);
+//        deck.addCards(donkeyKong);
+//        deck.addCards(Toad);
+//        deck.addCards(Yoshi);
+//        deck.addCards(Peach);
+//        deck.addCards(Bowser);
+//        deck.addCards(Koopa);
+//        
+//        deck.addCards(Mario);
+//        deck.addCards(Luigi);
+//        deck.addCards(donkeyKong);
+//        deck.addCards(Toad);
+//        deck.addCards(Yoshi);
+//        deck.addCards(Peach);
+//        deck.addCards(Bowser);
+//        deck.addCards(Koopa);
+//        
         deck.shuffle();
     
         tamTab = deck.getCards().size();
@@ -144,10 +186,22 @@ public class gameController implements Initializable {
                 });
             }
         }
+    private void sumarPuntos() {
+        if (turnoJugador == 2 ) {
+            pointsP2++;
+            labelPointsP2.setText("POINTS: " + pointsP2 + "");
+            }
+        else {
+            pointsP1++;
+            labelPointsP1.setText("POINTS: " + pointsP1 + "");
+        }
+    
+    }
 
     public void compareCards(){
         if ( idCard == temp){
             System.out.println("Acertada");
+            sumarPuntos();
             }
         else if ( idCard != temp ){
             System.out.println("Fallo");
@@ -230,6 +284,8 @@ public void labelNames(String n1, String n2, String l1, String l2, String V1, St
     victoriesP1.setText(victoriesP1.getText() + " : " + V1);
     victoriesP2.setText(victoriesP2.getText() + " : " + V1);
    }
+
+
 }
 
 
