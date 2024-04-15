@@ -76,7 +76,8 @@ public class gameController implements Initializable {
     private int indexCard2;
 
     private boolean[] indexUsed;
-   
+    private int aciertos = 0;
+    private boolean gameFinished = false;
     
     private int pointsP1;
     private int pointsP2;
@@ -170,13 +171,11 @@ public class gameController implements Initializable {
     //            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
                 imageView.setUserData(i);
 
-                //Al pulsar una carta te dice su indice de 0 a 15 !
-
                 imageView.setOnMouseClicked(event -> {
                     int index = (int) imageView.getUserData()-desp;
                     //System.out.println(index);
                     imageView.setImage(deck.getCards().get(index).getImage());
-
+       
                     if (click1){
                         idCard = deck.getCards().get(index).getId();
                         indexCard1 = index;
@@ -190,6 +189,8 @@ public class gameController implements Initializable {
                             click1 = true;
                             System.out.println("Seeegond: "  + temp);
                             compareCards(index);
+                            if(gameFinished)
+                                score();
                         }
                     }
 
@@ -209,10 +210,26 @@ public class gameController implements Initializable {
     
     }
 
+    private void score(){
+
+        System.out.println("El juego ha terminado!!");
+        if (pointsP1 == pointsP2){
+        System.out.print("Los jugadores han empatado");
+        }else if ( pointsP1 > pointsP2){
+        System.out.print("El jugador1 ha ganado");   
+        }else{
+            System.out.print("Los jugadores han empatado");
+
+        }
+     }
+    
     public void compareCards(int i){
         if ( idCard == temp){
             indexUsed[indexCard1] = true;
             indexUsed[indexCard2] = true;
+            aciertos += 2;
+            if ( aciertos == tamTab)
+                gameFinished = true;
             System.out.println("Acertada");
             sumarPuntos();
             }
@@ -316,6 +333,6 @@ public void labelNames(String n1, String n2, String l1, String l2, String V1, St
     victoriesP1.setText(victoriesP1.getText() + " : " + V1);
     victoriesP2.setText(victoriesP2.getText() + " : " + V1);
    }
+
+
 }
-
-
