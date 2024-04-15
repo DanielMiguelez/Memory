@@ -179,7 +179,7 @@ public class gameController implements Initializable {
                         temp = deck.getCards().get(index).getId();
                         click1 = true;
                         System.out.println("Seeegond: "  + temp);
-                        compareCards();
+                        compareCards(index);
                     }
 
 
@@ -198,12 +198,13 @@ public class gameController implements Initializable {
     
     }
 
-    public void compareCards(){
+    public void compareCards(int i){
         if ( idCard == temp){
             System.out.println("Acertada");
             sumarPuntos();
             }
         else if ( idCard != temp ){
+            flipCards(i);
             System.out.println("Fallo");
             System.out.println();
             if (turnoJugador <2 ) {
@@ -216,7 +217,12 @@ public class gameController implements Initializable {
                 }
             }
         }
-
+    
+    private void flipCards(int i){
+        ImageView imageView = (ImageView) board.getChildren().get(i);
+        imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
+        }
+    
     private void setBackground(int tamTab){
             if (tamTab==16)
                 desp = 8;
