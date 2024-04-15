@@ -31,6 +31,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import memory.Card;
 import memory.Deck;
+import javafx.animation.PauseTransition;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -69,6 +71,11 @@ public class gameController implements Initializable {
     private boolean click1 = true;
     private int idCard;
     private int temp;
+    
+    private int indexCard1;
+    private int indexCard2;
+
+    private boolean[] indexUsed;
    
     
     private int pointsP1;
@@ -146,7 +153,7 @@ public class gameController implements Initializable {
         setBackground(tamTab);
         setBoard(tamTab);
         
-        
+       indexUsed = new boolean [tamTab];
         
         
         
@@ -172,14 +179,18 @@ public class gameController implements Initializable {
 
                     if (click1){
                         idCard = deck.getCards().get(index).getId();
+                        indexCard1 = index;
                         click1 = false;
                         System.out.println("First : "  + idCard);
                     }
                     else if (!click1){
                         temp = deck.getCards().get(index).getId();
-                        click1 = true;
-                        System.out.println("Seeegond: "  + temp);
-                        compareCards(index);
+                        indexCard2 = index;
+                        if ( indexCard1 != indexCard2 && indexUsed[indexCard1] == false && indexUsed[indexCard2] == false){
+                            click1 = true;
+                            System.out.println("Seeegond: "  + temp);
+                            compareCards(index);
+                        }
                     }
 
 
@@ -200,11 +211,19 @@ public class gameController implements Initializable {
 
     public void compareCards(int i){
         if ( idCard == temp){
+            indexUsed[indexCard1] = true;
+            indexUsed[indexCard2] = true;
             System.out.println("Acertada");
             sumarPuntos();
             }
         else if ( idCard != temp ){
-            flipCards(i);
+            flipCards();
+            board.setDisable(true); // Bloquear el FlowPane
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(e -> {
+            board.setDisable(false); // Desbloquear el FlowPane después de 2 segundos
+            });
+            pause.play();
             System.out.println("Fallo");
             System.out.println();
             if (turnoJugador <2 ) {
@@ -218,10 +237,18 @@ public class gameController implements Initializable {
             }
         }
     
-    private void flipCards(int i){
-        ImageView imageView = (ImageView) board.getChildren().get(i);
-        imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
-        }
+    private void flipCards(){
+       
+       PauseTransition pause = new PauseTransition(Duration.seconds(2));
+                    pause.setOnFinished(e -> {
+            ImageView imageView = (ImageView) board.getChildren().get(indexCard1);
+            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
+            imageView = (ImageView) board.getChildren().get(indexCard2);
+            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
+            
+        });
+        pause.play();
+    }
     
     private void setBackground(int tamTab){
             if (tamTab==16)
@@ -229,7 +256,6 @@ public class gameController implements Initializable {
             for (int i=0+desp; i<tamTab+desp;i++){
                 ImageView imageView = (ImageView) board.getChildren().get(i);
                 imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
-
         }
     }
 
@@ -290,8 +316,6 @@ public void labelNames(String n1, String n2, String l1, String l2, String V1, St
     victoriesP1.setText(victoriesP1.getText() + " : " + V1);
     victoriesP2.setText(victoriesP2.getText() + " : " + V1);
    }
-
-
 }
 
 
