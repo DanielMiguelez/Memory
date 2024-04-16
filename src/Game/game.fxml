@@ -15,12 +15,12 @@
 <AnchorPane id="AnchorPane" maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.gameController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#140743" height="720.0" smooth="false" stroke="BLACK" strokeType="INSIDE" style="-fx-border-width-: 0;" width="1280.0" />
-      <ImageView fitHeight="736.0" fitWidth="780.0" layoutX="250.0" pickOnBounds="true" smooth="false">
+      <ImageView fitHeight="720.0" fitWidth="780.0" layoutX="250.0" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@../media/soul.gif" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="582.0" layoutX="1030.0" layoutY="154.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="582.0" layoutX="1030.0" layoutY="138.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0">
          <fill>
             <LinearGradient endX="0.7585227272727273" endY="1.0" startX="0.7926136363636362" startY="0.10371294201814517">
                <stops>
@@ -37,7 +37,7 @@
                </stops>
             </LinearGradient>
          </fill></Rectangle>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" height="611.0" layoutY="125.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="611.0" layoutY="109.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0">
          <fill>
             <LinearGradient endX="0.897727243828051" endY="1.0" startX="0.6842954619742028" startY="0.22113727114005272">
                <stops>
@@ -108,7 +108,7 @@
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Label fx:id="victoriesP1" layoutX="37.0" layoutY="639.0" text="WINS:" textFill="#ffee00">
+      <Label fx:id="victoriesP1" layoutX="37.0" layoutY="636.0" text="WINS:" textFill="#ffee00">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
@@ -129,12 +129,12 @@
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Label fx:id="victoriesP2" layoutX="1071.0" layoutY="638.0" text="WINS:" textFill="WHITE">
+      <Label fx:id="victoriesP2" layoutX="1071.0" layoutY="634.0" text="WINS:" textFill="WHITE">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <FlowPane fx:id="board" alignment="CENTER" hgap="15.0" layoutX="250.0" layoutY="368.0" orientation="VERTICAL" prefHeight="367.0" prefWidth="780.0" vgap="10.0">
+      <FlowPane fx:id="board" alignment="CENTER" hgap="15.0" layoutX="250.0" layoutY="350.0" orientation="VERTICAL" prefHeight="367.0" prefWidth="780.0" vgap="10.0">
          <children>
             <ImageView fitHeight="81.0" fitWidth="73.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
             <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="336.0" layoutY="132.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
@@ -175,39 +175,39 @@
             <Image url="@../media/luigiSide.png" />
          </image>
       </ImageView>
-      <Label fx:id="labelPointsP1" layoutX="37.0" layoutY="684.0" text="POINTS:" textFill="#ffee00">
+      <Label fx:id="labelPointsP1" layoutX="37.0" layoutY="669.0" text="POINTS:" textFill="#ffee00">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Label fx:id="labelPointsP2" layoutX="1071.0" layoutY="677.0" text="POINTS:" textFill="WHITE">
+      <Label fx:id="labelPointsP2" layoutX="1071.0" layoutY="667.0" text="POINTS:" textFill="WHITE">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="winnerPane" layoutX="249.0" layoutY="366.0" prefHeight="370.0" prefWidth="780.0" style="-fx-background-color: blue;" visible="true">
+      <AnchorPane fx:id="winnerPane" layoutX="250.0" layoutY="350.0" prefHeight="370.0" prefWidth="780.0" style="-fx-background-color: blue;" visible="true">
          <children>
-            <ImageView fx:id="winnerPicture" fitHeight="141.0" fitWidth="149.0" layoutX="283.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="winnerPicture" fitHeight="141.0" fitWidth="149.0" layoutX="320.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/luigiSide.png" />
                </image>
             </ImageView>
-            <Label fx:id="winnerName" layoutX="268.0" layoutY="33.0" text="WINNER:" textFill="WHITE">
+            <Label fx:id="winnerName" layoutX="304.0" layoutY="33.0" text="WINNER:" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
             </Label>
-            <Label fx:id="playAgainBtn" layoutX="230.0" layoutY="279.0" text="PLAY AGAIN" textFill="WHITE">
+            <Label fx:id="playAgainBtn" layoutX="267.0" layoutY="226.0" text="PLAY AGAIN" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
             </Label>
-            <Label fx:id="menuBtn" layoutX="14.0" layoutY="279.0" text="MENU" textFill="WHITE">
+            <Label fx:id="menuBtn" layoutX="336.0" layoutY="318.0" text="MENU" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
             </Label>
-            <Label fx:id="rankingBtn" layoutX="522.0" layoutY="279.0" onMouseClicked="#openRanking" text="RANKING" textFill="WHITE">
+            <Label fx:id="rankingBtn" layoutX="298.0" layoutY="272.0" onMouseClicked="#openRanking" text="RANKING" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
