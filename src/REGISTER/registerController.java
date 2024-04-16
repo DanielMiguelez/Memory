@@ -189,9 +189,8 @@ public class registerController implements Initializable {
 
                    id = Integer.parseInt(resultados[0][0]);
                    name = (resultados[0][1]);
-                   nivel= Integer.parseInt(resultados[0][2]);
-                   victories = Integer.parseInt(resultados[0][3]);
-                   password = (resultados[0][4]);
+                   victories = Integer.parseInt(resultados[0][2]);
+                   nivel = Integer.parseInt(resultados[0][3]);
                    Player player1 = new Player(id,name,victories,nivel,password);  
                    System.out.println(player1);
                    nameP1 = name;
@@ -229,8 +228,8 @@ public class registerController implements Initializable {
                     
                    id = Integer.parseInt(resultados[0][0]);
                    name = (resultados[0][1]);
-                   nivel = Integer.parseInt(resultados[0][2]);
-                   victories = Integer.parseInt(resultados[0][3]);
+                   victories = Integer.parseInt(resultados[0][2]);
+                   nivel = Integer.parseInt(resultados[0][3]);
                    password = (resultados[0][4]);
                    Player player2 = new Player(id,name,victories,nivel,password);
                    System.out.println(player2);
@@ -258,7 +257,7 @@ public class registerController implements Initializable {
             Stage stage = (Stage) currentScene.getWindow();
             //cogemos los textos de los labels y se los pasamos al metodo del game controler
             gameController game = loader.getController();
-            game.labelNames(nameP1,nameP2,victoriesP1,levelP1,victoriesP2,levelP2);
+            game.labelNames(nameP1,nameP2,levelP1,levelP2,victoriesP1,victoriesP2);
 
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
@@ -266,6 +265,19 @@ public class registerController implements Initializable {
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+     
+     public String getLevelP1(){
+        return levelP1;
+        }
+     public String getLevelP2(){
+        return levelP2;
+        }
+     public String getWinsP1(){
+        return victoriesP1;
+        }
+     public String getWinsP2(){
+        return victoriesP2;
         }
      
      public void openMenu(){
