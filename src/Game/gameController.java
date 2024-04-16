@@ -32,6 +32,7 @@ import javafx.stage.Stage;
 import memory.Card;
 import memory.Deck;
 import javafx.animation.PauseTransition;
+import javafx.scene.Node;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import utilidades.bbdd.Bd;
@@ -86,7 +87,7 @@ public class gameController implements Initializable {
     
     private int pointsP1;
     private int pointsP2;
-    private String winner = "Pepe";
+    private String winner;
     
     public String incrementWins(String winner){
         return "update jugadores\n" + "set victorias_jugador  = victorias_jugador + 1\n" + "where nick_jugador = '"+winner+"'";
@@ -97,14 +98,14 @@ public class gameController implements Initializable {
         
         deck = new Deck();
 
-        Card Mario = new Card("Mario", 1, new Image("/media/800px-Mario_Mario_Party_Superstars.png"));
+        Card Mario = new Card("Mario", 1, new Image("/media/Mario.png"));
         Card Luigi = new Card("Luigi", 2, new Image("/media/Luigi1.png"));
-        Card donkeyKong = new Card("donkeyKong", 3, new Image("/media/donkeyKong.png"));
-        Card Toad = new Card("Toad", 4, new Image("/media/download.jpg"));
-        Card Yoshi = new Card("Yoshi", 5, new Image("/media/setaZul.png"));
-        Card Peach = new Card("Peach", 6, new Image("/media/luigiSide_1.png"));
-        Card Bowser = new Card("Bowser", 7, new Image("/media/marioSide.png"));
-        Card Koopa = new Card("Koopa", 8, new Image("/media/unnamed.png"));
+//        Card donkeyKong = new Card("donkeyKong", 3, new Image("/media/donkeyKong.png"));
+//        Card Toad = new Card("Toad", 4, new Image("/media/download.jpg"));
+//        Card Yoshi = new Card("Yoshi", 5, new Image("/media/setaZul.png"));
+//        Card Peach = new Card("Peach", 6, new Image("/media/luigiSide_1.png"));
+//        Card Bowser = new Card("Bowser", 7, new Image("/media/marioSide.png"));
+//        Card Koopa = new Card("Koopa", 8, new Image("/media/unnamed.png"));
 
         // AGREGAR CARTAS AL MAZO 2 VECES, Y TENEMOS LAS 16.
         deck.addCards(Mario);
@@ -139,24 +140,7 @@ public class gameController implements Initializable {
         deck.addCards(Luigi);
         deck.addCards(Luigi);
         deck.addCards(Luigi);
-        deck.addCards(Luigi); 
-//        deck.addCards(Luigi);
-//        deck.addCards(donkeyKong);
-//        deck.addCards(Toad);
-//        deck.addCards(Yoshi);
-//        deck.addCards(Peach);
-//        deck.addCards(Bowser);
-//        deck.addCards(Koopa);
-//        
-//        deck.addCards(Mario);
-//        deck.addCards(Luigi);
-//        deck.addCards(donkeyKong);
-//        deck.addCards(Toad);
-//        deck.addCards(Yoshi);
-//        deck.addCards(Peach);
-//        deck.addCards(Bowser);
-//        deck.addCards(Koopa);
-//        
+        deck.addCards(Luigi);        
         deck.shuffle();
     
         tamTab = deck.getCards().size();
@@ -164,11 +148,6 @@ public class gameController implements Initializable {
         setBoard(tamTab);
         
        indexUsed = new boolean [tamTab];
-       
-       winner = nameP2.getText();
-       System.out.println(winner); 
-       System.out.println(nameP1.getText()); 
-      
     }
     
     
@@ -187,7 +166,7 @@ public class gameController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ranking/ranking.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual y el escenario
-            Scene currentScene = rankingBtn.getScene();
+            Scene currentScene = board.getScene();
             Stage stage = (Stage) currentScene.getWindow();
 
             // Reemplazar la escena actual con la escena del registro
@@ -199,18 +178,54 @@ public class gameController implements Initializable {
         }   
     }
     
+    @FXML
+    private void openMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu/menu.fxml"));
+            Parent root = loader.load();
+            // Obtener la escena actual y el escenario
+            Scene currentScene = board.getScene();
+            Stage stage = (Stage) currentScene.getWindow();
+
+            // Reemplazar la escena actual con la escena del registro
+            currentScene.setRoot(root);
+            stage.show();
+           
+        } catch (IOException ex) {
+            Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }
+    
+    @FXML
+    private void openGameAgain() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Game/game.fxml"));
+            Parent root = loader.load();
+            // Obtener la escena actual y el escenario
+            Scene currentScene = board.getScene();
+            Stage stage = (Stage) currentScene.getWindow();
+            
+            // Reemplazar la escena actual con la escena del registro
+            currentScene.setRoot(root);
+            stage.hide();
+            stage.show();
+           
+        } catch (IOException ex) {
+            Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }
+    
     
     public void labelNames(String n1, String n2, String l1, String l2, String V1, String V2){
-    nameP1.setText(n1);
-    nameP2.setText(n2);
-    levelP1.setText(levelP1.getText() + " : " + l1);
-    levelP2.setText(levelP2.getText() + " : " + l2);
-    victoriesP1.setText(victoriesP1.getText() + " : " + V1);
-    victoriesP2.setText(victoriesP2.getText() + " : " + V1);
-   }
+        nameP1.setText(n1);
+        nameP2.setText(n2);
+        levelP1.setText(levelP1.getText() + " : " + l1);
+        levelP2.setText(levelP2.getText() + " : " + l2);
+        victoriesP1.setText(victoriesP1.getText() + " : " + V1);
+        victoriesP2.setText(victoriesP2.getText() + " : " + V1);
+    }
 
     private void setBoard(int tamTab){
-
             if (tamTab==16)
                 desp = 8;
             for (int i=0+desp; i<tamTab+desp;i++){
@@ -258,14 +273,13 @@ public class gameController implements Initializable {
     }
 
     private void score(){
-
         System.out.println("El juego ha terminado!!");
+        winnerPane.setVisible(true);
         if (pointsP1 == pointsP2){
         System.out.print("Los jugadores han empatado");
         }else if ( pointsP1 > pointsP2){
             winner = nameP1.getText();
             openConnection( incrementWins(winner) );
-            winnerPane.setVisible(true);
         }else{
             winner = nameP2.getText();
             openConnection( incrementWins(winner) );
@@ -299,7 +313,6 @@ public class gameController implements Initializable {
     }
     
     private void turnoJugadores (){
-        
         if (turnoJugador <2 ) {
             turnoJugador += 1;
             System.out.println("Turn: " + turnoJugador);
@@ -311,7 +324,6 @@ public class gameController implements Initializable {
     }
     
     private void flipCards(){
-       
        PauseTransition pause = new PauseTransition(Duration.seconds(2));
                     pause.setOnFinished(e -> {
             ImageView imageView = (ImageView) board.getChildren().get(indexCard1);
@@ -324,60 +336,34 @@ public class gameController implements Initializable {
     }
     
     private void setBackground(int tamTab){
-            if (tamTab==16)
-                desp = 8;
-            for (int i=0+desp; i<tamTab+desp;i++){
-                ImageView imageView = (ImageView) board.getChildren().get(i);
-                imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
+        if (tamTab==16)
+            desp = 8;
+        for (int i=0+desp; i<tamTab+desp;i++){
+            ImageView imageView = (ImageView) board.getChildren().get(i);
+            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
         }
     }
 
-
-
-public void closeWindows(ActionEvent event){
-    
-     try {
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu/menu.fxml"));
-            
-            Parent root = loader.load();
-            
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            
-            stage.setScene(scene);
-            stage.show();
-            
-            Stage previousStage = (Stage) ((javafx.scene.Node)event.getSource()).getScene().getWindow();
-            previousStage.close();
-            
-            
-        } catch (IOException ex) {
-            Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
 
     @FXML
-private void hoverCards(MouseEvent event) {
-
-  // Get the ImageView that was hovered over
-  ImageView hoveredCard = (ImageView) event.getTarget();
-
-  // Check if the hovered target is actually an ImageView
-  if (hoveredCard != null) {
-    // Apply shadow effect to the hovered card
-    hoveredCard.setEffect(new DropShadow(5.0, 5.0, 5.0, Color.BLACK));
-  }
-}
-@FXML
-private void unhoverCards(MouseEvent event) {
-  // Get the ImageView that was hovered over
-  ImageView hoveredCard = (ImageView) event.getTarget();
-  // Check if the hovered target is actually an ImageView
-  if (hoveredCard != null) {
-    // Apply shadow effect to the hovered card
-    hoveredCard.setEffect(null);
+    private void hoverNode(MouseEvent event) {
+        Node node =  (Node) event.getTarget();
+        if (node != null) {
+            node.setEffect(new DropShadow(15, 5, 5, Color.BLACK));
+        }
+    }
+    @FXML
+    private void unhoverNode(MouseEvent event) {
+      Node node =  (Node) event.getTarget();
+      if (node != null) {
+        node.setEffect(null);
+            }
+        }
+    @FXML
+    private void hoverNodeBright(MouseEvent event) {
+        Node node =  (Node) event.getTarget();
+        if (node != null) {
+            node.setEffect(new DropShadow(15, 0, 0, Color.WHITE));
         }
     }
 
