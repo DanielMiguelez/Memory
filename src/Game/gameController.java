@@ -49,16 +49,6 @@ public class gameController implements Initializable {
     @FXML
     private Label nameP2;
     @FXML
-     private Label levelP1;
-    @FXML
-    private Label levelP2;
-    @FXML
-     private Label victoriesP1;
-    @FXML
-    private Label victoriesP2;
-    @FXML
-    private Button exitButton;
-    @FXML
     private FlowPane board;
     @FXML
     private AnchorPane winnerPane;
@@ -66,6 +56,14 @@ public class gameController implements Initializable {
     private Label labelPointsP1;
     @FXML
     private Label labelPointsP2;
+    @FXML
+    private Label levelPlayer1;
+    @FXML
+    private Label levelPlayer2;
+    @FXML
+    private Label winsPlayer1;
+    @FXML
+    private Label winsPlayer2;
     @FXML
     private Label rankingBtn;
     
@@ -92,6 +90,16 @@ public class gameController implements Initializable {
     public String incrementWins(String winner){
         return "update jugadores\n" + "set victorias_jugador  = victorias_jugador + 1\n" + "where nick_jugador = '"+winner+"'";
     }
+    public String getUserLevel(String user){
+        return "select nivel_jugador from jugadores where nick_jugador = '" + user + "'";
+    }
+    public String getUserVictories(String user){
+        return "select victorias_jugador from jugadores where nick_jugador = '" + user + "'";
+    }
+    
+//    public String getWins(){
+//        return 
+//    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -142,22 +150,31 @@ public class gameController implements Initializable {
         deck.addCards(Luigi);
         deck.addCards(Luigi);        
         deck.shuffle();
-    
+        
         tamTab = deck.getCards().size();
         setBackground(tamTab);
         setBoard(tamTab);
         
        indexUsed = new boolean [tamTab];
+       winnerPane.setVisible(true);
     }
     
     
     
-    public boolean openConnection( String q ){
+    public boolean connectionSet( String q ){
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
         String query = String.format(q);
         boolean verify = Bd.consultaModificacion(gestor, query);
         gestor.cerrar_Conexion(true);
         return verify;
+    }
+    
+    public String[][] connectionSelect( String q ){
+        Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
+        String query = String.format(q);
+        String[][]result = Bd.consultaSelect(gestor, query);
+        gestor.cerrar_Conexion(true);
+        return result;
     }
     
     @FXML
@@ -204,7 +221,14 @@ public class gameController implements Initializable {
             // Obtener la escena actual y el escenario
             Scene currentScene = board.getScene();
             Stage stage = (Stage) currentScene.getWindow();
+            gameController game = loader.getController();
+
+            String[][]lvlP1 = connectionSelect( getUserLevel( nameP1.getText() ) );
+            String[][]lvlP2 = connectionSelect( getUserLevel( nameP2.getText() ) );
+            String[][]winsP1 = connectionSelect( getUserVictories( nameP1.getText() ) ); 
+            String[][]winsP2 = connectionSelect( getUserVictories( nameP2.getText() ) );
             
+            game.labelNames(nameP1.getText(),nameP2.getText(),lvlP1[0][0],lvlP2[0][0],winsP1[0][0],winsP2[0][0]);
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
             stage.hide();
@@ -216,13 +240,14 @@ public class gameController implements Initializable {
     }
     
     
-    public void labelNames(String n1, String n2, String l1, String l2, String V1, String V2){
+    public void labelNames(String n1, String n2, String lvlP1, String lvlP2, String winsP1, String winsP2){
         nameP1.setText(n1);
         nameP2.setText(n2);
-        levelP1.setText(levelP1.getText() + " : " + l1);
-        levelP2.setText(levelP2.getText() + " : " + l2);
-        victoriesP1.setText(victoriesP1.getText() + " : " + V1);
-        victoriesP2.setText(victoriesP2.getText() + " : " + V1);
+        
+        levelPlayer1.setText(lvlP1);
+        levelPlayer2.setText(lvlP2);
+        winsPlayer1.setText(winsP1);
+        winsPlayer2.setText(winsP2);
     }
 
     private void setBoard(int tamTab){
@@ -269,7 +294,6 @@ public class gameController implements Initializable {
             pointsP1++;
             labelPointsP1.setText("POINTS: " + pointsP1 + "");
         }
-    
     }
 
     private void score(){
@@ -279,10 +303,10 @@ public class gameController implements Initializable {
         System.out.print("Los jugadores han empatado");
         }else if ( pointsP1 > pointsP2){
             winner = nameP1.getText();
-            openConnection( incrementWins(winner) );
+            connectionSet( incrementWins(winner) );
         }else{
             winner = nameP2.getText();
-            openConnection( incrementWins(winner) );
+            connectionSet( incrementWins(winner) );
         }
      }
     
@@ -354,9 +378,9 @@ public class gameController implements Initializable {
     }
     @FXML
     private void unhoverNode(MouseEvent event) {
-      Node node =  (Node) event.getTarget();
-      if (node != null) {
-        node.setEffect(null);
+        Node node =  (Node) event.getTarget();
+        if (node != null) {
+            node.setEffect(null);
             }
         }
     @FXML
