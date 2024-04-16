@@ -12,11 +12,11 @@ public class Player {
     public int nivel;
     public String password;
 
-    public Player (int id,String name,int victories,int nivel,String password){
+    public Player (int id,String name,int victories,String password){
         this.id = id;
         this.name = name;
         this.victories = victories;
-        this.nivel = nivel;
+        this.nivel = victories/5;
         this.password = password;
     }
     

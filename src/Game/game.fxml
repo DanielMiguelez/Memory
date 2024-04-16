@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -8,7 +9,6 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -60,8 +60,7 @@
             <Font name="Gill Sans Ultra Bold" size="31.0" />
          </font>
       </Label>
-      <Circle fill="WHITE" layoutX="115.0" layoutY="162.0" radius="66.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fitHeight="118.0" fitWidth="118.0" layoutX="56.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="118.0" fitWidth="118.0" layoutX="56.0" layoutY="103.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/Mushroom1.png" />
          </image>
@@ -81,8 +80,7 @@
             <Font name="Gill Sans Ultra Bold" size="31.0" />
          </font>
       </Label>
-      <Circle fill="WHITE" layoutX="1167.0" layoutY="170.0" radius="66.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fitHeight="132.0" fitWidth="124.0" layoutX="1104.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="117.0" fitWidth="124.0" layoutX="1108.0" layoutY="106.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/star2.png" />
          </image>
@@ -102,13 +100,7 @@
             <Font name="Gill Sans Ultra Bold" size="31.0" />
          </font>
       </Label>
-      <Circle fill="WHITE" layoutX="117.0" layoutY="515.0" radius="66.0" stroke="BLACK" strokeType="INSIDE" />
-      <Label fx:id="levelP1" layoutX="37.0" layoutY="601.0" text="LEVEL:" textFill="#f2ff00">
-         <font>
-            <Font name="Gill Sans Ultra Bold" size="29.0" />
-         </font>
-      </Label>
-      <Label fx:id="victoriesP1" layoutX="37.0" layoutY="636.0" text="WINS:" textFill="#ffee00">
+      <Label layoutX="13.0" layoutY="614.0" text="WINS:" textFill="#ffee00">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
@@ -118,76 +110,75 @@
             <Font name="Gill Sans Ultra Bold" size="31.0" />
          </font>
       </Label>
-      <Circle fill="WHITE" layoutX="1166.0" layoutY="523.0" radius="66.0" stroke="BLACK" strokeType="INSIDE" />
-      <ImageView fitHeight="164.0" fitWidth="163.0" layoutX="1085.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="164.0" fitWidth="163.0" layoutX="1085.0" layoutY="440.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/setaZul.png" />
          </image>
       </ImageView>
-      <Label fx:id="levelP2" layoutX="1071.0" layoutY="601.0" text="LEVEL:" textFill="WHITE">
+      <Label layoutX="1051.0" layoutY="581.0" text="LEVEL:" textFill="WHITE">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Label fx:id="victoriesP2" layoutX="1071.0" layoutY="634.0" text="WINS:" textFill="WHITE">
+      <Label layoutX="1051.0" layoutY="614.0" text="WINS:" textFill="WHITE">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <FlowPane fx:id="board" alignment="CENTER" hgap="15.0" layoutX="250.0" layoutY="350.0" orientation="VERTICAL" prefHeight="367.0" prefWidth="780.0" vgap="10.0">
+      <FlowPane fx:id="board" alignment="CENTER" hgap="15.0" layoutX="248.0" layoutY="364.0" orientation="VERTICAL" prefHeight="356.0" prefWidth="780.0" vgap="10.0">
          <children>
-            <ImageView fitHeight="81.0" fitWidth="73.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="336.0" layoutY="132.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="377.0" layoutY="132.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="420.0" layoutY="132.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="461.0" layoutY="132.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="504.0" layoutY="132.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="545.0" layoutY="132.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="588.0" layoutY="132.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="629.0" layoutY="132.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="336.0" layoutY="173.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="377.0" layoutY="173.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="420.0" layoutY="173.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="461.0" layoutY="173.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="504.0" layoutY="173.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="545.0" layoutY="173.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="588.0" layoutY="173.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="629.0" layoutY="173.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="336.0" layoutY="214.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="377.0" layoutY="214.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="420.0" layoutY="214.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="461.0" layoutY="214.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="504.0" layoutY="214.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="545.0" layoutY="214.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="588.0" layoutY="214.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="629.0" layoutY="214.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="336.0" layoutY="255.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="377.0" layoutY="255.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="420.0" layoutY="255.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="461.0" layoutY="255.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="504.0" layoutY="255.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="545.0" layoutY="255.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
-            <ImageView fitHeight="81.0" fitWidth="73.0" layoutX="588.0" layoutY="255.0" onMouseEntered="#hoverCards" onMouseExited="#unhoverCards" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="336.0" layoutY="132.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="377.0" layoutY="132.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="420.0" layoutY="132.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="461.0" layoutY="132.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="504.0" layoutY="132.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="545.0" layoutY="132.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="588.0" layoutY="132.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="629.0" layoutY="132.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="336.0" layoutY="173.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="377.0" layoutY="173.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="420.0" layoutY="173.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="461.0" layoutY="173.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="504.0" layoutY="173.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="545.0" layoutY="173.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="588.0" layoutY="173.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="629.0" layoutY="173.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="336.0" layoutY="214.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="377.0" layoutY="214.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="420.0" layoutY="214.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="461.0" layoutY="214.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="504.0" layoutY="214.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="545.0" layoutY="214.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="588.0" layoutY="214.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="629.0" layoutY="214.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="336.0" layoutY="255.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="377.0" layoutY="255.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="622.0" layoutY="243.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="622.0" layoutY="289.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="664.0" layoutY="151.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="664.0" layoutY="197.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
+            <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="664.0" layoutY="243.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
          </children>
       </FlowPane>
-      <ImageView fitHeight="141.0" fitWidth="149.0" layoutX="49.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="141.0" fitWidth="149.0" layoutX="49.0" layoutY="449.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/luigiSide.png" />
          </image>
       </ImageView>
-      <Label fx:id="labelPointsP1" layoutX="37.0" layoutY="669.0" text="POINTS:" textFill="#ffee00">
+      <Label layoutX="1051.0" layoutY="667.0" text="POINTS:" textFill="WHITE">
          <font>
             <Font name="Gill Sans Ultra Bold" size="29.0" />
          </font>
       </Label>
-      <Label fx:id="labelPointsP2" layoutX="1071.0" layoutY="667.0" text="POINTS:" textFill="WHITE">
-         <font>
-            <Font name="Gill Sans Ultra Bold" size="29.0" />
-         </font>
-      </Label>
-      <AnchorPane fx:id="winnerPane" layoutX="250.0" layoutY="350.0" prefHeight="370.0" prefWidth="780.0" style="-fx-background-color: blue;" visible="true">
+      <AnchorPane fx:id="winnerPane" layoutX="250.0" layoutY="361.0" prefHeight="358.0" prefWidth="780.0" style="-fx-background-color: rgba(140, 140, 140, 0.9);">
          <children>
-            <ImageView fx:id="winnerPicture" fitHeight="141.0" fitWidth="149.0" layoutX="320.0" layoutY="53.0" pickOnBounds="true" preserveRatio="true">
+            <Label fx:id="rankingBtn1" layoutX="289.0" layoutY="33.0" onMouseClicked="#openRanking" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: rgba(27, 29, 102, 0.6); -fx-background-radius: 7px;" text="          " textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="31.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="winnerPicture" fitHeight="141.0" fitWidth="149.0" layoutX="320.0" layoutY="59.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/luigiSide.png" />
                </image>
@@ -197,22 +188,71 @@
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
             </Label>
-            <Label fx:id="playAgainBtn" layoutX="267.0" layoutY="226.0" text="PLAY AGAIN" textFill="WHITE">
+            <Label fx:id="playAgainBtn" layoutX="255.0" layoutY="219.0" onMouseClicked="#openGameAgain" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" style="-fx-background-color: rgba(27, 29, 102, 0.6); -fx-background-radius: 7px;" text=" PLAY AGAIN " textFill="WHITE">
+                <font>
+                    <Font name="Gill Sans Ultra Bold" size="31.0" />
+                </font>
+            </Label>
+
+            <Label fx:id="menuBtn" layoutX="326.0" layoutY="313.0" onMouseClicked="#openMenu" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" style="-fx-background-color: rgba(27, 29, 102, 0.6); -fx-background-radius: 7px;" text=" MENU " textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
             </Label>
-            <Label fx:id="menuBtn" layoutX="336.0" layoutY="318.0" text="MENU" textFill="WHITE">
-               <font>
-                  <Font name="Gill Sans Ultra Bold" size="31.0" />
-               </font>
-            </Label>
-            <Label fx:id="rankingBtn" layoutX="298.0" layoutY="272.0" onMouseClicked="#openRanking" text="RANKING" textFill="WHITE">
+            <Label fx:id="rankingBtn" layoutX="289.0" layoutY="266.0" onMouseClicked="#openRanking" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" style="-fx-background-color: rgba(27, 29, 102, 0.6); -fx-background-radius: 7px;" text=" RANKING " textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
+      <Label layoutX="11.0" layoutY="581.0" text="LEVEL:" textFill="#f2ff00">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label layoutX="11.0" layoutY="667.0" text="POINTS:" textFill="#ffee00">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelPointsP1" layoutX="156.0" layoutY="667.0" text="0" textFill="#ffee00">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="levelPlayer2" layoutX="1213.0" layoutY="584.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="levelPlayer1" layoutX="178.0" layoutY="583.0" text="0" textFill="#ffee00">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelPointsP2" layoutX="1193.0" layoutY="667.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="winsPlayer1" layoutX="178.0" layoutY="614.0" text="0" textFill="#ffee00">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="29.0" />
+         </font>
+      </Label>
+      <Label fx:id="timer" prefHeight="38.0" prefWidth="234.0" text="timer:" textAlignment="RIGHT" textFill="#bed418">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="winsPlayer2" layoutX="1213.0" layoutY="614.0" text="0" textFill="WHITE">
+         <font>
+            <Font name="Gill Sans Ultra Bold" size="29.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

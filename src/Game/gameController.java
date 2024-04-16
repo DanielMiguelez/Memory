@@ -37,7 +37,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 import utilidades.bbdd.Bd;
 import utilidades.bbdd.Gestor_conexion_POSTGRE;
-
+import javafx.util.Duration;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 /**
  * FXML Controller class
  *
@@ -86,6 +89,28 @@ public class gameController implements Initializable {
     private int pointsP1;
     private int pointsP2;
     private String winner;
+    
+    private int segundos = 0;
+    private int minutos = 0;
+    private Timeline timeline;
+    
+    @FXML
+    private Label timer;
+    
+    @FXML
+    private Label nameP11;
+    @FXML
+    private Label nameP21;
+    @FXML
+    private Label rankingBtn1;
+    @FXML
+    private ImageView winnerPicture;
+    @FXML
+    private Label winnerName;
+    @FXML
+    private Label playAgainBtn;
+    @FXML
+    private Label menuBtn;
     
     public String incrementWins(String winner){
         return "update jugadores\n" + "set victorias_jugador  = victorias_jugador + 1\n" + "where nick_jugador = '"+winner+"'";
@@ -156,7 +181,8 @@ public class gameController implements Initializable {
         setBoard(tamTab);
         
        indexUsed = new boolean [tamTab];
-       winnerPane.setVisible(true);
+       winnerPane.setVisible(false);
+       iniciarTiempo();
     }
     
     
@@ -276,8 +302,10 @@ public class gameController implements Initializable {
                             click1 = true;
                             System.out.println("Seeegond: "  + temp);
                             compareCards(index);
-                            if(gameFinished)
+                            if(gameFinished){
+                                pausarTiempo();
                                 score();
+                            }    
                         }
                     }
 
@@ -391,6 +419,29 @@ public class gameController implements Initializable {
         }
     }
 
+    private void iniciarTiempo() {
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            
+            
+            timer.setText("Tiempo "+(minutos<10?" 0":" ")+ minutos +":"+(segundos<10?"0":"")+ segundos);
+            segundos++;
+            if (segundos == 60){
+                minutos++;
+                segundos = 0;    
+            }    
+        }));
+        
+        System.out.println("Timer on");
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+    }
+    
+    private void pausarTiempo(){
+        if(timeline != null){
+            timeline.stop();
+            System.out.println("Timer off");
+        }
+    }
 
 
 

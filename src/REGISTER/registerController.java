@@ -173,7 +173,7 @@ public class registerController implements Initializable {
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
         user1 = labelP1.getText().toLowerCase();
         password1 = passwordP1.getText().toLowerCase();
-        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), COALESCE(nivel_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + user1 + "'" + " AND contraseña=" + "'" + password1 + "'");
+        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + user1 + "'" + " AND contraseña=" + "'" + password1 + "'");
         String[][]resultados   = Bd.consultaSelect(gestor, query);
         gestor.cerrar_Conexion(true);
         
@@ -190,8 +190,8 @@ public class registerController implements Initializable {
                    id = Integer.parseInt(resultados[0][0]);
                    name = (resultados[0][1]);
                    victories = Integer.parseInt(resultados[0][2]);
-                   nivel = Integer.parseInt(resultados[0][3]);
-                   Player player1 = new Player(id,name,victories,nivel,password);  
+                   password = (resultados[0][3]);
+                   Player player1 = new Player(id,name,victories,password);  
                    System.out.println(player1);
                    nameP1 = name;
                    levelP1 = nivel+"";
@@ -212,7 +212,7 @@ public class registerController implements Initializable {
         user2 = labelP2.getText().toLowerCase();
         password2 = passwordP2.getText().toLowerCase();
  
-        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), COALESCE(nivel_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + user2 + "'" + " AND contraseña=" + "'" + password2 + "'");
+        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + user2 + "'" + " AND contraseña=" + "'" + password2 + "'");
         String[][]resultados  = Bd.consultaSelect(gestor, query);
         gestor.cerrar_Conexion(true);
 
@@ -229,9 +229,8 @@ public class registerController implements Initializable {
                    id = Integer.parseInt(resultados[0][0]);
                    name = (resultados[0][1]);
                    victories = Integer.parseInt(resultados[0][2]);
-                   nivel = Integer.parseInt(resultados[0][3]);
-                   password = (resultados[0][4]);
-                   Player player2 = new Player(id,name,victories,nivel,password);
+                   password = (resultados[0][3]);
+                   Player player2 = new Player(id,name,victories,password);
                    System.out.println(player2);
                     nameP2 = name;
                     levelP2 = nivel+"";
