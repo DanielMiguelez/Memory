@@ -218,10 +218,12 @@ public class gameController implements Initializable {
         }else if ( pointsP1 > pointsP2){
         System.out.print("El jugador1 ha ganado");   
         }else{
-            System.out.print("Los jugadores han empatado");
+            System.out.print("El jugador2 ha ganado");
 
         }
      }
+    
+    
     
     public void compareCards(int i){
         if ( idCard == temp){
