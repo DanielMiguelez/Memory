@@ -78,11 +78,24 @@ public class registerController implements Initializable {
     
     String user2;
     String password2;
+    
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        String c = "insert into jugadores (nick_jugador,contraseña) values (" + "'" + user1 + "'" + " , " + "'" + password1 + "'" + ")";
+        String incrementWins = "update jugadores\n" + "set victorias_jugador  = victorias_jugador + 1\n" + "where nick_jugador = '"+user1+"'";
         
     }
+    
+    
+    public boolean openConnection( String q ){
+        Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
+        String query = String.format(q);
+        boolean verify = Bd.consultaModificacion(gestor, query);
+        gestor.cerrar_Conexion(true);
+        return verify;
+    }
+
     
     @FXML
     public void registerUser1() {

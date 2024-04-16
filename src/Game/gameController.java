@@ -32,7 +32,10 @@ import javafx.stage.Stage;
 import memory.Card;
 import memory.Deck;
 import javafx.animation.PauseTransition;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import utilidades.bbdd.Bd;
+import utilidades.bbdd.Gestor_conexion_POSTGRE;
 
 /**
  * FXML Controller class
@@ -54,14 +57,16 @@ public class gameController implements Initializable {
     private Label victoriesP2;
     @FXML
     private Button exitButton;
-    
     @FXML
     private FlowPane board;
-     @FXML
+    @FXML
+    private AnchorPane winnerPane;
+    @FXML
     private Label labelPointsP1;
     @FXML
     private Label labelPointsP2;
-    
+    @FXML
+    private Label rankingBtn;
     
     private Deck deck;
     private int tamTab;
@@ -81,7 +86,11 @@ public class gameController implements Initializable {
     
     private int pointsP1;
     private int pointsP2;
+    private String winner = "Pepe";
     
+    public String incrementWins(String winner){
+        return "update jugadores\n" + "set victorias_jugador  = victorias_jugador + 1\n" + "where nick_jugador = '"+winner+"'";
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -155,12 +164,50 @@ public class gameController implements Initializable {
         setBoard(tamTab);
         
        indexUsed = new boolean [tamTab];
-        
-        
-        
+       
+       winner = nameP2.getText();
+       System.out.println(winner); 
+       System.out.println(nameP1.getText()); 
+      
     }
     
     
+    
+    public boolean openConnection( String q ){
+        Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
+        String query = String.format(q);
+        boolean verify = Bd.consultaModificacion(gestor, query);
+        gestor.cerrar_Conexion(true);
+        return verify;
+    }
+    
+    @FXML
+    private void openRanking() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ranking/ranking.fxml"));
+            Parent root = loader.load();
+            // Obtener la escena actual y el escenario
+            Scene currentScene = rankingBtn.getScene();
+            Stage stage = (Stage) currentScene.getWindow();
+
+            // Reemplazar la escena actual con la escena del registro
+            currentScene.setRoot(root);
+            stage.show();
+           
+        } catch (IOException ex) {
+            Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
+        }   
+    }
+    
+    
+    public void labelNames(String n1, String n2, String l1, String l2, String V1, String V2){
+    nameP1.setText(n1);
+    nameP2.setText(n2);
+    levelP1.setText(levelP1.getText() + " : " + l1);
+    levelP2.setText(levelP2.getText() + " : " + l2);
+    victoriesP1.setText(victoriesP1.getText() + " : " + V1);
+    victoriesP2.setText(victoriesP2.getText() + " : " + V1);
+   }
 
     private void setBoard(int tamTab){
 
@@ -216,10 +263,12 @@ public class gameController implements Initializable {
         if (pointsP1 == pointsP2){
         System.out.print("Los jugadores han empatado");
         }else if ( pointsP1 > pointsP2){
-        System.out.print("El jugador1 ha ganado");   
+            winner = nameP1.getText();
+            openConnection( incrementWins(winner) );
+            winnerPane.setVisible(true);
         }else{
-            System.out.print("El jugador2 ha ganado");
-
+            winner = nameP2.getText();
+            openConnection( incrementWins(winner) );
         }
      }
     
@@ -245,16 +294,21 @@ public class gameController implements Initializable {
             pause.play();
             System.out.println("Fallo");
             System.out.println();
-            if (turnoJugador <2 ) {
-                turnoJugador += 1;
-                System.out.println("Turn: " + turnoJugador);
-            }
-            else {
-                turnoJugador = 1;
-                System.out.println("Turn: " + turnoJugador);
-                }
-            }
+            turnoJugadores();
+        }  
+    }
+    
+    private void turnoJugadores (){
+        
+        if (turnoJugador <2 ) {
+            turnoJugador += 1;
+            System.out.println("Turn: " + turnoJugador);
         }
+        else {
+            turnoJugador = 1;
+            System.out.println("Turn: " + turnoJugador);
+        }
+    }
     
     private void flipCards(){
        
@@ -327,14 +381,7 @@ private void unhoverCards(MouseEvent event) {
         }
     }
 
-public void labelNames(String n1, String n2, String l1, String l2, String V1, String V2){
-    nameP1.setText(n1);
-    nameP2.setText(n2);
-    levelP1.setText(levelP1.getText() + " : " + l1);
-    levelP2.setText(levelP2.getText() + " : " + l2);
-    victoriesP1.setText(victoriesP1.getText() + " : " + V1);
-    victoriesP2.setText(victoriesP2.getText() + " : " + V1);
-   }
+
 
 
 }
