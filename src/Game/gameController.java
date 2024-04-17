@@ -6,6 +6,7 @@
 package Game;
 
 import Menu.menuController;
+import REGISTER.registerController;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -47,28 +48,59 @@ import javafx.animation.Timeline;
  * @author aronbp
  */
 public class gameController implements Initializable {
+   
+    @FXML
+    private Label rankingBtn;
+    @FXML
+    private FlowPane board;
+    @FXML
+    private AnchorPane winnerPane;
+    
+    
+    //INFO 4 USUARIOS
+    @FXML
+    public AnchorPane anchorPlayer1;
+    @FXML
+    public AnchorPane anchorPlayer2;
+    @FXML
+    public AnchorPane anchorPlayer3;
+    @FXML
+    public AnchorPane anchorPlayer4;
     @FXML
     private Label nameP1;
     @FXML
     private Label nameP2;
     @FXML
-    private FlowPane board;
+    private Label nameP3;
     @FXML
-    private AnchorPane winnerPane;
-    @FXML
-    private Label labelPointsP1;
-    @FXML
-    private Label labelPointsP2;
+    private Label nameP4;
     @FXML
     private Label levelPlayer1;
     @FXML
     private Label levelPlayer2;
     @FXML
+    private Label levelPlayer3;
+    @FXML
+    private Label levelPlayer4;
+    @FXML
     private Label winsPlayer1;
     @FXML
     private Label winsPlayer2;
     @FXML
-    private Label rankingBtn;
+    private Label winsPlayer3;
+    @FXML
+    private Label winsPlayer4;
+    @FXML
+    private Label labelPointsP1;
+    @FXML
+    private Label labelPointsP2;
+    @FXML
+    private Label labelPointsP3;
+    @FXML
+    private Label labelPointsP4;
+    //INFO 4 USUARIOS
+    
+
     
     private Deck deck;
     private int tamTab;
@@ -88,6 +120,9 @@ public class gameController implements Initializable {
     
     private int pointsP1;
     private int pointsP2;
+    private int pointsP3;
+    private int pointsP4;
+    
     private String winner;
     
     private int segundos = 0;
@@ -111,6 +146,8 @@ public class gameController implements Initializable {
     private Label playAgainBtn;
     @FXML
     private Label menuBtn;
+    
+    private int numTurns;
     
     public String incrementWins(String winner){
         return "update jugadores\n" + "set victorias_jugador  = victorias_jugador + 1\n" + "where nick_jugador = '"+winner+"'";
@@ -183,6 +220,7 @@ public class gameController implements Initializable {
        indexUsed = new boolean [tamTab];
        winnerPane.setVisible(false);
        iniciarTiempo();
+       System.out.print(numTurns);
     }
     
     
@@ -248,13 +286,14 @@ public class gameController implements Initializable {
             Scene currentScene = board.getScene();
             Stage stage = (Stage) currentScene.getWindow();
             gameController game = loader.getController();
-
+            
+            //AÑADIR P3 & P4;
             String[][]lvlP1 = connectionSelect( getUserLevel( nameP1.getText() ) );
             String[][]lvlP2 = connectionSelect( getUserLevel( nameP2.getText() ) );
             String[][]winsP1 = connectionSelect( getUserVictories( nameP1.getText() ) ); 
             String[][]winsP2 = connectionSelect( getUserVictories( nameP2.getText() ) );
             
-            game.labelNames(nameP1.getText(),nameP2.getText(),lvlP1[0][0],lvlP2[0][0],winsP1[0][0],winsP2[0][0]);
+            //game.labelNames(nameP1.getText(),nameP2.getText(),lvlP1[0][0],lvlP2[0][0],winsP1[0][0],winsP2[0][0]);
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
             stage.hide();
@@ -266,14 +305,19 @@ public class gameController implements Initializable {
     }
     
     
-    public void labelNames(String n1, String n2, String lvlP1, String lvlP2, String winsP1, String winsP2){
+    public void labelNames(String n1,String n2,String n3,String n4, String lvlP1, String lvlP2,String lvlP3, String lvlP4, String winsP1, String winsP2,String winsP3, String winsP4){
         nameP1.setText(n1);
         nameP2.setText(n2);
-        
+        nameP3.setText(n3);
+        nameP4.setText(n4);
         levelPlayer1.setText(lvlP1);
         levelPlayer2.setText(lvlP2);
+        levelPlayer3.setText(lvlP3);
+        levelPlayer4.setText(lvlP4);
         winsPlayer1.setText(winsP1);
         winsPlayer2.setText(winsP2);
+        winsPlayer3.setText(winsP3);
+        winsPlayer4.setText(winsP4);
     }
 
     private void setBoard(int tamTab){
@@ -314,28 +358,44 @@ public class gameController implements Initializable {
             }
         }
     private void sumarPuntos() {
-        if (turnoJugador == 2 ) {
-            pointsP2++;
-            labelPointsP2.setText("POINTS: " + pointsP2 + "");
-            }
-        else {
+        if (turnoJugador == 1) {
             pointsP1++;
-            labelPointsP1.setText("POINTS: " + pointsP1 + "");
+            labelPointsP1.setText(pointsP1 + "");
+            }
+        else if (turnoJugador == 2) {
+            pointsP2++;
+            labelPointsP2.setText(pointsP2 + "");
+            }
+        else if (turnoJugador == 3) {
+            pointsP3++;
+            labelPointsP3.setText(pointsP3 + "");
+            }
+        else if (turnoJugador == 4) {
+            pointsP4++;
+            labelPointsP4.setText(pointsP4 + "");
         }
     }
 
     private void score(){
         System.out.println("El juego ha terminado!!");
         winnerPane.setVisible(true);
-        if (pointsP1 == pointsP2){
-        System.out.print("Los jugadores han empatado");
-        }else if ( pointsP1 > pointsP2){
+
+        if (pointsP1 > pointsP2 && pointsP1 > pointsP3 && pointsP1 > pointsP4){
             winner = nameP1.getText();
             connectionSet( incrementWins(winner) );
-        }else{
+        }else if ( pointsP2 > pointsP3 && pointsP2 > pointsP4 && pointsP2 > pointsP1){
             winner = nameP2.getText();
             connectionSet( incrementWins(winner) );
+        }else if (pointsP3 > pointsP2 && pointsP3 > pointsP4 && pointsP3 > pointsP1){
+            winner = nameP3.getText();
+            connectionSet( incrementWins(winner) );
+        }else if (pointsP4 > pointsP3 && pointsP4 > pointsP2 && pointsP4 > pointsP1){
+            winner = nameP4.getText();
+            connectionSet( incrementWins(winner) );
+        }else {
+            System.out.print("Los jugadores han empatado");
         }
+        
      }
     
     
@@ -363,9 +423,15 @@ public class gameController implements Initializable {
             turnoJugadores();
         }  
     }
+    public void setNumTurns(int numTurns) {
+        this.numTurns = numTurns;    
+    }
+
     
     private void turnoJugadores (){
-        if (turnoJugador <2 ) {
+//        if ( numTurns > 4 )
+//            numTurns = 4;
+        if (turnoJugador < numTurns ) {
             turnoJugador += 1;
             System.out.println("Turn: " + turnoJugador);
         }
@@ -443,6 +509,7 @@ public class gameController implements Initializable {
         }
     }
 
+  
 
 
 }

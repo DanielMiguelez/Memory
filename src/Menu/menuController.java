@@ -95,6 +95,7 @@ public class menuController implements Initializable {
             Media sound = new Media(new File(path).toURI().toString());
             mediaPlayer = new MediaPlayer(sound);
             
+            //CON ESTO LO LOOPEAMOS
             /*
             mediaPlayer.setOnEndOfMedia(() -> {
             mediaPlayer.seek(Duration.ZERO);
@@ -119,7 +120,7 @@ public class menuController implements Initializable {
     @FXML
     private void openSettings(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Options/Options.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Options/options.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual y el escenario
             Scene currentScene = settingsButton.getScene();
