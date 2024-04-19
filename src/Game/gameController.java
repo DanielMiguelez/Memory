@@ -42,6 +42,10 @@ import javafx.util.Duration;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 /**
  * FXML Controller class
  *
@@ -99,9 +103,6 @@ public class gameController implements Initializable {
     @FXML
     private Label labelPointsP4;
     //INFO 4 USUARIOS
-    
-
-    
     private Deck deck;
     private int tamTab;
     private int desp;
@@ -114,7 +115,7 @@ public class gameController implements Initializable {
     private int indexCard1;
     private int indexCard2;
 
-    private boolean[] indexUsed;
+    private boolean[]indexUsed;
     private int aciertos = 0;
     private boolean gameFinished = false;
     
@@ -146,6 +147,12 @@ public class gameController implements Initializable {
     private Label playAgainBtn;
     @FXML
     private Label menuBtn;
+    @FXML
+    private Button botonEnviar;
+    @FXML
+    private TextField texto;
+    @FXML 
+    private TextFlow chat;
     
     private int numTurns;
     
@@ -165,7 +172,6 @@ public class gameController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
         deck = new Deck();
 
         Card Mario = new Card("Mario", 1, new Image("/media/Mario.png"));
@@ -223,7 +229,17 @@ public class gameController implements Initializable {
        System.out.print(numTurns);
     }
     
-    
+    @FXML
+    private void sendToChat(){
+    String t = "\n";
+    t += texto.getText(); // Suponiendo que 'texto' es un objeto TextField o similar donde el usuario ingresa el texto
+    // Creamos un objeto Text con el texto ingresado por el usuario
+    Text nuevoTexto = new Text(t);
+    nuevoTexto.setFill(Color.WHEAT);
+    nuevoTexto.setFont(Font.font("Gill Sans Ultra Bold", 12));// Agregamos el nuevo objeto Text al TextFlow 'chat'
+    chat.setVisible(true);
+    chat.getChildren().add(nuevoTexto);
+    }
     
     public boolean connectionSet( String q ){
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
@@ -255,7 +271,7 @@ public class gameController implements Initializable {
             stage.show();
            
         } catch (IOException ex) {
-            Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
         }   
     }
     
@@ -305,15 +321,11 @@ public class gameController implements Initializable {
     }
     
     
-    public void labelNames(String n1,String n2,String n3,String n4, String lvlP1, String lvlP2,String lvlP3, String lvlP4, String winsP1, String winsP2,String winsP3, String winsP4){
+    public void labelNames(String n1,String n2,String n3,String n4, String winsP1, String winsP2,String winsP3, String winsP4){
         nameP1.setText(n1);
         nameP2.setText(n2);
         nameP3.setText(n3);
         nameP4.setText(n4);
-        levelPlayer1.setText(lvlP1);
-        levelPlayer2.setText(lvlP2);
-        levelPlayer3.setText(lvlP3);
-        levelPlayer4.setText(lvlP4);
         winsPlayer1.setText(winsP1);
         winsPlayer2.setText(winsP2);
         winsPlayer3.setText(winsP3);
@@ -393,12 +405,9 @@ public class gameController implements Initializable {
             winner = nameP4.getText();
             connectionSet( incrementWins(winner) );
         }else {
-            System.out.print("Los jugadores han empatado");
+            winnerName.setText("THERE'S NO WINNER");
         }
-        
      }
-    
-    
     
     public void compareCards(int i){
         if ( idCard == temp){
@@ -413,7 +422,7 @@ public class gameController implements Initializable {
         else if ( idCard != temp ){
             flipCards();
             board.setDisable(true); // Bloquear el FlowPane
-            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(e -> {
             board.setDisable(false); // Desbloquear el FlowPane después de 2 segundos
             });
@@ -442,7 +451,7 @@ public class gameController implements Initializable {
     }
     
     private void flipCards(){
-       PauseTransition pause = new PauseTransition(Duration.seconds(2));
+       PauseTransition pause = new PauseTransition(Duration.seconds(1));
                     pause.setOnFinished(e -> {
             ImageView imageView = (ImageView) board.getChildren().get(indexCard1);
             imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
@@ -489,7 +498,7 @@ public class gameController implements Initializable {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             
             
-            timer.setText("Tiempo "+(minutos<10?" 0":" ")+ minutos +":"+(segundos<10?"0":"")+ segundos);
+            timer.setText("TEMP "+(minutos<10?" 0":" ")+ minutos +":"+(segundos<10?"0":"")+ segundos);
             segundos++;
             if (segundos == 60){
                 minutos++;

@@ -22,16 +22,16 @@
          <image>
             <Image url="@../media/register.png" />
          </image></ImageView>
-      <TextField fx:id="labelP1" layoutX="279.0" layoutY="470.0" prefHeight="40.0" prefWidth="250.0" />
-      <PasswordField fx:id="passwordP1" layoutX="279.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" promptText="Password must be &gt; 5" />
-      <Button fx:id="loginLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="279.0" layoutY="587.0" mnemonicParsing="false" onAction="#loginUser1" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
-      <Button fx:id="registerLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="413.0" layoutY="587.0" mnemonicParsing="false" onAction="#registerUser1" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
-      <TextField fx:id="labelP2" layoutX="749.0" layoutY="470.0" prefHeight="40.0" prefWidth="250.0" />
-      <PasswordField fx:id="passwordP2" layoutX="749.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" promptText="Password must be &gt; 5" />
-      <Button fx:id="loginRight" alignment="CENTER" contentDisplay="CENTER" layoutX="749.0" layoutY="587.0" mnemonicParsing="false" onAction="#loginUser2" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
-      <Button fx:id="registerRight" alignment="CENTER" contentDisplay="CENTER" layoutX="883.0" layoutY="587.0" mnemonicParsing="false" onAction="#registerUser2" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
-      <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" layoutX="584.0" layoutY="626.0" mnemonicParsing="false" onAction="#openMenu" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="back" />
-      <ImageView fx:id="leftUser" fitHeight="67.0" fitWidth="250.0" layoutX="279.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+      <TextField fx:id="labelNameLeft" layoutX="279.0" layoutY="470.0" prefHeight="40.0" prefWidth="250.0" />
+      <PasswordField fx:id="passwordUserLeft" layoutX="279.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" promptText="Password must be &gt; 5" />
+      <Button fx:id="btnLoginLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="279.0" layoutY="587.0" mnemonicParsing="false" onAction="#loginUser1" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
+      <Button fx:id="btnRegisterLeft" alignment="CENTER" contentDisplay="CENTER" layoutX="413.0" layoutY="587.0" mnemonicParsing="false" onAction="#registerUser1" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
+      <TextField fx:id="labelNameRight" layoutX="749.0" layoutY="470.0" prefHeight="40.0" prefWidth="250.0" />
+      <PasswordField fx:id="passwordUserRight" layoutX="749.0" layoutY="530.0" prefHeight="40.0" prefWidth="250.0" promptText="Password must be &gt; 5" />
+      <Button fx:id="btnLoginRight" alignment="CENTER" contentDisplay="CENTER" layoutX="749.0" layoutY="587.0" mnemonicParsing="false" onAction="#loginUser2" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
+      <Button fx:id="btnRegisterRight" alignment="CENTER" contentDisplay="CENTER" layoutX="883.0" layoutY="587.0" mnemonicParsing="false" onAction="#registerUser2" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
+      <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" layoutX="584.0" layoutY="626.0" mnemonicParsing="false" onAction="#openMenu" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="back" />
+      <ImageView fx:id="leftUser" fitHeight="67.0" fitWidth="250.0" layoutX="279.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/player1.png" />
          </image>
@@ -41,12 +41,12 @@
             <Image url="@../media/player2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrowLeftP1" fitHeight="26.0" fitWidth="39.0" layoutX="253.0" layoutY="409.0" onMouseClicked="#changePlayerLeft" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="arrowLeftP1" fitHeight="26.0" fitWidth="39.0" layoutX="253.0" layoutY="403.0" onMouseClicked="#changePlayerLeft" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/flecha2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrowRightP1" fitHeight="26.0" fitWidth="39.0" layoutX="528.0" layoutY="409.0" onMouseClicked="#changePlayerLeft" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fx:id="arrowRightP1" fitHeight="26.0" fitWidth="39.0" layoutX="528.0" layoutY="404.0" onMouseClicked="#changePlayerLeft" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@../media/flecha2.png" />
          </image>
@@ -61,9 +61,19 @@
             <Image url="@../media/flecha2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="playButton" fitHeight="150.0" fitWidth="200.0" layoutX="565.0" layoutY="437.0" onMouseClicked="#openGame" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="playButton" fitHeight="108.0" fitWidth="148.0" layoutX="568.0" layoutY="476.0" onMouseClicked="#openGame" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true">
          <image>
-            <Image url="@../media/playButton.png" />
+            <Image url="@../media/start.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="arrowLeftP11" fitHeight="26.0" fitWidth="39.0" layoutX="391.0" layoutY="364.0" onMouseClicked="#changePlayerLeft" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+         <image>
+            <Image url="@../media/flecha2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="arrowLeftP111" fitHeight="26.0" fitWidth="39.0" layoutX="391.0" layoutY="443.0" onMouseClicked="#changePlayerLeft" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+         <image>
+            <Image url="@../media/flecha2.png" />
          </image>
       </ImageView>
    </children>

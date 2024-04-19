@@ -14,28 +14,14 @@ import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
 public class Memory extends Application {
-
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/REGISTER/register.fxml")); 
+        Parent root = FXMLLoader.load(getClass().getResource("/Menu/menu.fxml")); 
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
         
-//           SONIDO AL INICIAR EL JUEGO
-//        String path = "@/../src/media/jump.mp3";
-//   
-//            Media sound = new Media(new File(path).toURI().toString());
-//            MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//            
-//            mediaPlayer.setOnEndOfMedia(() -> {
-//            mediaPlayer.seek(Duration.ZERO);
-//            });
-//            
-//            mediaPlayer.play();
-}
-     
 //    public static void main(String[] args) {
 //      
 //       launch(args);
@@ -266,5 +252,5 @@ public class Memory extends Application {
 //        } 
 //    }
 
-    
+    }
 }
