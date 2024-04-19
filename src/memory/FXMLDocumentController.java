@@ -35,7 +35,7 @@ public class FXMLDocumentController implements Initializable {
         String vec[][];
        
        
-        Gestor_conexion_POSTGRE gestor= new Gestor_conexion_POSTGRE("abpdefault",true);
+        Gestor_conexion_POSTGRE gestor= new Gestor_conexion_POSTGRE("memory",true);
         //Bd.consultaModificacion(gestor, "delete from jugadores where nick='jose' ");
         vec=Bd.consultaSelect(gestor, "select * from jugadores");
         gestor.cerrar_Conexion(true);
@@ -52,4 +52,6 @@ public class FXMLDocumentController implements Initializable {
         //mediaPlayer.seek(Duration.ZERO);
         mediaPlayer.play();
         }
+    
+    
 }

@@ -104,13 +104,13 @@ public class gameController implements Initializable {
     private Label labelPointsP4;
     //INFO 4 USUARIOS
     private Deck deck;
-    private int tamTab;
+    private int tamanyoTablero;
     private int desp;
     private int turnoJugador = 1;
     
     private boolean click1 = true;
     private int idCard;
-    private int temp;
+    private int idSecondCard;
     
     private int indexCard1;
     private int indexCard2;
@@ -158,9 +158,6 @@ public class gameController implements Initializable {
     
     public String incrementWins(String winner){
         return "update jugadores\n" + "set victorias_jugador  = victorias_jugador + 1\n" + "where nick_jugador = '"+winner+"'";
-    }
-    public String getUserLevel(String user){
-        return "select nivel_jugador from jugadores where nick_jugador = '" + user + "'";
     }
     public String getUserVictories(String user){
         return "select victorias_jugador from jugadores where nick_jugador = '" + user + "'";
@@ -219,11 +216,11 @@ public class gameController implements Initializable {
         deck.addCards(Luigi);        
         deck.shuffle();
         
-        tamTab = deck.getCards().size();
-        setBackground(tamTab);
-        setBoard(tamTab);
+        tamanyoTablero = deck.getCards().size();
+        setBackground(tamanyoTablero);
+        setBoard(tamanyoTablero);
         
-       indexUsed = new boolean [tamTab];
+       indexUsed = new boolean [tamanyoTablero];
        winnerPane.setVisible(false);
        iniciarTiempo();
        System.out.print(numTurns);
@@ -352,11 +349,11 @@ public class gameController implements Initializable {
                         System.out.println("First : "  + idCard);
                     }
                     else if (!click1){
-                        temp = deck.getCards().get(index).getId();
+                        idSecondCard = deck.getCards().get(index).getId();
                         indexCard2 = index;
                         if ( indexCard1 != indexCard2 && indexUsed[indexCard1] == false && indexUsed[indexCard2] == false){
                             click1 = true;
-                            System.out.println("Seeegond: "  + temp);
+                            System.out.println("Seeegond: "  + idSecondCard);
                             compareCards(index);
                             if(gameFinished){
                                 pausarTiempo();
@@ -370,21 +367,25 @@ public class gameController implements Initializable {
             }
         }
     private void sumarPuntos() {
-        if (turnoJugador == 1) {
-            pointsP1++;
-            labelPointsP1.setText(pointsP1 + "");
-            }
-        else if (turnoJugador == 2) {
-            pointsP2++;
-            labelPointsP2.setText(pointsP2 + "");
-            }
-        else if (turnoJugador == 3) {
-            pointsP3++;
-            labelPointsP3.setText(pointsP3 + "");
-            }
-        else if (turnoJugador == 4) {
-            pointsP4++;
-            labelPointsP4.setText(pointsP4 + "");
+        switch (turnoJugador) {
+            case 1:
+                pointsP1++;
+                labelPointsP1.setText(pointsP1 + "");
+                break;
+            case 2:
+                pointsP2++;
+                labelPointsP2.setText(pointsP2 + "");
+                break;
+            case 3:
+                pointsP3++;
+                labelPointsP3.setText(pointsP3 + "");
+                break;
+            case 4:
+                pointsP4++;
+                labelPointsP4.setText(pointsP4 + "");
+                break;
+            default:
+                break;
         }
     }
 
@@ -410,19 +411,19 @@ public class gameController implements Initializable {
      }
     
     public void compareCards(int i){
-        if ( idCard == temp){
+        if ( idCard == idSecondCard){
             indexUsed[indexCard1] = true;
             indexUsed[indexCard2] = true;
             aciertos += 2;
-            if ( aciertos == tamTab)
+            if ( aciertos == tamanyoTablero)
                 gameFinished = true;
             System.out.println("Acertada");
             sumarPuntos();
             }
-        else if ( idCard != temp ){
-            flipCards();
+        else if ( idCard != idSecondCard ){
+            coverCards();
             board.setDisable(true); // Bloquear el FlowPane
-            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
             pause.setOnFinished(e -> {
             board.setDisable(false); // Desbloquear el FlowPane después de 2 segundos
             });
@@ -438,8 +439,7 @@ public class gameController implements Initializable {
 
     
     private void turnoJugadores (){
-//        if ( numTurns > 4 )
-//            numTurns = 4;
+
         if (turnoJugador < numTurns ) {
             turnoJugador += 1;
             System.out.println("Turn: " + turnoJugador);
@@ -450,8 +450,8 @@ public class gameController implements Initializable {
         }
     }
     
-    private void flipCards(){
-       PauseTransition pause = new PauseTransition(Duration.seconds(1));
+    private void coverCards(){
+       PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
                     pause.setOnFinished(e -> {
             ImageView imageView = (ImageView) board.getChildren().get(indexCard1);
             imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
