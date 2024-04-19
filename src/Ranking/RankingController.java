@@ -6,6 +6,7 @@
 package Ranking;
 
 import Menu.menuController;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,7 +20,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import utilidades.bbdd.Bd;
 import utilidades.bbdd.Gestor_conexion_POSTGRE;
 
@@ -39,12 +43,25 @@ public class RankingController implements Initializable {
     @FXML
     private Label thirdFromRanking;
 
+    private MediaPlayer mediaPlayer;
     
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+            String path = "@/../src/media/peach.mp3";
+            Media sound = new Media(new File(path).toURI().toString());
+            mediaPlayer = new MediaPlayer(sound);
+            
+            //CON ESTO LO LOOPEAMOS
+            mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.seek(Duration.ZERO);
+            });
+            
+            mediaPlayer.play();
+            
         String[][]r = connectionSelect( getRankingUsers() );
         String first = r[0][0];
         String second = r[1][0];
@@ -83,6 +100,7 @@ public class RankingController implements Initializable {
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
             stage.show();
+            mediaPlayer.stop();
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
             }
