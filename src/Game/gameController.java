@@ -301,8 +301,8 @@ public class gameController implements Initializable {
             gameController game = loader.getController();
             
             //AÑADIR P3 & P4;
-            String[][]lvlP1 = connectionSelect( getUserLevel( nameP1.getText() ) );
-            String[][]lvlP2 = connectionSelect( getUserLevel( nameP2.getText() ) );
+//            String[][]lvlP1 = connectionSelect( getUserLevel( nameP1.getText() ) );
+//            String[][]lvlP2 = connectionSelect( getUserLevel( nameP2.getText() ) );
             String[][]winsP1 = connectionSelect( getUserVictories( nameP1.getText() ) ); 
             String[][]winsP2 = connectionSelect( getUserVictories( nameP2.getText() ) );
             
