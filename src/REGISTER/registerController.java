@@ -4,13 +4,10 @@ package REGISTER;
 TO-DO:
 AÑADIR CPUS AL LOGIN;
 CPU AGAINST GAME (EASY (1A-4RND), (2A[1 de esas 2 C. que levanta tiene que tener el id de ]-2RND) EQUILIBRADO , (CADA X-> FAIL) GOD);
-SET IMAGEN WINNER;
 SONIDOS AL JUEGO;
 REFACTORIZAR (METER OBJETOS USUARIOS A GAMECONTROLLER PARA SETEAR INFO EN LABELNAMES);
 AÑADIR COMENTARIOS;
-PÁGINA DE RANKING;
 PÁGINA DE INSTRUCCIONES;
-RECOGER DATOS ON PLAY AGIAN;
 MONEDAS EN EL JUEGO;
 EASTER-EGGS;
 OPTIONS;
@@ -136,6 +133,17 @@ public class registerController implements Initializable {
             btnLoginLeft.setOnAction(Event -> loginUser3());
             setP1StyleNull();
         }
+        
+        if (oFxId.equals("arrowUpP1")) {
+            leftUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/cpu.png")));
+            //btnLoginLeft.setOnAction(Event -> loginUser3());
+            setP1StyleNull();
+        }
+        if (oFxId.equals("arrowDownP1")) {
+            leftUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player1.png")));
+            //btnLoginLeft.setOnAction(Event -> loginUser3());
+            setP1StyleNull();
+        }
     }
 
     public void changePlayerRight(Event e) {
@@ -151,6 +159,16 @@ public class registerController implements Initializable {
         if (oFxId.equals("arrowRightP2")) {
             rightUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player4.png")));
             btnLoginRight.setOnAction(Event -> loginUser4());
+            setP2StyleNull();
+        }
+        if (oFxId.equals("arrowUpP2")) {
+            rightUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/cpu.png")));
+            //btnLoginRight.setOnAction(Event -> loginUser4());
+            setP2StyleNull();
+        }
+        if (oFxId.equals("arrowDownP2")) {
+            rightUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player2.png")));
+            //btnLoginRight.setOnAction(Event -> loginUser4());
             setP2StyleNull();
         }
     }
@@ -315,7 +333,7 @@ public class registerController implements Initializable {
             logged2 = false;
         }
     }
-
+    
     public void loginUser3() {
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
         nameP3 = labelNameLeft.getText().toLowerCase();
