@@ -104,9 +104,9 @@ public class gameController implements Initializable {
     private Label labelPointsP4;
     //INFO 4 USUARIOS
     private Deck deck;
-    private int tamanyoTablero;
+    private int boardSize;
     private int desp;
-    private int turnoJugador = 1;
+    private int playerTurn = 1;
     
     private boolean click1 = true;
     private int idCard;
@@ -116,7 +116,7 @@ public class gameController implements Initializable {
     private int indexCard2;
 
     private boolean[]indexUsed;
-    private int aciertos = 0;
+    private int matches = 0;
     private boolean gameFinished = false;
     
     private int pointsP1;
@@ -126,8 +126,8 @@ public class gameController implements Initializable {
     
     private String winner;
     
-    private int segundos = 0;
-    private int minutos = 0;
+    private int seconds = 0;
+    private int minutes = 0;
     private Timeline timeline;
     
     @FXML
@@ -156,6 +156,11 @@ public class gameController implements Initializable {
     
     private int numTurns;
     
+    String[][]winsP1 = new String [0][1];
+    String[][]winsP2 = new String [0][1];
+    String[][]winsP3 = new String [0][1];
+    String[][]winsP4 = new String [0][1];
+    
     public String incrementWins(String winner){
         return "update jugadores\n" + "set victorias_jugador  = victorias_jugador + 1\n" + "where nick_jugador = '"+winner+"'";
     }
@@ -168,7 +173,7 @@ public class gameController implements Initializable {
 //    }
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {  
         deck = new Deck();
 
         Card Mario = new Card("Mario", 1, new Image("/media/Mario.png"));
@@ -216,14 +221,14 @@ public class gameController implements Initializable {
         deck.addCards(Luigi);        
         deck.shuffle();
         
-        tamanyoTablero = deck.getCards().size();
-        setBackground(tamanyoTablero);
-        setBoard(tamanyoTablero);
+        boardSize = deck.getCards().size();
+        setBackground(boardSize);
+        setBoard(boardSize);
         
-       indexUsed = new boolean [tamanyoTablero];
+       indexUsed = new boolean [boardSize];
        winnerPane.setVisible(false);
-       iniciarTiempo();
-       System.out.print(numTurns);
+       startTime();
+       System.out.println(numTurns);
     }
     
     @FXML
@@ -300,13 +305,37 @@ public class gameController implements Initializable {
             Stage stage = (Stage) currentScene.getWindow();
             gameController game = loader.getController();
             
-            //AÑADIR P3 & P4;
-//            String[][]lvlP1 = connectionSelect( getUserLevel( nameP1.getText() ) );
-//            String[][]lvlP2 = connectionSelect( getUserLevel( nameP2.getText() ) );
-            String[][]winsP1 = connectionSelect( getUserVictories( nameP1.getText() ) ); 
-            String[][]winsP2 = connectionSelect( getUserVictories( nameP2.getText() ) );
+            if ( playerTurn == 4 ){
+                anchorPlayer1.setVisible(true);
+                anchorPlayer2.setVisible(true);
+                anchorPlayer3.setVisible(true);
+                anchorPlayer4.setVisible(true);
+                winsP1 = connectionSelect(getUserVictories( nameP1.getText())); 
+                winsP2 = connectionSelect(getUserVictories( nameP2.getText()));
+                winsP3 = connectionSelect(getUserVictories( nameP3.getText())); 
+                winsP4 = connectionSelect(getUserVictories( nameP4.getText()));
+            }
+            if ( playerTurn == 3 ){
+                anchorPlayer1.setVisible(true);
+                anchorPlayer2.setVisible(true);
+                anchorPlayer3.setVisible(true);
+                winsP1 = connectionSelect(getUserVictories( nameP1.getText())); 
+                winsP2 = connectionSelect(getUserVictories( nameP2.getText()));
+                winsP3 = connectionSelect(getUserVictories( nameP3.getText()));
+            }
+            if (playerTurn == 2 ){
+                anchorPlayer1.setVisible(true);
+                anchorPlayer2.setVisible(true);
+                winsP1 = connectionSelect(getUserVictories( nameP1.getText())); 
+                winsP2 = connectionSelect(getUserVictories( nameP2.getText()));
+            }
+            else{
+               anchorPlayer1.setVisible(true);
+                winsP1 = connectionSelect(getUserVictories( nameP1.getText())); 
+            }
             
-            //game.labelNames(nameP1.getText(),nameP2.getText(),lvlP1[0][0],lvlP2[0][0],winsP1[0][0],winsP2[0][0]);
+            game.setNumTurns(numTurns);
+            game.labelNames(nameP1.getText(),nameP2.getText(),nameP3.getText(),nameP4.getText(),winsP1[0][0],winsP2[0][0],winsP3[0][0],winsP4[0][0]);
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
             stage.hide();
@@ -329,10 +358,10 @@ public class gameController implements Initializable {
         winsPlayer4.setText(winsP4);
     }
 
-    private void setBoard(int tamTab){
-            if (tamTab==16)
+    private void setBoard(int boardSize){
+            if (boardSize==16)
                 desp = 8;
-            for (int i=0+desp; i<tamTab+desp;i++){
+            for (int i=0+desp; i<boardSize+desp;i++){
                 ImageView imageView = (ImageView) board.getChildren().get(i);
     //            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
                 imageView.setUserData(i);
@@ -356,7 +385,7 @@ public class gameController implements Initializable {
                             System.out.println("Seeegond: "  + idSecondCard);
                             compareCards(index);
                             if(gameFinished){
-                                pausarTiempo();
+                                pauseTime();
                                 score();
                             }    
                         }
@@ -367,7 +396,7 @@ public class gameController implements Initializable {
             }
         }
     private void sumarPuntos() {
-        switch (turnoJugador) {
+        switch (playerTurn) {
             case 1:
                 pointsP1++;
                 labelPointsP1.setText(pointsP1 + "");
@@ -406,7 +435,8 @@ public class gameController implements Initializable {
             winner = nameP4.getText();
             connectionSet( incrementWins(winner) );
         }else {
-            winnerName.setText("THERE'S NO WINNER");
+            winnerName.setText("DRAW");
+            winnerPicture.setVisible(false);
         }
      }
     
@@ -414,8 +444,8 @@ public class gameController implements Initializable {
         if ( idCard == idSecondCard){
             indexUsed[indexCard1] = true;
             indexUsed[indexCard2] = true;
-            aciertos += 2;
-            if ( aciertos == tamanyoTablero)
+            matches += 2;
+            if ( matches == boardSize)
                 gameFinished = true;
             System.out.println("Acertada");
             sumarPuntos();
@@ -423,14 +453,14 @@ public class gameController implements Initializable {
         else if ( idCard != idSecondCard ){
             coverCards();
             board.setDisable(true); // Bloquear el FlowPane
-            PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
             pause.setOnFinished(e -> {
             board.setDisable(false); // Desbloquear el FlowPane después de 2 segundos
             });
             pause.play();
             System.out.println("Fallo");
             System.out.println();
-            turnoJugadores();
+            playerTurns();
         }  
     }
     public void setNumTurns(int numTurns) {
@@ -438,20 +468,20 @@ public class gameController implements Initializable {
     }
 
     
-    private void turnoJugadores (){
+    private void playerTurns (){
 
-        if (turnoJugador < numTurns ) {
-            turnoJugador += 1;
-            System.out.println("Turn: " + turnoJugador);
+        if (playerTurn < numTurns ) {
+            playerTurn += 1;
+            System.out.println("Turn: " + playerTurn);
         }
         else {
-            turnoJugador = 1;
-            System.out.println("Turn: " + turnoJugador);
+            playerTurn = 1;
+            System.out.println("Turn: " + playerTurn);
         }
     }
     
     private void coverCards(){
-       PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+       PauseTransition pause = new PauseTransition(Duration.seconds(1));
                     pause.setOnFinished(e -> {
             ImageView imageView = (ImageView) board.getChildren().get(indexCard1);
             imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
@@ -462,10 +492,10 @@ public class gameController implements Initializable {
         pause.play();
     }
     
-    private void setBackground(int tamTab){
-        if (tamTab==16)
+    private void setBackground(int boardSize){
+        if (boardSize==16)
             desp = 8;
-        for (int i=0+desp; i<tamTab+desp;i++){
+        for (int i=0+desp; i<boardSize+desp;i++){
             ImageView imageView = (ImageView) board.getChildren().get(i);
             imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
         }
@@ -494,15 +524,15 @@ public class gameController implements Initializable {
         }
     }
 
-    private void iniciarTiempo() {
+    private void startTime() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
             
             
-            timer.setText("TEMP "+(minutos<10?" 0":" ")+ minutos +":"+(segundos<10?"0":"")+ segundos);
-            segundos++;
-            if (segundos == 60){
-                minutos++;
-                segundos = 0;    
+            timer.setText("Time "+(minutes<10?" 0":" ")+ minutes +":"+(seconds<10?"0":"")+ seconds);
+            seconds++;
+            if (seconds == 60){
+                minutes++;
+                seconds = 0;    
             }    
         }));
         
@@ -511,7 +541,7 @@ public class gameController implements Initializable {
         timeline.play();
     }
     
-    private void pausarTiempo(){
+    private void pauseTime(){
         if(timeline != null){
             timeline.stop();
             System.out.println("Timer off");
