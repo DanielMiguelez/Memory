@@ -96,7 +96,7 @@
       </FlowPane>
       <AnchorPane fx:id="winnerPane" layoutX="250.0" layoutY="362.0" prefHeight="358.0" prefWidth="780.0" style="-fx-background-color: rgba(140, 140, 140, 0.9);">
          <children>
-            <Label fx:id="rankingBtn1" layoutX="289.0" layoutY="33.0" onMouseClicked="#openRanking" prefHeight="39.0" prefWidth="205.0" style="-fx-background-color: rgba(27, 29, 102, 0.6); -fx-background-radius: 7px;" text="          " textFill="WHITE">
+            <Label fx:id="rankingBtn1" layoutX="289.0" layoutY="33.0" onMouseClicked="#openRanking" prefHeight="39.0" prefWidth="231.0" style="-fx-background-color: rgba(27, 29, 102, 0.6); -fx-background-radius: 7px;" text="          " textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
@@ -106,7 +106,7 @@
                   <Image url="@../media/luigiSide.png" />
                </image>
             </ImageView>
-            <Label fx:id="winnerName" layoutX="304.0" layoutY="33.0" text="WINNER:" textFill="WHITE">
+            <Label fx:id="winnerName" alignment="CENTER" contentDisplay="CENTER" layoutX="306.0" layoutY="33.0" text="DRAW" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
@@ -137,7 +137,7 @@
             <Font name="Gill Sans Ultra Bold" size="25.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorPlayer1" layoutY="412.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
+      <AnchorPane fx:id="anchorPlayer1" layoutY="412.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;">
          <children>
             <ImageView fitHeight="141.0" fitWidth="149.0" layoutX="55.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -218,7 +218,7 @@
             <Button fx:id="botonEnviar1" layoutX="184.0" layoutY="265.0" maxHeight="25.0" maxWidth="50.0" mnemonicParsing="false" onAction="#sendToChat" prefHeight="25.0" prefWidth="50.0" text="Send" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPlayer2" layoutX="1028.0" layoutY="412.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
+      <AnchorPane fx:id="anchorPlayer2" layoutX="1028.0" layoutY="412.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;">
          <children>
             <ImageView fitHeight="141.0" fitWidth="149.0" layoutX="50.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -299,7 +299,7 @@
             <Button fx:id="botonEnviar111" layoutX="181.0" layoutY="268.0" maxHeight="25.0" maxWidth="50.0" mnemonicParsing="false" onAction="#sendToChat" prefHeight="25.0" prefWidth="50.0" text="Send" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPlayer3" layoutX="-1.0" layoutY="54.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
+      <AnchorPane fx:id="anchorPlayer3" layoutX="-1.0" layoutY="54.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;">
          <children>
             <ImageView fitHeight="132.0" fitWidth="130.0" layoutX="60.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -380,7 +380,7 @@
             <Button fx:id="botonEnviar" layoutX="190.0" layoutY="269.0" maxHeight="25.0" maxWidth="50.0" mnemonicParsing="false" onAction="#sendToChat" prefHeight="25.0" prefWidth="50.0" text="Send" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPlayer4" layoutX="1028.0" layoutY="45.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
+      <AnchorPane fx:id="anchorPlayer4" layoutX="1028.0" layoutY="45.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;">
          <children>
             <ImageView fitHeight="123.0" fitWidth="130.0" layoutX="60.0" layoutY="25.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>

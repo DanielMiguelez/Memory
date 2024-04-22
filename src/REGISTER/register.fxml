@@ -31,12 +31,12 @@
       <Button fx:id="btnLoginRight" alignment="CENTER" contentDisplay="CENTER" layoutX="749.0" layoutY="587.0" mnemonicParsing="false" onAction="#loginUser2" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="LOGIN" />
       <Button fx:id="btnRegisterRight" alignment="CENTER" contentDisplay="CENTER" layoutX="883.0" layoutY="587.0" mnemonicParsing="false" onAction="#registerUser2" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="REGISTER" />
       <Button fx:id="back" alignment="CENTER" contentDisplay="CENTER" layoutX="584.0" layoutY="626.0" mnemonicParsing="false" onAction="#openMenu" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" opacity="0.75" prefHeight="40.0" prefWidth="115.0" text="back" />
-      <ImageView fx:id="leftUser" fitHeight="67.0" fitWidth="250.0" layoutX="279.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="leftUserLogo" fitHeight="67.0" fitWidth="250.0" layoutX="279.0" layoutY="389.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/player1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rightUser" fitHeight="67.0" fitWidth="250.0" layoutX="749.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="rightUserLogo" fitHeight="67.0" fitWidth="250.0" layoutX="749.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/player2.png" />
          </image>

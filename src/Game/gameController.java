@@ -421,7 +421,8 @@ public class gameController implements Initializable {
     private void score(){
         System.out.println("El juego ha terminado!!");
         winnerPane.setVisible(true);
-
+        System.out.println("P1: " + pointsP1 + "P2: " + pointsP2 + "P3: " + pointsP3 + "P4: " + pointsP4);
+        
         if (pointsP1 > pointsP2 && pointsP1 > pointsP3 && pointsP1 > pointsP4){
             winner = nameP1.getText();
             connectionSet( incrementWins(winner) );
@@ -438,6 +439,7 @@ public class gameController implements Initializable {
             winnerName.setText("DRAW");
             winnerPicture.setVisible(false);
         }
+        winnerName.setText(winner);
      }
     
     public void compareCards(int i){

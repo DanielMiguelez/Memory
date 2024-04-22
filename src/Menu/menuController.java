@@ -46,19 +46,24 @@ public class menuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-            String path = "@/../src/media/menuMusic.mp3";
-            Media sound = new Media(new File(path).toURI().toString());
-            mediaPlayer = new MediaPlayer(sound);
-            
-            //CON ESTO LO LOOPEAMOS
-            mediaPlayer.setOnEndOfMedia(() -> {
-            mediaPlayer.seek(Duration.ZERO);
-            });
-            
-            mediaPlayer.play();
+//            String path = "@/../src/media/menuMusic.mp3";
+//            Media sound = new Media(new File(path).toURI().toString());
+//            mediaPlayer = new MediaPlayer(sound);
+//            
+//            //CON ESTO LO LOOPEAMOS
+//            mediaPlayer.setOnEndOfMedia(() -> {
+//            mediaPlayer.seek(Duration.ZERO);
+//            });
+//            
+//            mediaPlayer.play();
     }    
     
+    
     @FXML
+    public void stopMusic(){
+//        mediaPlayer.stop();
+    } 
+   @FXML
     private void openRegister() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/REGISTER/register.fxml"));
@@ -78,7 +83,7 @@ public class menuController implements Initializable {
     @FXML
     private void openRanking(ActionEvent event) {
         try {
-            mediaPlayer.stop();
+            //mediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ranking/ranking.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual y el escenario

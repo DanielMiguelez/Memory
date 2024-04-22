@@ -41,6 +41,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import memory.Player;
@@ -104,6 +105,7 @@ public class registerController implements Initializable {
 
     private int numPlayers;
     public gameController game;
+    public menuController menu;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -131,7 +133,7 @@ public class registerController implements Initializable {
         }
         if (oFxId.equals("arrowRightP1")) {
             leftUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player3.png")));
-            btnLoginLeft.setOnAction(event -> loginUser3());
+            btnLoginLeft.setOnAction(Event -> loginUser3());
             setP1StyleNull();
         }
     }
@@ -148,7 +150,7 @@ public class registerController implements Initializable {
         }
         if (oFxId.equals("arrowRightP2")) {
             rightUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player4.png")));
-            btnLoginRight.setOnAction(event -> loginUser4());
+            btnLoginRight.setOnAction(Event -> loginUser4());
             setP2StyleNull();
         }
     }
@@ -173,14 +175,14 @@ public class registerController implements Initializable {
 
     @FXML
     public void registerUser1() {
-        nameP1 = labelNameLeft.getText().toLowerCase();
-        password1 = passwordUserLeft.getText().toLowerCase();
+        name = labelNameLeft.getText().toLowerCase();
+        password = passwordUserLeft.getText().toLowerCase();
 
         //SI USUARIO Y CONTRASEÑA SON "VALIDOS"
-        if (nameP1.length() > 0 && password1.length() >= 5) {
+        if (name.length() > 0 && password.length() >= 5) {
             //LOS METEMOS A LA BBDD MEMORY
             Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
-            String query = String.format("insert into jugadores (nick_jugador,contraseña) values (" + "'" + nameP1 + "'" + " , " + "'" + password1 + "'" + ")");
+            String query = String.format("insert into jugadores (nick_jugador,contraseña) values (" + "'" + name + "'" + " , " + "'" + password + "'" + ")");
             consulta = Bd.consultaModificacion(gestor, query);
             gestor.cerrar_Conexion(true);
             if (consulta) {
@@ -209,12 +211,12 @@ public class registerController implements Initializable {
 
     @FXML
     public void registerUser2() {
-        nameP2 = labelNameRight.getText().toLowerCase();
-        password2 = passwordUserRight.getText().toLowerCase();
+        name = labelNameRight.getText().toLowerCase();
+        password = passwordUserRight.getText().toLowerCase();
 
-        if (nameP2.length() > 0 && password2.length() >= 5) {
+        if (name.length() > 0 && password.length() >= 5) {
             Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
-            String query = String.format("insert into jugadores (nick_jugador,contraseña) values (" + "'" + nameP2 + "'" + " , " + "'" + password2 + "'" + ")");
+            String query = String.format("insert into jugadores (nick_jugador,contraseña) values (" + "'" + name + "'" + " , " + "'" + password + "'" + ")");
             consulta = Bd.consultaModificacion(gestor, query);
             gestor.cerrar_Conexion(true);
             if (consulta) {
@@ -328,7 +330,7 @@ public class registerController implements Initializable {
             passwordUserLeft.setText("");
             logged3 = false;
         } else if (resultados != null) {
-            if (nameP3.equals(nameP1) || nameP3.equals(nameP2) || nameP3.equals(nameP4)) {
+            if (nameP3.equals(nameP1) || nameP3.equals(nameP2)) {
                 btnLoginLeft.setStyle("-fx-background-color: red;");
                 labelNameLeft.setStyle("-fx-border-color: red;");
                 logged3 = false;
@@ -345,8 +347,6 @@ public class registerController implements Initializable {
                 System.out.println("Logeando p3:" + player3);
                 nameP3 = name;
                 victoriesP3 = victories + "";
-//                    if (logged4)
-//                       openGame();
             }
         } else {
             btnLoginLeft.setStyle("-fx-background-color: red;");
@@ -387,8 +387,6 @@ public class registerController implements Initializable {
                 System.out.println("Logueando p4: " + player4);
                 nameP4 = name;
                 victoriesP4 = victories + "";
-//                    if (logged3)
-//                        openGame();
             }
         } else {
             btnLoginRight.setStyle("-fx-background-color: red;");
@@ -399,14 +397,18 @@ public class registerController implements Initializable {
 
     public void openGame() {
         try {
-//            currentStage.close();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Game/game.fxml"));
-            Parent root = loader.load();
+            FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/Menu/menu.fxml"));
+            Parent root = menuLoader.load();
+            menu =  menuLoader.getController();
+            FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/Game/game.fxml"));
+            root = gameLoader.load();
+            game = gameLoader.getController();
+            menu.stopMusic();
             // Obtener la escena actual y el escenario
             Scene currentScene = btnLoginLeft.getScene();
             Stage stage = (Stage) currentScene.getWindow();
             //cogemos los textos de los labels y se los pasamos al metodo del game controler
-            game = loader.getController();
+            
             game.labelNames(nameP1, nameP2, nameP3, nameP4, victoriesP1, victoriesP2, victoriesP3, victoriesP4);
             checkLogged();
             game.setNumTurns(numPlayers);
@@ -445,6 +447,8 @@ public class registerController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu/menu.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual y el escenario
+            menuController menu = loader.getController();
+
             Scene currentScene = btnLoginLeft.getScene();
             Stage stage = (Stage) currentScene.getWindow();
             // Reemplazar la escena actual con la escena del registro
@@ -493,5 +497,8 @@ public class registerController implements Initializable {
 
     private boolean getLogged4() {
         return logged4;
+    }
+    public int getNumPlayers(){
+        return numPlayers;
     }
 }
