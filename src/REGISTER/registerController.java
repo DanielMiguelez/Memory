@@ -103,7 +103,7 @@ public class registerController implements Initializable {
     String nameP4;
     String password4;
 
-    private int numPlayers;
+    private int numPlayers = 0;
     public gameController game;
     public menuController menu;
 
@@ -400,10 +400,10 @@ public class registerController implements Initializable {
             FXMLLoader menuLoader = new FXMLLoader(getClass().getResource("/Menu/menu.fxml"));
             Parent root = menuLoader.load();
             menu =  menuLoader.getController();
+            menu.stopMusic();
             FXMLLoader gameLoader = new FXMLLoader(getClass().getResource("/Game/game.fxml"));
             root = gameLoader.load();
             game = gameLoader.getController();
-            menu.stopMusic();
             // Obtener la escena actual y el escenario
             Scene currentScene = btnLoginLeft.getScene();
             Stage stage = (Stage) currentScene.getWindow();
@@ -425,18 +425,22 @@ public class registerController implements Initializable {
         if (logged) {
             game.anchorPlayer1.setVisible(true);
             numPlayers++;
+            System.out.println(numPlayers);
         }
         if (logged2) {
             game.anchorPlayer2.setVisible(true);
             numPlayers++;
+            System.out.println(numPlayers);
         }
         if (logged3) {
             game.anchorPlayer3.setVisible(true);
             numPlayers++;
+            System.out.println(numPlayers);
         }
         if (logged4) {
             game.anchorPlayer4.setVisible(true);
             numPlayers++;
+            System.out.println(numPlayers);
         }
 
     }

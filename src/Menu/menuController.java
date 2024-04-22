@@ -46,23 +46,10 @@ public class menuController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//            String path = "@/../src/media/menuMusic.mp3";
-//            Media sound = new Media(new File(path).toURI().toString());
-//            mediaPlayer = new MediaPlayer(sound);
-//            
-//            //CON ESTO LO LOOPEAMOS
-//            mediaPlayer.setOnEndOfMedia(() -> {
-//            mediaPlayer.seek(Duration.ZERO);
-//            });
-//            
-//            mediaPlayer.play();
+           menuMusic(); 
     }    
     
-    
-    @FXML
-    public void stopMusic(){
-//        mediaPlayer.stop();
-    } 
+   
    @FXML
     private void openRegister() {
         try {
@@ -83,7 +70,7 @@ public class menuController implements Initializable {
     @FXML
     private void openRanking(ActionEvent event) {
         try {
-            //mediaPlayer.stop();
+            mediaPlayer.stop();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ranking/ranking.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual y el escenario
@@ -133,13 +120,12 @@ public class menuController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu/Rules.fxml"));
             Parent root = loader.load();
-            // Obtener la escena actual y el escenario
-//            Scene currentScene = settingsButton.getScene();
-//            Stage stage = (Stage) currentScene.getWindow();
-//
-//            // Reemplazar la escena actual con la escena del registro
-//            currentScene.setRoot(root);
-//            stage.show();
+            Scene currentScene = settingsButton.getScene();
+            Stage stage = (Stage) currentScene.getWindow();
+
+            // Reemplazar la escena actual con la escena del registro
+            currentScene.setRoot(root);
+            stage.show();
            
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
@@ -147,11 +133,20 @@ public class menuController implements Initializable {
     }
     
      public void menuMusic(){
-        String path = "@/../src/memory/menuMusic.mp3";
-        Media sound = new Media(new File(path).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        //mediaPlayer.seek(Duration.ZERO);
-        mediaPlayer.play();
+            String path = "@/../src/media/menuMusic.mp3";
+            Media sound = new Media(new File(path).toURI().toString());
+            mediaPlayer = new MediaPlayer(sound);
+            
+            //CON ESTO LO LOOPEAMOS
+            mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.seek(Duration.ZERO);
+            });
+            
+            mediaPlayer.play();
         }
-    
+     
+    @FXML
+    public void stopMusic(){
+        mediaPlayer.stop();
+    }  
 }

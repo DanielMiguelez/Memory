@@ -42,25 +42,21 @@ public class RankingController implements Initializable {
     private Label secondFromRanking;
     @FXML
     private Label thirdFromRanking;
+    private MediaPlayer mediaPlayer;
 
-    //private MediaPlayer mediaPlayer;
-    
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-//            String path = "@/../src/media/peach.mp3";
-//            Media sound = new Media(new File(path).toURI().toString());
-//            mediaPlayer = new MediaPlayer(sound);
-//            
-//            //CON ESTO LO LOOPEAMOS
-//            mediaPlayer.setOnEndOfMedia(() -> {
-//            mediaPlayer.seek(Duration.ZERO);
-//            });
-//            
-//            mediaPlayer.play();
+            String path = "@/../src/media/peach.mp3";
+            Media sound = new Media(new File(path).toURI().toString());
+            mediaPlayer = new MediaPlayer(sound);
+            
+            //CON ESTO LO LOOPEAMOS
+            mediaPlayer.setOnEndOfMedia(() -> {
+            mediaPlayer.seek(Duration.ZERO);
+            });
+            
+            mediaPlayer.play();
             
         String[][]r = connectionSelect( getRankingUsers() );
         String first = r[0][0];
@@ -100,7 +96,7 @@ public class RankingController implements Initializable {
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
             stage.show();
-          //  mediaPlayer.stop();
+            mediaPlayer.stop();
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -52,7 +52,7 @@ import javafx.scene.text.TextFlow;
  * @author aronbp
  */
 public class gameController implements Initializable {
-   
+    
     @FXML
     private Label rankingBtn;
     @FXML
@@ -154,7 +154,9 @@ public class gameController implements Initializable {
     @FXML 
     private TextFlow chat;
     
-    private int numTurns;
+    private int numTurns = 0;
+    private MediaPlayer mediaPlayer;
+    
     
     String[][]winsP1 = new String [0][1];
     String[][]winsP2 = new String [0][1];
@@ -173,7 +175,7 @@ public class gameController implements Initializable {
 //    }
     
     @Override
-    public void initialize(URL url, ResourceBundle rb) {  
+    public void initialize(URL url, ResourceBundle rb) {
         deck = new Deck();
 
         Card Mario = new Card("Mario", 1, new Image("/media/Mario.png"));
@@ -186,23 +188,23 @@ public class gameController implements Initializable {
 //        Card Koopa = new Card("Koopa", 8, new Image("/media/unnamed.png"));
 
         // AGREGAR CARTAS AL MAZO 2 VECES, Y TENEMOS LAS 16.
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario); 
- 
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario);
+//        deck.addCards(Mario); 
+// 
         deck.addCards(Luigi);
         deck.addCards(Luigi);
         deck.addCards(Luigi);
@@ -228,7 +230,6 @@ public class gameController implements Initializable {
        indexUsed = new boolean [boardSize];
        winnerPane.setVisible(false);
        startTime();
-       System.out.println(numTurns);
     }
     
     @FXML
@@ -304,48 +305,60 @@ public class gameController implements Initializable {
             Scene currentScene = board.getScene();
             Stage stage = (Stage) currentScene.getWindow();
             gameController game = loader.getController();
+            System.out.println(numTurns);
             
-            if ( playerTurn == 4 ){
-                anchorPlayer1.setVisible(true);
-                anchorPlayer2.setVisible(true);
-                anchorPlayer3.setVisible(true);
-                anchorPlayer4.setVisible(true);
+            stage.hide();
+            stage.show();
+           
+            if ( numTurns == 4 ){
+                game.anchorPlayer1.setVisible(true);
+                game.anchorPlayer2.setVisible(true);
+                game.anchorPlayer3.setVisible(true);
+                game.anchorPlayer4.setVisible(true);
                 winsP1 = connectionSelect(getUserVictories( nameP1.getText())); 
                 winsP2 = connectionSelect(getUserVictories( nameP2.getText()));
                 winsP3 = connectionSelect(getUserVictories( nameP3.getText())); 
                 winsP4 = connectionSelect(getUserVictories( nameP4.getText()));
             }
-            if ( playerTurn == 3 ){
-                anchorPlayer1.setVisible(true);
-                anchorPlayer2.setVisible(true);
-                anchorPlayer3.setVisible(true);
+            if ( numTurns == 3 ){
+                game.anchorPlayer1.setVisible(true);
+                game.anchorPlayer2.setVisible(true);
+                game.anchorPlayer3.setVisible(true);
                 winsP1 = connectionSelect(getUserVictories( nameP1.getText())); 
                 winsP2 = connectionSelect(getUserVictories( nameP2.getText()));
                 winsP3 = connectionSelect(getUserVictories( nameP3.getText()));
             }
-            if (playerTurn == 2 ){
-                anchorPlayer1.setVisible(true);
-                anchorPlayer2.setVisible(true);
+            if ( numTurns == 2 ){
+                game.anchorPlayer1.setVisible(true);
+                game.anchorPlayer2.setVisible(true);
                 winsP1 = connectionSelect(getUserVictories( nameP1.getText())); 
                 winsP2 = connectionSelect(getUserVictories( nameP2.getText()));
             }
             else{
-               anchorPlayer1.setVisible(true);
+               game.anchorPlayer1.setVisible(true);
                 winsP1 = connectionSelect(getUserVictories( nameP1.getText())); 
             }
             
             game.setNumTurns(numTurns);
-            game.labelNames(nameP1.getText(),nameP2.getText(),nameP3.getText(),nameP4.getText(),winsP1[0][0],winsP2[0][0],winsP3[0][0],winsP4[0][0]);
+            
+            if (numTurns == 1)
+               game.labelNames(nameP1.getText()," "," "," ",winsP1[0][0]," "," "," ");
+            // Reemplazar la escena actual con la escena del registro
+            if (numTurns == 2)
+               game.labelNames(nameP1.getText(),nameP2.getText()," "," ",winsP1[0][0],winsP2[0][0]," "," ");
+            // Reemplazar la escena actual con la escena del registro
+            if (numTurns == 4)
+               game.labelNames(nameP1.getText(),nameP2.getText(),nameP3.getText()," ",winsP1[0][0],winsP2[0][0],winsP3[0][0]," ");
+            // Reemplazar la escena actual con la escena del registro
+            if (numTurns == 4)
+               game.labelNames(nameP1.getText(),nameP2.getText(),nameP3.getText(),nameP4.getText(),winsP1[0][0],winsP2[0][0],winsP3[0][0],winsP4[0][0]);
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
-            stage.hide();
-            stage.show();
-           
+
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
         }   
     }
-    
     
     public void labelNames(String n1,String n2,String n3,String n4, String winsP1, String winsP2,String winsP3, String winsP4){
         nameP1.setText(n1);
