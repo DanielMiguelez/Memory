@@ -36,7 +36,7 @@
             <Image url="@../media/player1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="rightUserLogo" fitHeight="67.0" fitWidth="250.0" layoutX="749.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="rightUserLogo" fitHeight="67.0" fitWidth="250.0" layoutX="749.0" layoutY="390.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/player2.png" />
          </image>
@@ -51,12 +51,12 @@
             <Image url="@../media/flecha2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrowLeftP2" fitHeight="26.0" fitWidth="39.0" layoutX="723.0" layoutY="409.0" onMouseClicked="#changePlayerRight" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="arrowLeftP2" fitHeight="26.0" fitWidth="39.0" layoutX="723.0" layoutY="404.0" onMouseClicked="#changePlayerRight" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../media/flecha2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrowRightP2" fitHeight="26.0" fitWidth="39.0" layoutX="998.0" layoutY="409.0" onMouseClicked="#changePlayerRight" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+      <ImageView fx:id="arrowRightP2" fitHeight="26.0" fitWidth="39.0" layoutX="998.0" layoutY="404.0" onMouseClicked="#changePlayerRight" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@../media/flecha2.png" />
          </image>
@@ -66,12 +66,22 @@
             <Image url="@../media/start.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrowLeftP11" fitHeight="26.0" fitWidth="39.0" layoutX="391.0" layoutY="364.0" onMouseClicked="#changePlayerLeft" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+      <ImageView fx:id="arrowUpP1" fitHeight="26.0" fitWidth="39.0" layoutX="391.0" layoutY="364.0" onMouseClicked="#changePlayerLeft" pickOnBounds="true" preserveRatio="true" rotate="90.0">
          <image>
             <Image url="@../media/flecha2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="arrowLeftP111" fitHeight="26.0" fitWidth="39.0" layoutX="391.0" layoutY="443.0" onMouseClicked="#changePlayerLeft" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+      <ImageView fx:id="arrowDownP1" fitHeight="26.0" fitWidth="39.0" layoutX="391.0" layoutY="443.0" onMouseClicked="#changePlayerLeft" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+         <image>
+            <Image url="@../media/flecha2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="arrowUpP2" fitHeight="26.0" fitWidth="39.0" layoutX="861.0" layoutY="364.0" onMouseClicked="#changePlayerRight" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+         <image>
+            <Image url="@../media/flecha2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="arrowDownP2" fitHeight="26.0" fitWidth="39.0" layoutX="861.0" layoutY="443.0" onMouseClicked="#changePlayerRight" pickOnBounds="true" preserveRatio="true" rotate="270.0">
          <image>
             <Image url="@../media/flecha2.png" />
          </image>

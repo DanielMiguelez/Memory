@@ -124,6 +124,15 @@ public class gameController implements Initializable {
     private int pointsP3;
     private int pointsP4;
     
+    @FXML
+    private ImageView imgPlayer1;
+    @FXML
+    private ImageView imgPlayer2;
+    @FXML
+    private ImageView imgPlayer3;
+    @FXML
+    private ImageView imgPlayer4;
+    
     private String winner;
     
     private int seconds = 0;
@@ -196,23 +205,23 @@ public class gameController implements Initializable {
 //        deck.addCards(Mario);
 //        deck.addCards(Mario);
 //        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario); 
-// 
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario);
+        deck.addCards(Mario); 
+ 
+//        deck.addCards(Luigi);
+//        deck.addCards(Luigi);
+//        deck.addCards(Luigi);
+//        deck.addCards(Luigi);
+//        deck.addCards(Luigi);
+//        deck.addCards(Luigi);
+//        deck.addCards(Luigi);
+//        deck.addCards(Luigi);
         deck.addCards(Luigi);
         deck.addCards(Luigi);
         deck.addCards(Luigi);
@@ -222,7 +231,6 @@ public class gameController implements Initializable {
         deck.addCards(Luigi);
         deck.addCards(Luigi);        
         deck.shuffle();
-        
         boardSize = deck.getCards().size();
         setBackground(boardSize);
         setBoard(boardSize);
@@ -374,26 +382,32 @@ public class gameController implements Initializable {
     private void setBoard(int boardSize){
             if (boardSize==16)
                 desp = 8;
+            else 
+                desp = 0;
+            
             for (int i=0+desp; i<boardSize+desp;i++){
                 ImageView imageView = (ImageView) board.getChildren().get(i);
     //            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
+                //8-24
                 imageView.setUserData(i);
 
                 imageView.setOnMouseClicked(event -> {
                     int index = (int) imageView.getUserData()-desp;
                     //System.out.println(index);
                     imageView.setImage(deck.getCards().get(index).getImage());
-       
+                        
                     if (click1){
-                        idCard = deck.getCards().get(index).getId();
                         indexCard1 = index;
-                        click1 = false;
-                        System.out.println("First : "  + idCard);
+                        if ( indexUsed[indexCard1] == false ){
+                            idCard = deck.getCards().get(index).getId();
+                            click1 = false;
+                            System.out.println("First : "  + idCard);
+                        }
                     }
                     else if (!click1){
                         idSecondCard = deck.getCards().get(index).getId();
                         indexCard2 = index;
-                        if ( indexCard1 != indexCard2 && indexUsed[indexCard1] == false && indexUsed[indexCard2] == false){
+                        if ( indexCard1 != indexCard2 && indexUsed[indexCard2] == false){
                             click1 = true;
                             System.out.println("Seeegond: "  + idSecondCard);
                             compareCards(index);
@@ -437,22 +451,25 @@ public class gameController implements Initializable {
         System.out.println("P1: " + pointsP1 + "P2: " + pointsP2 + "P3: " + pointsP3 + "P4: " + pointsP4);
         
         if (pointsP1 > pointsP2 && pointsP1 > pointsP3 && pointsP1 > pointsP4){
-            winner = nameP1.getText();
+            winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/luigiSide.png")));
+            winnerName.setText(nameP1.getText());
             connectionSet( incrementWins(winner) );
         }else if ( pointsP2 > pointsP3 && pointsP2 > pointsP4 && pointsP2 > pointsP1){
-            winner = nameP2.getText();
+            winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/GreenMushroom.png")));
+            winnerName.setText(nameP2.getText());
             connectionSet( incrementWins(winner) );
         }else if (pointsP3 > pointsP2 && pointsP3 > pointsP4 && pointsP3 > pointsP1){
-            winner = nameP3.getText();
+            winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/marioSide.png")));
+            winnerName.setText(nameP3.getText());
             connectionSet( incrementWins(winner) );
         }else if (pointsP4 > pointsP3 && pointsP4 > pointsP2 && pointsP4 > pointsP1){
-            winner = nameP4.getText();
+            winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Mushroom1.png")));
+            winnerName.setText(nameP4.getText());
             connectionSet( incrementWins(winner) );
         }else {
             winnerName.setText("DRAW");
             winnerPicture.setVisible(false);
         }
-        winnerName.setText(winner);
      }
     
     public void compareCards(int i){
@@ -462,7 +479,7 @@ public class gameController implements Initializable {
             matches += 2;
             if ( matches == boardSize)
                 gameFinished = true;
-            System.out.println("Acertada");
+            System.out.println(matches);
             sumarPuntos();
             }
         else if ( idCard != idSecondCard ){
@@ -478,6 +495,7 @@ public class gameController implements Initializable {
             playerTurns();
         }  
     }
+    
     public void setNumTurns(int numTurns) {
         this.numTurns = numTurns;    
     }
@@ -496,11 +514,11 @@ public class gameController implements Initializable {
     }
     
     private void coverCards(){
-       PauseTransition pause = new PauseTransition(Duration.seconds(1));
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
                     pause.setOnFinished(e -> {
-            ImageView imageView = (ImageView) board.getChildren().get(indexCard1);
+            ImageView imageView = (ImageView) board.getChildren().get(indexCard1+desp);
             imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
-            imageView = (ImageView) board.getChildren().get(indexCard2);
+            imageView = (ImageView) board.getChildren().get(indexCard2+desp);
             imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
             
         });

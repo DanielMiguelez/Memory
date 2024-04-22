@@ -101,6 +101,8 @@ public class registerController implements Initializable {
     String password4;
 
     private int numPlayers = 0;
+    private int numberOfLogins = 0;
+
     public gameController game;
     public menuController menu;
 
@@ -136,12 +138,13 @@ public class registerController implements Initializable {
         
         if (oFxId.equals("arrowUpP1")) {
             leftUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/cpu.png")));
-            //btnLoginLeft.setOnAction(Event -> loginUser3());
+            btnLoginLeft.setOnAction(Event -> loginCPU(e));
+            labelNameLeft.setPromptText("Give your IA a name");
             setP1StyleNull();
         }
         if (oFxId.equals("arrowDownP1")) {
             leftUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player1.png")));
-            //btnLoginLeft.setOnAction(Event -> loginUser3());
+            btnLoginLeft.setOnAction(Event -> loginUser3());
             setP1StyleNull();
         }
     }
@@ -163,12 +166,13 @@ public class registerController implements Initializable {
         }
         if (oFxId.equals("arrowUpP2")) {
             rightUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/cpu.png")));
-            //btnLoginRight.setOnAction(Event -> loginUser4());
+            btnLoginRight.setOnAction(Event -> loginCPU(e));
+            labelNameRight.setPromptText("Give your IA a name");
             setP2StyleNull();
         }
         if (oFxId.equals("arrowDownP2")) {
             rightUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player2.png")));
-            //btnLoginRight.setOnAction(Event -> loginUser4());
+            btnLoginRight.setOnAction(Event -> loginUser2());
             setP2StyleNull();
         }
     }
@@ -190,7 +194,33 @@ public class registerController implements Initializable {
         labelNameRight.setText(null);
         passwordUserRight.setText(null);
     }
-
+    
+    public void loginCPU(Event e) {
+        Object o = e.getSource();
+        Node n = (Node) o;
+        String oFxId = n.getId();
+        String cpuName = "";
+        
+        if (oFxId.equals("arrowUpP2")){
+            cpuName = labelNameRight.getText();
+        }
+        if (oFxId.equals("arrowUpP1")){
+            cpuName = labelNameLeft.getText();
+        }
+        
+        System.out.println(cpuName);
+        if (numberOfLogins==1) {
+            numberOfLogins++;
+        }
+        if (numberOfLogins==2) {
+            numberOfLogins++;
+        }
+        if (numberOfLogins==3) {
+            nameP4="CPU";
+            numberOfLogins++;
+        }
+    }
+    
     @FXML
     public void registerUser1() {
         name = labelNameLeft.getText().toLowerCase();
@@ -277,6 +307,7 @@ public class registerController implements Initializable {
                 btnLoginLeft.setStyle("-fx-background-color: green;");
                 labelNameLeft.setStyle("-fx-border-color: green;");
                 logged = true;
+                numberOfLogins++;
 
                 id = Integer.parseInt(resultados[0][0]);
                 name = (resultados[0][1]);
@@ -317,6 +348,7 @@ public class registerController implements Initializable {
                 btnLoginRight.setStyle("-fx-background-color: green;");
                 labelNameRight.setStyle("-fx-border-color: green;");
                 logged2 = true;
+                numberOfLogins++;
 
                 id = Integer.parseInt(resultados[0][0]);
                 name = (resultados[0][1]);
@@ -356,6 +388,7 @@ public class registerController implements Initializable {
                 btnLoginLeft.setStyle("-fx-background-color: green;");
                 labelNameLeft.setStyle("-fx-border-color: green;");
                 logged3 = true;
+                numberOfLogins++;
 
                 id = Integer.parseInt(resultados[0][0]);
                 name = (resultados[0][1]);
@@ -396,6 +429,7 @@ public class registerController implements Initializable {
                 btnLoginRight.setStyle("-fx-background-color: green;");
                 labelNameRight.setStyle("-fx-border-color: green;");
                 logged4 = true;
+                numberOfLogins++;
 
                 id = Integer.parseInt(resultados[0][0]);
                 name = (resultados[0][1]);
@@ -439,28 +473,29 @@ public class registerController implements Initializable {
         }
     }
 
-    public void checkLogged() {
-        if (logged) {
+    
+    public int checkLogged() {
+        if (numberOfLogins>0) {
             game.anchorPlayer1.setVisible(true);
             numPlayers++;
             System.out.println(numPlayers);
         }
-        if (logged2) {
+        if (numberOfLogins>1) {
             game.anchorPlayer2.setVisible(true);
             numPlayers++;
             System.out.println(numPlayers);
         }
-        if (logged3) {
+        if (numberOfLogins>2) {
             game.anchorPlayer3.setVisible(true);
             numPlayers++;
             System.out.println(numPlayers);
         }
-        if (logged4) {
+        if (numberOfLogins>3) {
             game.anchorPlayer4.setVisible(true);
             numPlayers++;
             System.out.println(numPlayers);
         }
-
+        return numPlayers;
     }
 
     public void openMenu() {

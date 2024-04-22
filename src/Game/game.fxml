@@ -139,7 +139,7 @@
       </Label>
       <AnchorPane fx:id="anchorPlayer1" layoutY="412.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
          <children>
-            <ImageView fitHeight="141.0" fitWidth="149.0" layoutX="55.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgPlayer1" fitHeight="141.0" fitWidth="149.0" layoutX="55.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/luigiSide.png" />
                </image>
@@ -220,7 +220,7 @@
       </AnchorPane>
       <AnchorPane fx:id="anchorPlayer2" layoutX="1028.0" layoutY="412.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
          <children>
-            <ImageView fitHeight="141.0" fitWidth="149.0" layoutX="50.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgPlayer2" fitHeight="141.0" fitWidth="149.0" layoutX="50.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/GreenMushroom.png" />
                </image>
@@ -301,7 +301,7 @@
       </AnchorPane>
       <AnchorPane fx:id="anchorPlayer3" layoutX="-1.0" layoutY="54.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
          <children>
-            <ImageView fitHeight="132.0" fitWidth="130.0" layoutX="60.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgPlayer3" fitHeight="132.0" fitWidth="130.0" layoutX="60.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/marioSide.png" />
                </image>
@@ -382,7 +382,7 @@
       </AnchorPane>
       <AnchorPane fx:id="anchorPlayer4" layoutX="1028.0" layoutY="45.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
          <children>
-            <ImageView fitHeight="123.0" fitWidth="130.0" layoutX="60.0" layoutY="25.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgPlayer4" fitHeight="123.0" fitWidth="130.0" layoutX="60.0" layoutY="25.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/Mushroom1.png" />
                </image>
