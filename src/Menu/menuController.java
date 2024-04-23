@@ -40,13 +40,15 @@ public class menuController implements Initializable {
     private Button settingsButton;
     @FXML
     private MediaPlayer mediaPlayer;
+    
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-           menuMusic(); 
+        menuMusic(); 
     }    
     
    

@@ -1,0 +1,36 @@
+
+CREATE TABLE IF NOT EXISTS jugadores (
+    id_jugador SERIAL PRIMARY KEY,
+    nick_jugador VARCHAR(20) UNIQUE NOT NULL,
+    victorias_jugador INT default 0,
+    contraseña VARCHAR(20) NOT NULL
+);
+
+-- Tabla partidas
+CREATE TABLE IF NOT EXISTS partidas (
+    id_partida SERIAL PRIMARY KEY,
+    duracion INT,
+    fecha DATE,
+    ganador_id INT REFERENCES jugadores(id_jugador),
+    guardar_partida BIGINT -- Otra opción si necesitas almacenar números grandes
+);
+
+-- Tabla jugadores_partidas
+CREATE TABLE IF NOT EXISTS jugadores_partidas (
+    id_jugador INT REFERENCES jugadores(id_jugador),
+    id_partida INT REFERENCES partidas(id_partida),
+    puntuacion_partida INT,
+    PRIMARY KEY (id_jugador, id_partida)
+);
+
+-- Tabla comentarios
+
+CREATE TABLE IF NOT EXISTS comentarios (
+    id_comentario SERIAL PRIMARY KEY,
+    contenido TEXT,
+    id_jugador INT NOT NULL,
+    id_partida INT NOT NULL,
+    FOREIGN KEY (id_jugador) REFERENCES jugadores(id_jugador),
+    FOREIGN KEY (id_partida) REFERENCES partidas(id_partida)
+);
+--

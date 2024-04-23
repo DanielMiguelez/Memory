@@ -2,16 +2,14 @@ package REGISTER;
 
 /*
 TO-DO:
-AÑADIR CPUS AL LOGIN;
+EASTER-EGGS;
+PÁGINA DE INSTRUCCIONES;
+OPTIONS;
 CPU AGAINST GAME (EASY (1A-4RND), (2A[1 de esas 2 C. que levanta tiene que tener el id de ]-2RND) EQUILIBRADO , (CADA X-> FAIL) GOD);
 SONIDOS AL JUEGO;
+
 REFACTORIZAR (METER OBJETOS USUARIOS A GAMECONTROLLER PARA SETEAR INFO EN LABELNAMES);
 AÑADIR COMENTARIOS;
-PÁGINA DE INSTRUCCIONES;
-MONEDAS EN EL JUEGO;
-EASTER-EGGS;
-OPTIONS;
-COMENTARIOS EN LA PARTIDA;
 BBDD AUTOCREADA CREATE TABLE IF NOT EXISTS;
 CIFRAR CONTRASÑEAS CON SHA;
  */
@@ -99,6 +97,9 @@ public class registerController implements Initializable {
     String password3;
     String nameP4;
     String password4;
+    
+    String cpuName;
+    String cpuMode;
 
     private int numPlayers = 0;
     private int numberOfLogins = 0;
@@ -128,23 +129,36 @@ public class registerController implements Initializable {
         if (oFxId.equals("arrowLeftP1")) {
             leftUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player1.png")));
             btnLoginLeft.setOnAction(Event -> loginUser1());
+            btnLoginLeft.setPrefWidth(115);
+            btnRegisterLeft.setVisible(true);
+            labelNameLeft.setPromptText("username");
             setP1StyleNull();
         }
         if (oFxId.equals("arrowRightP1")) {
             leftUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player3.png")));
             btnLoginLeft.setOnAction(Event -> loginUser3());
+            btnLoginLeft.setPrefWidth(115);
+            btnRegisterLeft.setVisible(true);
+            labelNameLeft.setPromptText("username");
             setP1StyleNull();
         }
         
         if (oFxId.equals("arrowUpP1")) {
             leftUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/cpu.png")));
             btnLoginLeft.setOnAction(Event -> loginCPU(e));
+            btnLoginLeft.setPrefWidth(250);
+            btnRegisterLeft.setVisible(false);
             labelNameLeft.setPromptText("Give your IA a name");
+            passwordUserLeft.setPromptText("Type difficult: easy , medium , hard");
             setP1StyleNull();
         }
         if (oFxId.equals("arrowDownP1")) {
             leftUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player1.png")));
             btnLoginLeft.setOnAction(Event -> loginUser3());
+            btnLoginLeft.setPrefWidth(115);
+            btnRegisterLeft.setVisible(true);
+            labelNameLeft.setPromptText("username");
+            passwordUserLeft.setPromptText("Password must be &gt; 5");
             setP1StyleNull();
         }
     }
@@ -153,26 +167,38 @@ public class registerController implements Initializable {
         Object o = e.getSource();
         Node n = (Node) o;
         String oFxId = n.getId();
-        //System.out.println(oFxId);
         if (oFxId.equals("arrowLeftP2")) {
             rightUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player2.png")));
             btnLoginRight.setOnAction(Event -> loginUser2());
+            btnLoginRight.setPrefWidth(115);
+            btnRegisterRight.setVisible(true);
+            labelNameRight.setPromptText("username");
             setP2StyleNull();
         }
         if (oFxId.equals("arrowRightP2")) {
             rightUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player4.png")));
             btnLoginRight.setOnAction(Event -> loginUser4());
+            btnLoginRight.setPrefWidth(115);
+            btnRegisterRight.setVisible(true);
+            labelNameRight.setPromptText("username");
             setP2StyleNull();
         }
         if (oFxId.equals("arrowUpP2")) {
             rightUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/cpu.png")));
             btnLoginRight.setOnAction(Event -> loginCPU(e));
+            btnLoginRight.setPrefWidth(250);
+            btnRegisterRight.setVisible(false);
             labelNameRight.setPromptText("Give your IA a name");
+            passwordUserRight.setPromptText("Type difficult: easy , medium , hard");
             setP2StyleNull();
         }
         if (oFxId.equals("arrowDownP2")) {
             rightUserLogo.setImage(new Image(memory.Card.class.getResourceAsStream("/media/player2.png")));
             btnLoginRight.setOnAction(Event -> loginUser2());
+            btnLoginRight.setPrefWidth(115);
+            btnRegisterRight.setVisible(true);
+            labelNameRight.setPromptText("username");
+            passwordUserRight.setPromptText("Password must be &gt; 5");
             setP2StyleNull();
         }
     }
@@ -199,27 +225,61 @@ public class registerController implements Initializable {
         Object o = e.getSource();
         Node n = (Node) o;
         String oFxId = n.getId();
-        String cpuName = "";
         
         if (oFxId.equals("arrowUpP2")){
             cpuName = labelNameRight.getText();
+            cpuMode = passwordUserRight.getText();
+            if (cpuName.length() > 0 && cpuMode.equals("easy") || cpuMode.equals("medium") || cpuMode.equals("hard")){
+                btnLoginRight.setStyle("-fx-background-color: green;");
+                labelNameRight.setStyle("-fx-border-color: green;");
+                loggedCpu();
+                numberOfLogins++;    
+            } else {
+                btnLoginRight.setStyle("-fx-background-color: red;");
+                labelNameRight.setStyle("-fx-border-color: red;");
+            }
         }
         if (oFxId.equals("arrowUpP1")){
             cpuName = labelNameLeft.getText();
-        }
-        
-        System.out.println(cpuName);
-        if (numberOfLogins==1) {
-            numberOfLogins++;
-        }
-        if (numberOfLogins==2) {
-            numberOfLogins++;
-        }
-        if (numberOfLogins==3) {
-            nameP4="CPU";
-            numberOfLogins++;
+            cpuMode = passwordUserLeft.getText();
+            if (cpuName.length() > 0 && cpuMode.equals("easy") || cpuMode.equals("medium") || cpuMode.equals("hard")){
+                btnLoginLeft.setStyle("-fx-background-color: green;");
+                labelNameLeft.setStyle("-fx-border-color: green;");
+                loggedCpu();
+                numberOfLogins++;    
+            } else {
+                btnLoginRight.setStyle("-fx-background-color: red;");
+                labelNameRight.setStyle("-fx-border-color: red;");
+            }
         }
     }
+    
+    public void loggedCpu(){
+                if (numberOfLogins==0) {
+                    nameP1 = cpuName;
+                    password1 = cpuMode;
+                    victoriesP1 = "CPU";
+                    // Estaría guapo meter -> levelPlayer1 = cpuMode; la dificultad en level.
+                }
+                else if (numberOfLogins==1) {
+                    nameP2 = cpuName;
+                    password2 = cpuMode;
+                    victoriesP2 = "CPU";
+                    
+                }
+                else if (numberOfLogins==2) {
+                    nameP3 = cpuName;
+                    password3 = cpuMode;
+                    victoriesP3 = "CPU";
+                }
+                else if (numberOfLogins==3) {
+                    nameP4= cpuName;
+                    password4 = cpuMode;
+                    victoriesP4 = "CPU";
+                }
+    }
+    
+    
     
     @FXML
     public void registerUser1() {
@@ -457,7 +517,7 @@ public class registerController implements Initializable {
             root = gameLoader.load();
             game = gameLoader.getController();
             // Obtener la escena actual y el escenario
-            Scene currentScene = btnLoginLeft.getScene();
+            Scene currentScene =btnLoginLeft.getScene();
             Stage stage = (Stage) currentScene.getWindow();
             //cogemos los textos de los labels y se los pasamos al metodo del game controler
             
