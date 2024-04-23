@@ -133,8 +133,6 @@ public class gameController implements Initializable {
     @FXML
     private ImageView imgPlayer4;
     
-    private String winner;
-    
     private int seconds = 0;
     private int minutes = 0;
     private Timeline timeline;
@@ -452,20 +450,24 @@ public class gameController implements Initializable {
         
         if (pointsP1 > pointsP2 && pointsP1 > pointsP3 && pointsP1 > pointsP4){
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/luigiSide.png")));
+            
             winnerName.setText(nameP1.getText());
-            connectionSet( incrementWins(winner) );
+            connectionSet( incrementWins(nameP1.getText()) );
         }else if ( pointsP2 > pointsP3 && pointsP2 > pointsP4 && pointsP2 > pointsP1){
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/GreenMushroom.png")));
+            
             winnerName.setText(nameP2.getText());
-            connectionSet( incrementWins(winner) );
+            connectionSet( incrementWins(nameP2.getText()) );
         }else if (pointsP3 > pointsP2 && pointsP3 > pointsP4 && pointsP3 > pointsP1){
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/marioSide.png")));
+            
             winnerName.setText(nameP3.getText());
-            connectionSet( incrementWins(winner) );
+            connectionSet( incrementWins(nameP3.getText()) );
         }else if (pointsP4 > pointsP3 && pointsP4 > pointsP2 && pointsP4 > pointsP1){
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Mushroom1.png")));
+            
             winnerName.setText(nameP4.getText());
-            connectionSet( incrementWins(winner) );
+            connectionSet( incrementWins(nameP4.getText()) );
         }else {
             winnerName.setText("DRAW");
             winnerPicture.setVisible(false);
