@@ -20,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.input.KeyEvent;
@@ -40,6 +41,8 @@ public class menuController implements Initializable {
     private Button settingsButton;
     @FXML
     private MediaPlayer mediaPlayer;
+    @FXML
+    private ImageView logo;
     
     
 
@@ -58,7 +61,7 @@ public class menuController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/REGISTER/register.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual y el escenario
-            Scene currentScene = playButton.getScene();
+            Scene currentScene = logo.getScene();
             Stage stage = (Stage) currentScene.getWindow();
 
             // Reemplazar la escena actual con la escena del registro
@@ -76,7 +79,7 @@ public class menuController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Ranking/ranking.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual y el escenario
-            Scene currentScene = rankingButton.getScene();
+            Scene currentScene = logo.getScene();
             Stage stage = (Stage) currentScene.getWindow();
 
             // Reemplazar la escena actual con la escena del registro
@@ -100,21 +103,20 @@ public class menuController implements Initializable {
     @FXML
     private void openSettings(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Options/options.fxml"));
+            mediaPlayer.stop();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Options/Options.fxml"));
             Parent root = loader.load();
             // Obtener la escena actual y el escenario
-            Scene currentScene = settingsButton.getScene();
+            Scene currentScene = logo.getScene();
             Stage stage = (Stage) currentScene.getWindow();
 
             // Reemplazar la escena actual con la escena del registro
             currentScene.setRoot(root);
             stage.show();
             
-            
-           
         } catch (IOException ex) {
             Logger.getLogger(menuController.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }   
     }
 
     private void openRules() {
@@ -122,7 +124,7 @@ public class menuController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Menu/Rules.fxml"));
             Parent root = loader.load();
-            Scene currentScene = settingsButton.getScene();
+            Scene currentScene = logo.getScene();
             Stage stage = (Stage) currentScene.getWindow();
 
             // Reemplazar la escena actual con la escena del registro

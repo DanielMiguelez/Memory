@@ -7,9 +7,11 @@ package Game;
 
 import Menu.menuController;
 import REGISTER.registerController;
+//import static REGISTER.registerController.cpuLevels;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,7 +57,9 @@ import javafx.scene.text.TextFlow;
  * @author aronbp
  */
 public class gameController implements Initializable {
-
+    
+    @FXML
+    private AnchorPane pausePopUp;
     @FXML
     private Label rankingBtn;
     @FXML
@@ -68,6 +72,14 @@ public class gameController implements Initializable {
     private FlowPane player3COINS;
     @FXML
     private FlowPane player4COINS;
+    @FXML
+    private FlowPane player1BLUECOINS;
+    @FXML
+    private FlowPane player2BLUECOINS;
+    @FXML
+    private FlowPane player3BLUECOINS;
+    @FXML
+    private FlowPane player4BLUECOINS;
     @FXML
     private AnchorPane winnerPane;
 
@@ -104,6 +116,9 @@ public class gameController implements Initializable {
     private Label winsPlayer3;
     @FXML
     private Label winsPlayer4;
+    
+    private Label[] winsPlayer;
+    
     @FXML
     private Label labelPointsP1;
     @FXML
@@ -116,7 +131,7 @@ public class gameController implements Initializable {
     private Deck deck;
     private int boardSize;
     private int desp;
-    private int playerTurn = 1;
+    private int playerTurn = 0;
 
     private boolean click1 = true;
     private int idCard;
@@ -134,6 +149,9 @@ public class gameController implements Initializable {
     private int pointsP3;
     private int pointsP4;
     
+    @FXML
+    public static ImageView gameBackground;
+        
     @FXML
     private ImageView imgPlayer1;
     @FXML
@@ -179,8 +197,10 @@ public class gameController implements Initializable {
     @FXML
     private TextArea chatAlt;
 
-    private int numTurns = 0;
+    private int numTurns;
     private MediaPlayer mediaPlayer;
+    
+    public static int size = 32;
 
     String[][] winsP1;
     String[][] winsP2;
@@ -199,9 +219,9 @@ public class gameController implements Initializable {
 //        return 
 //    }
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb) {    
+        
         deck = new Deck();
-
         Card Mario = new Card("Mario", 1, new Image("/media/Mario.png"));
         Card Luigi = new Card("Luigi", 2, new Image("/media/Luigi1.png"));
 //        Card donkeyKong = new Card("donkeyKong", 3, new Image("/media/donkeyKong.png"));
@@ -210,50 +230,83 @@ public class gameController implements Initializable {
 //        Card Peach = new Card("Peach", 6, new Image("/media/luigiSide_1.png"));
 //        Card Bowser = new Card("Bowser", 7, new Image("/media/marioSide.png"));
 //        Card Koopa = new Card("Koopa", 8, new Image("/media/unnamed.png"));
-
+        
         // AGREGAR CARTAS AL MAZO 2 VECES, Y TENEMOS LAS 16.
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-//        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-        deck.addCards(Mario);
-
-//        deck.addCards(Luigi);
-//        deck.addCards(Luigi);
-//        deck.addCards(Luigi);
-//        deck.addCards(Luigi);
-//        deck.addCards(Luigi);
-//        deck.addCards(Luigi);
-//        deck.addCards(Luigi);
-//        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
-        deck.addCards(Luigi);
+        if (size == 32){
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+        } else if (size == 16){
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Mario);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+            deck.addCards(Luigi);
+        }
         deck.shuffle();
         boardSize = deck.getCards().size();
+        
         setBackground(boardSize);
         setBoard(boardSize);
 
         indexUsed = new boolean[boardSize];
         winnerPane.setVisible(false);
         startTime();
+        playerTurns();
+        
 
+    }
+    
+    @FXML
+    public void openPopUp(){
+        pausePopUp.setVisible(true);
+        timeline.stop();
+    }
+    
+    @FXML
+    public void closePopUp(){
+        pausePopUp.setVisible(false);
+        timeline.play();
     }
 
     @FXML
@@ -458,14 +511,10 @@ public class gameController implements Initializable {
         } else {
             desp = 0;
         }
-
         for (int i = 0 + desp; i < boardSize + desp; i++) {
             ImageView imageView = (ImageView) board.getChildren().get(i);
-            //            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
-            //8-24
             imageView.setUserData(i);
-
-            imageView.setOnMouseClicked(event -> {
+             imageView.setOnMouseClicked(event -> {
                 int index = (int) imageView.getUserData() - desp;
                 //System.out.println(index);
                 imageView.setImage(deck.getCards().get(index).getImage());
@@ -499,19 +548,39 @@ public class gameController implements Initializable {
         switch (playerTurn) {
             case 1:
                 pointsP1++;
-                    player1COINS.getChildren().get(pointsP1-1).setVisible(true);
-                break;
+                    if (pointsP1<9)
+                        player1COINS.getChildren().get(pointsP1-1).setVisible(true);
+                    else {
+                        player1COINS.getChildren().get(pointsP1-9).setVisible(false);                        
+                        player1BLUECOINS.getChildren().get(pointsP1-9).setVisible(true);
+                        }
+                    break;
             case 2:
                 pointsP2++;
+                    if (pointsP2<9)
                     player2COINS.getChildren().get(pointsP2-1).setVisible(true);
+                    else{
+                        player2COINS.getChildren().get(pointsP2-9).setVisible(false);                        
+                        player2BLUECOINS.getChildren().get(pointsP2-9).setVisible(true);
+                    }
                 break;
             case 3:
                 pointsP3++;
+                    if (pointsP3<9)
                     player3COINS.getChildren().get(pointsP3-1).setVisible(true);
+                    else{
+                        player3COINS.getChildren().get(pointsP3-9).setVisible(false);                        
+                        player3BLUECOINS.getChildren().get(pointsP3-9).setVisible(true);
+                    }
                 break;
             case 4:
                 pointsP4++;
+                    if (pointsP4<9)
                     player4COINS.getChildren().get(pointsP4-1).setVisible(true);
+                    else {
+                        player4COINS.getChildren().get(pointsP4-9).setVisible(false);                        
+                        player4BLUECOINS.getChildren().get(pointsP4-9).setVisible(true);
+                    }
                 break;
             default:
                 break;
@@ -566,6 +635,10 @@ public class gameController implements Initializable {
             indexUsed[indexCard1] = true;
             indexUsed[indexCard2] = true;
             matches += 2;
+            for (int j = 0; j < boardSize; j++) {
+                if(deck.getCards().get(i).getId() == idCard)
+                    deck.getCards().get(i).setTurned();
+            }
             if (matches == boardSize) {
                 gameFinished = true;
             }
@@ -588,18 +661,45 @@ public class gameController implements Initializable {
     public void setNumTurns(int numTurns) {
         this.numTurns = numTurns;
     }
-
-    private void playerTurns() {
-
-        if (playerTurn < numTurns) {
-            playerTurn += 1;
-            System.out.println("Turn: " + playerTurn);
-        } else {
-            playerTurn = 1;
-            System.out.println("Turn: " + playerTurn);
-        }
+    
+    private void playerTurns(){
+        winsPlayer = new Label[] {winsPlayer1,winsPlayer2,winsPlayer3,winsPlayer4};
+            if (playerTurn < numTurns) {
+                playerTurn += 1;
+                System.out.println("Turn: " + playerTurn);
+            } else {
+                playerTurn = 1;
+                System.out.println("Turn: " + playerTurn);
+            }
+            if(winsPlayer[playerTurn-1].getText().equals("CPU"))
+                logicaCPU();
+            }
+    
+public void logicaCPU(){
+    String mode = registerController.cpuLevels[playerTurn-1];
+    Random rnd = new Random(); 
+    boolean cpuTurnEnded = false;
+    
+    switch (mode){
+        case "hard":
+            //Declarar a = turnosAciertos (2-3) 
+            //Hace un random de 0 a boardSize hasta que getTurned(), método de DECK, devuelva false;
+            //Ese random será una carta no girada, busca la otra en el tablero comparando por ID y la levanta
+            break;
+        case "medium":
+            break;
+        case "easy":
+            break;
     }
+}
 
+private void pauseGame(){
+    PauseTransition pause = new PauseTransition(Duration.seconds(0.5));
+    pause.setOnFinished(e -> {
+            board.setDisable(false); // Desbloquear el FlowPane después de 2 segundos
+        });
+    pause.play();
+    }
     private void coverCards() {
         PauseTransition pause = new PauseTransition(Duration.seconds(1));
         pause.setOnFinished(e -> {

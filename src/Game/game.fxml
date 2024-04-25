@@ -18,9 +18,15 @@
 <AnchorPane id="AnchorPane" maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Game.gameController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#140743" height="720.0" smooth="false" stroke="BLACK" strokeType="INSIDE" style="-fx-border-width-: 0;" width="1280.0" />
-      <ImageView fitHeight="720.0" fitWidth="780.0" layoutX="250.0" pickOnBounds="true" smooth="false">
+      <ImageView fx:id="gameBackground" fitHeight="720.0" fitWidth="780.0" layoutX="250.0" pickOnBounds="true" smooth="false">
          <image>
             <Image url="@../media/soul.gif" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff00" height="48.0" layoutX="714.0" layoutY="301.0" onDragEntered="#hoverNodeBright" onDragExited="#unhoverNode" onMouseClicked="#openPopUp" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" stroke="BLACK" strokeType="INSIDE" width="216.0" />
+      <ImageView fx:id="gameBackground1" fitHeight="720.0" fitWidth="780.0" layoutX="250.0" pickOnBounds="true" smooth="false">
+         <image>
+            <Image url="@../media/mansion.gif" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" height="582.0" layoutX="1030.0" layoutY="138.0" mouseTransparent="true" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="250.0">
@@ -58,7 +64,7 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <FlowPane fx:id="board" alignment="CENTER" hgap="15.0" layoutX="248.0" layoutY="364.0" orientation="VERTICAL" prefHeight="356.0" prefWidth="780.0" vgap="10.0">
+      <FlowPane fx:id="board" alignment="CENTER" hgap="15.0" layoutX="250.0" layoutY="364.0" orientation="VERTICAL" prefHeight="356.0" prefWidth="780.0" style="-fx-background-color: rgba(110,110,100,0.5);" vgap="10.0">
          <children>
             <ImageView fitHeight="79.0" fitWidth="70.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
             <ImageView fitHeight="79.0" fitWidth="70.0" layoutX="336.0" layoutY="132.0" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" pickOnBounds="true" />
@@ -96,17 +102,12 @@
       </FlowPane>
       <AnchorPane fx:id="winnerPane" layoutX="250.0" layoutY="362.0" prefHeight="358.0" prefWidth="780.0" style="-fx-background-color: rgba(140, 140, 140, 0.9);" visible="false">
          <children>
-            <Label fx:id="rankingBtn1" layoutX="289.0" layoutY="33.0" onMouseClicked="#openRanking" prefHeight="39.0" prefWidth="231.0" style="-fx-background-color: rgba(27, 29, 102, 0.6); -fx-background-radius: 7px;" text="          " textFill="WHITE">
-               <font>
-                  <Font name="Gill Sans Ultra Bold" size="31.0" />
-               </font>
-            </Label>
             <ImageView fx:id="winnerPicture" fitHeight="141.0" fitWidth="149.0" layoutX="320.0" layoutY="59.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/luigiSide.png" />
                </image>
             </ImageView>
-            <Label fx:id="winnerName" alignment="CENTER" contentDisplay="CENTER" layoutX="306.0" layoutY="33.0" text="DRAW" textAlignment="CENTER" textFill="WHITE">
+            <Label fx:id="winnerName" alignment="CENTER" contentDisplay="CENTER" layoutX="317.0" layoutY="39.0" style="-fx-background-color: rgba(27, 29, 102, 0.6); -fx-background-radius: 7px;" text=" DRAW " textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
@@ -117,7 +118,7 @@
                 </font>
             </Label>
 
-            <Label fx:id="menuBtn" layoutX="326.0" layoutY="313.0" onMouseClicked="#openMenu" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" style="-fx-background-color: rgba(27, 29, 102, 0.6); -fx-background-radius: 7px;" text=" MENU " textFill="WHITE">
+                  <Label fx:id="menuBtn" layoutX="326.0" layoutY="313.0" onMouseClicked="#openMenu" onMouseEntered="#hoverNode" onMouseExited="#unhoverNode" style="-fx-background-color: rgba(27, 29, 102, 0.6); -fx-background-radius: 7px;" text=" MENU " textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
@@ -137,7 +138,7 @@
             <Font name="Gill Sans Ultra Bold" size="25.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="anchorPlayer1" layoutY="412.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
+      <AnchorPane fx:id="anchorPlayer1" layoutY="412.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;">
          <children>
             <FlowPane fx:id="player1COINS" layoutX="36.0" layoutY="193.0" prefHeight="70.0" prefWidth="166.0">
                <children>
@@ -183,6 +184,50 @@
                   </ImageView>
                </children>
             </FlowPane>
+            <FlowPane fx:id="player1BLUECOINS" layoutX="36.0" layoutY="193.0" prefHeight="70.0" prefWidth="166.0">
+               <children>
+                  <ImageView fx:id="player1Coin11" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin31" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin51" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin71" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin21" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin41" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin61" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin81" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </FlowPane>
             <ImageView fx:id="imgPlayer1" fitHeight="141.0" fitWidth="149.0" layoutX="55.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/luigiSide.png" />
@@ -222,7 +267,7 @@
             <Button fx:id="sendToChatP1" layoutX="184.0" layoutY="267.0" maxHeight="25.0" maxWidth="50.0" mnemonicParsing="false" onAction="#sendToChat" prefHeight="25.0" prefWidth="50.0" text="Send" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPlayer2" layoutX="1028.0" layoutY="412.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
+      <AnchorPane fx:id="anchorPlayer2" layoutX="1028.0" layoutY="412.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;">
          <children>
             <FlowPane fx:id="player2COINS" layoutX="44.0" layoutY="197.0" prefHeight="70.0" prefWidth="173.0">
                <children>
@@ -268,6 +313,50 @@
                   </ImageView>
                </children>
             </FlowPane>
+            <FlowPane fx:id="player2BLUECOINS" layoutX="44.0" layoutY="197.0" prefHeight="70.0" prefWidth="173.0">
+               <children>
+                  <ImageView fx:id="player1Coin111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin311" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin511" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin711" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin211" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin411" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin611" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin811" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </FlowPane>
             <ImageView fx:id="imgPlayer2" fitHeight="141.0" fitWidth="149.0" layoutX="50.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../media/GreenMushroom.png" />
@@ -307,85 +396,8 @@
             <Button fx:id="sendToChatP2" layoutX="181.0" layoutY="269.0" maxHeight="25.0" maxWidth="50.0" mnemonicParsing="false" onAction="#sendToChat" prefHeight="25.0" prefWidth="50.0" text="Send" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="anchorPlayer3" layoutX="-1.0" layoutY="54.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
+      <AnchorPane fx:id="anchorPlayer3" layoutX="-1.0" layoutY="54.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;">
          <children>
-            <ImageView fx:id="imgPlayer3" fitHeight="132.0" fitWidth="130.0" layoutX="60.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../media/marioSide.png" />
-               </image>
-            </ImageView>
-            <Label fx:id="nameP3" alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="250.0" text="PLAYER 3" textFill="WHITE">
-               <font>
-                  <Font name="Gill Sans Ultra Bold" size="31.0" />
-               </font>
-            </Label>
-            <Label layoutX="29.0" layoutY="122.0" text="WINS:" textFill="#ffee00">
-               <font>
-                  <Font name="Gill Sans Ultra Bold" size="29.0" />
-               </font>
-            </Label>
-            <Label layoutX="30.0" layoutY="154.0" text="LEVEL:" textFill="#f2ff00">
-               <font>
-                  <Font name="Gill Sans Ultra Bold" size="29.0" />
-               </font>
-            </Label>
-            <Label fx:id="labelPointsP3" layoutX="181.0" layoutY="211.0" text="0" textFill="#ffee00" visible="false">
-               <font>
-                  <Font name="Gill Sans Ultra Bold" size="29.0" />
-               </font>
-            </Label>
-            <Label fx:id="levelPlayer3" layoutX="181.0" layoutY="154.0" text="0" textFill="#ffee00">
-               <font>
-                  <Font name="Gill Sans Ultra Bold" size="29.0" />
-               </font>
-            </Label>
-            <Label fx:id="winsPlayer3" layoutX="181.0" layoutY="122.0" text="0" textFill="#ffee00">
-               <font>
-                  <Font name="Gill Sans Ultra Bold" size="29.0" />
-               </font>
-            </Label>
-            <ImageView fitHeight="38.0" fitWidth="59.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <TextField fx:id="player3Comments" layoutX="15.0" layoutY="269.0" maxHeight="25.0" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
-            <Button fx:id="sendToChatP3" layoutX="190.0" layoutY="269.0" maxHeight="25.0" maxWidth="50.0" mnemonicParsing="false" onAction="#sendToChat" prefHeight="25.0" prefWidth="50.0" text="Send" />
             <FlowPane fx:id="player3COINS" layoutX="38.0" layoutY="195.0" prefHeight="70.0" prefWidth="173.0">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
@@ -430,87 +442,91 @@
                   </ImageView>
                </children>
             </FlowPane>
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="anchorPlayer4" layoutX="1028.0" layoutY="45.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;" visible="false">
-         <children>
-            <ImageView fx:id="imgPlayer4" fitHeight="123.0" fitWidth="130.0" layoutX="60.0" layoutY="25.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
+            <FlowPane fx:id="player3BLUECOINS" layoutX="38.0" layoutY="195.0" prefHeight="70.0" prefWidth="173.0">
+               <children>
+                  <ImageView fx:id="player1Coin1111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin3111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin5111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin7111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin2111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin4111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin6111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin8111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </FlowPane>
+            <ImageView fx:id="imgPlayer3" fitHeight="132.0" fitWidth="130.0" layoutX="60.0" layoutY="14.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../media/Mushroom1.png" />
+                  <Image url="@../media/marioSide.png" />
                </image>
             </ImageView>
-            <Label fx:id="nameP4" alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="250.0" text="PLAYER 4" textFill="WHITE">
+            <Label fx:id="nameP3" alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="250.0" text="PLAYER 3" textFill="WHITE">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="31.0" />
                </font>
             </Label>
-            <Label layoutX="29.0" layoutY="132.0" text="WINS:" textFill="#ffee00">
+            <Label layoutX="29.0" layoutY="122.0" text="WINS:" textFill="#ffee00">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="29.0" />
                </font>
             </Label>
-            <Label layoutX="30.0" layoutY="164.0" text="LEVEL:" textFill="#f2ff00">
+            <Label layoutX="30.0" layoutY="154.0" text="LEVEL:" textFill="#f2ff00">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="29.0" />
                </font>
             </Label>
-            <Label fx:id="labelPointsP4" layoutX="181.0" layoutY="211.0" text="0" textFill="#ffee00" visible="false">
+            <Label fx:id="labelPointsP3" layoutX="181.0" layoutY="211.0" text="0" textFill="#ffee00" visible="false">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="29.0" />
                </font>
             </Label>
-            <Label fx:id="levelPlayer4" layoutX="181.0" layoutY="164.0" text="0" textFill="#ffee00">
+            <Label fx:id="levelPlayer3" layoutX="181.0" layoutY="154.0" text="0" textFill="#ffee00">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="29.0" />
                </font>
             </Label>
-            <Label fx:id="winsPlayer4" layoutX="181.0" layoutY="132.0" text="0" textFill="#ffee00">
+            <Label fx:id="winsPlayer3" layoutX="181.0" layoutY="122.0" text="0" textFill="#ffee00">
                <font>
                   <Font name="Gill Sans Ultra Bold" size="29.0" />
                </font>
             </Label>
-            <ImageView fitHeight="38.0" fitWidth="59.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="39.0" fitWidth="70.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true" visible="false">
-               <image>
-                  <Image url="@../media/coin.gif" />
-               </image>
-            </ImageView>
-            <TextField fx:id="player4Comments" layoutX="16.0" layoutY="271.0" maxHeight="25.0" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
-            <Button fx:id="sendToChatP4" layoutX="184.0" layoutY="271.0" maxHeight="25.0" maxWidth="50.0" mnemonicParsing="false" onAction="#sendToChat" prefHeight="25.0" prefWidth="50.0" text="Send" />
+            <TextField fx:id="player3Comments" layoutX="15.0" layoutY="269.0" maxHeight="25.0" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
+            <Button fx:id="sendToChatP3" layoutX="190.0" layoutY="269.0" maxHeight="25.0" maxWidth="50.0" mnemonicParsing="false" onAction="#sendToChat" prefHeight="25.0" prefWidth="50.0" text="Send" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="anchorPlayer4" layoutX="1028.0" layoutY="45.0" prefHeight="295.0" prefWidth="250.0" style="-fx-background-color: transparent;">
+         <children>
             <FlowPane fx:id="player4COINS" layoutX="33.0" layoutY="197.0" prefHeight="70.0" prefWidth="173.0">
                <children>
                   <ImageView fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
@@ -555,8 +571,103 @@
                   </ImageView>
                </children>
             </FlowPane>
+            <FlowPane fx:id="player4BLUECOINS" layoutX="33.0" layoutY="197.0" prefHeight="70.0" prefWidth="173.0">
+               <children>
+                  <ImageView fx:id="player1Coin11111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin31111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin51111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin71111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin21111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin41111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin61111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="player1Coin81111" fitHeight="35.0" fitWidth="35.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@../media/blueCoinWWM.gif" />
+                     </image>
+                  </ImageView>
+               </children>
+            </FlowPane>
+            <ImageView fx:id="imgPlayer4" fitHeight="123.0" fitWidth="130.0" layoutX="60.0" layoutY="25.0" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../media/Mushroom1.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="nameP4" alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="250.0" text="PLAYER 4" textFill="WHITE">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="31.0" />
+               </font>
+            </Label>
+            <Label layoutX="29.0" layoutY="132.0" text="WINS:" textFill="#ffee00">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="29.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="164.0" text="LEVEL:" textFill="#f2ff00">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="29.0" />
+               </font>
+            </Label>
+            <Label fx:id="labelPointsP4" layoutX="181.0" layoutY="211.0" text="0" textFill="#ffee00" visible="false">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="29.0" />
+               </font>
+            </Label>
+            <Label fx:id="levelPlayer4" layoutX="181.0" layoutY="164.0" text="0" textFill="#ffee00">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="29.0" />
+               </font>
+            </Label>
+            <Label fx:id="winsPlayer4" layoutX="181.0" layoutY="132.0" text="0" textFill="#ffee00">
+               <font>
+                  <Font name="Gill Sans Ultra Bold" size="29.0" />
+               </font>
+            </Label>
+            <TextField fx:id="player4Comments" layoutX="16.0" layoutY="271.0" maxHeight="25.0" maxWidth="150.0" prefHeight="25.0" prefWidth="150.0" />
+            <Button fx:id="sendToChatP4" layoutX="184.0" layoutY="271.0" maxHeight="25.0" maxWidth="50.0" mnemonicParsing="false" onAction="#sendToChat" prefHeight="25.0" prefWidth="50.0" text="Send" />
          </children>
       </AnchorPane>
       <TextFlow fx:id="chat" layoutX="741.0" layoutY="-1.0" maxHeight="140.0" maxWidth="280.0" prefHeight="140.0" prefWidth="280.0" style="-fx-background-color: rgba(224, 194, 163, 0.80); -fx-background-radius: 0 0 10 10;" visible="false" />
+      <AnchorPane fx:id="pausePopUp" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: rgba(20,100,100,1);" visible="false">
+         <children>
+            <ImageView fitHeight="720.0" fitWidth="1280.0" opacity="0.6" pickOnBounds="true">
+               <image>
+                  <Image url="@../media/luigiCasino.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="195.0" fitWidth="750.0" layoutX="269.0" layoutY="34.0" onMouseClicked="#closePopUp" onMouseEntered="#hoverNodeBright" onMouseExited="#unhoverNode" opacity="0.6" pickOnBounds="true">
+               <image>
+                  <Image url="@../media/resume.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

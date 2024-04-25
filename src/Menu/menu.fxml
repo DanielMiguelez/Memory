@@ -17,17 +17,17 @@
             <DropShadow />
          </effect>
       </ImageView>
-      <Button fx:id="playButton" alignment="CENTER" contentDisplay="CENTER" layoutX="877.0" layoutY="184.0" mnemonicParsing="false" onAction="#openRegister" opacity="0.84" prefHeight="72.0" prefWidth="363.0" stylesheets="@menu.css" text="PLAY">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="877.0" layoutY="184.0" mnemonicParsing="false" onAction="#openRegister" opacity="0.84" prefHeight="72.0" prefWidth="363.0" stylesheets="@menu.css" text="PLAY">
          <font>
             <Font size="33.0" />
          </font>
       </Button>
-      <Button fx:id="rankingButton" alignment="CENTER" contentDisplay="CENTER" layoutX="876.0" layoutY="291.0" mnemonicParsing="false" onAction="#openRanking" opacity="0.75" prefHeight="66.0" prefWidth="366.0" stylesheets="@menu.css" text="RANKING">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="876.0" layoutY="291.0" mnemonicParsing="false" onAction="#openRanking" opacity="0.75" prefHeight="66.0" prefWidth="366.0" stylesheets="@menu.css" text="RANKING">
          <font>
             <Font size="30.0" />
          </font>
       </Button>
-      <Button fx:id="settingsButton" alignment="CENTER" contentDisplay="CENTER" layoutX="879.0" layoutY="388.0" mnemonicParsing="false" onAction="#openSettings" opacity="0.75" prefHeight="66.0" prefWidth="365.0" stylesheets="@menu.css" text="SETTINGS">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="879.0" layoutY="388.0" mnemonicParsing="false" onAction="#openSettings" opacity="0.75" prefHeight="66.0" prefWidth="365.0" stylesheets="@menu.css" text="SETTINGS">
          <font>
             <Font size="30.0" />
          </font>
@@ -47,7 +47,7 @@
             <Image url="@../media/round.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="941.0" layoutX="170.0" layoutY="-7.0" opacity="0.85" pickOnBounds="true">
+      <ImageView fx:id="logo" fitHeight="150.0" fitWidth="941.0" layoutX="170.0" layoutY="-7.0" opacity="0.85" pickOnBounds="true">
          <image>
             <Image url="@../media/logo.png" />
          </image>

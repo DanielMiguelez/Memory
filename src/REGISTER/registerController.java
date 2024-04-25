@@ -2,6 +2,8 @@ package REGISTER;
 
 /*
 TO-DO:
+VEC TAM 3;
+DEJAR CLARO DE QUIEN ES TURNO;
 EASTER-EGGS;
 PÁGINA DE INSTRUCCIONES;
 OPTIONS;
@@ -97,6 +99,8 @@ public class registerController implements Initializable {
     String password3;
     String nameP4;
     String password4;
+    
+    public static String[]cpuLevels = new String[4];
     
     String cpuName;
     String cpuMode;
@@ -258,6 +262,7 @@ public class registerController implements Initializable {
                 if (numberOfLogins==0) {
                     nameP1 = cpuName;
                     password1 = cpuMode;
+                    cpuLevels[0]=cpuMode;
                     victoriesP1 = "CPU";
                     // Estaría guapo meter -> levelPlayer1 = cpuMode; la dificultad en level.
                 }
@@ -265,17 +270,19 @@ public class registerController implements Initializable {
                     nameP2 = cpuName;
                     password2 = cpuMode;
                     victoriesP2 = "CPU";
-                    
+                    cpuLevels[1]=cpuMode;                    
                 }
                 else if (numberOfLogins==2) {
                     nameP3 = cpuName;
                     password3 = cpuMode;
                     victoriesP3 = "CPU";
+                    cpuLevels[2]=cpuMode;                    
                 }
                 else if (numberOfLogins==3) {
                     nameP4= cpuName;
                     password4 = cpuMode;
                     victoriesP4 = "CPU";
+                    cpuLevels[3]=cpuMode;                    
                 }
     }
     
