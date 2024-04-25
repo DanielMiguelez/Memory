@@ -223,10 +223,20 @@ public class gameController implements Initializable {
     public String getUserVictories(String user) {
         return "select victorias_jugador from jugadores where nick_jugador = '" + user + "'";
     }
+    
+    
+ public String insertCommentsDB(String nick, String comment) {
+    return "INSERT INTO comentarios (id_jugador, id_partida, contenido) \n" +
+            "SELECT j.id_jugador, p.id_partida, '" + comment + "' " +
+            "FROM jugadores j " +
+            "JOIN partidas p ON j.nick_jugador = '" + nick + "' " +
+            "WHERE j.nick_jugador = '" + nick + "'";
+}
 
-//    public String getWins(){
-//        return 
-//    }
+    
+
+//   return "INSERT INTO partidas (ganador_id, duracion, fecha) SELECT id_jugador,
+    //'" + (minutes + ":" + seconds) + "','" + time + "' FROM jugadores WHERE nick_jugador = '" + winner + "'";
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         if (vecSt == -1)
@@ -338,8 +348,7 @@ public class gameController implements Initializable {
         Object o = e.getSource();
         Node n = (Node) o;
         String oFxId = n.getId();
-        
-     
+       
         String t = "";
         chat.setVisible(true);
         Text nuevoTexto = new Text();
@@ -347,21 +356,25 @@ public class gameController implements Initializable {
         switch (oFxId){
             case "sendToChatP1":
                 nuevoTexto = new Text ( nameP1.getText() + ": " + player1Comments.getText() +"\n" );
+                connectionSet(insertCommentsDB(nameP1.getText(), player1Comments.getText()));
                 player1Comments.setText("");
                 nuevoTexto.setFill(Color.RED);
                 break;
             case "sendToChatP2":
                 nuevoTexto = new Text ( nameP2.getText() + ": " +player2Comments.getText() +"\n" );
+                connectionSet(insertCommentsDB(nameP2.getText(), player2Comments.getText()));
                 player2Comments.setText("");
                 nuevoTexto.setFill(Color.BLUE);
                 break;
             case "sendToChatP3":
                 nuevoTexto = new Text ( nameP3.getText() + ": " +player3Comments.getText() +"\n" );
+                insertCommentsDB(nameP3.getText(), player3Comments.getText());
                 player3Comments.setText("");
                 nuevoTexto.setFill(Color.YELLOW);
                 break;
             case "sendToChatP4":
                 nuevoTexto = new Text ( nameP4.getText() + ": " +player4Comments.getText() +"\n" );
+                insertCommentsDB(nameP4.getText(), player4Comments.getText());
                 player4Comments.setText("");
                 nuevoTexto.setFill(Color.GREEN);
                 break;
@@ -652,7 +665,8 @@ public class gameController implements Initializable {
             }
         } else {
             winnerName.setText("DRAW");
-            winnerPicture.setVisible(false);
+            winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/cruz.png")));
+            connectionSet(insertDataGames(""));
         }
     }
 

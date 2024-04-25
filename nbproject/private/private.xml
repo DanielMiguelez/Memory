@@ -3,8 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Dani/Documents/NetBeansProjects/Memory/src/REGISTER/registerController.java</file>
-            <file>file:/C:/Users/Dani/Documents/NetBeansProjects/Memory/src/memory/FXMLDocumentController.java</file>
+            <file>file:/C:/Users/Dani/Documents/NetBeansProjects/Memory/src/Game/gameController.java</file>
+            <file>file:/C:/Users/Dani/Documents/NetBeansProjects/Memory/src/Ranking/RankingController.java</file>
             <file>file:/C:/Users/Dani/Documents/NetBeansProjects/Memory/src/Menu/menuController.java</file>
         </group>
     </open-files>
