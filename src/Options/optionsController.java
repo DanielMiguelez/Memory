@@ -36,8 +36,12 @@ public class optionsController implements Initializable {
     @FXML
     private Label exit;
     @FXML
+    private Label styleLabel;
+    @FXML
     private Label amountOfCards;
     
+    private int index = -1;
+    private String[]vecCardStyle = {"DEFAULT", "RETRO", "MODERN", "DARK", "YELLOW", "COLORFUL"};
     /**
      * Initializes the controller class.
      */
@@ -46,8 +50,23 @@ public class optionsController implements Initializable {
         // TODO
     }    
     
-    public void changeStyle(){
-        gameController.gameBackground.setImage(new Image("/media/mansion.gif"));
+    public void changeStyle(Event e){
+        Node n = (Node) e.getSource();
+        String nFxId = n.getId();
+        //{"DEFAULT", "RETRO", "MODERN", "DARK", "YELLOW", "COLORFUL"};
+        if (nFxId.equals("rightStyleArrow")){
+            index++;
+            if (index>5)
+                index=0;
+            styleLabel.setText(vecCardStyle[index]);
+            gameController.vecSt = index;
+        } else if (nFxId.equals("leftStyleArrow")){
+            index--;
+            if(index<0)
+                index=5;
+            styleLabel.setText(vecCardStyle[index]);
+            gameController.vecSt = index;
+        } 
     }
     
     public void changeBoardSize(Event e){

@@ -11,6 +11,7 @@ import REGISTER.registerController;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -57,6 +58,10 @@ import javafx.scene.text.TextFlow;
  * @author aronbp
  */
 public class gameController implements Initializable {
+    
+    //retro, modern, dark, yellow, colorfull
+
+   
     
     @FXML
     private AnchorPane pausePopUp;
@@ -206,6 +211,10 @@ public class gameController implements Initializable {
     String[][] winsP2;
     String[][] winsP3;
     String[][] winsP4;
+    
+    Image[]cardStyles = new Image[6];
+    
+    public static int vecSt = -1;
 
     public String incrementWins(String winner) {
         return "update jugadores\n" + "set victorias_jugador  = victorias_jugador + 1\n" + "where nick_jugador = '" + winner + "'";
@@ -219,7 +228,16 @@ public class gameController implements Initializable {
 //        return 
 //    }
     @Override
-    public void initialize(URL url, ResourceBundle rb) {    
+    public void initialize(URL url, ResourceBundle rb) {
+        if (vecSt == -1)
+            vecSt = 0;
+       
+        cardStyles[0] = new Image("/media/Card.png"); 
+        cardStyles[1] = new Image("/media/retro.png"); 
+        cardStyles[2] = new Image("/media/modern.png"); 
+        cardStyles[3] = new Image("/media/dark.png"); 
+        cardStyles[4] = new Image("/media/yellow.png"); 
+        cardStyles[5] = new Image("/media/colorful.png"); 
         
         deck = new Deck();
         Card Mario = new Card("Mario", 1, new Image("/media/Mario.png"));
@@ -292,9 +310,15 @@ public class gameController implements Initializable {
         indexUsed = new boolean[boardSize];
         winnerPane.setVisible(false);
         startTime();
+        
         playerTurns();
         
 
+    }
+    
+    public String insertDataGames(String winner) {
+        LocalDate time = LocalDate.now();
+        return "INSERT INTO partidas (ganador_id, duracion, fecha) SELECT id_jugador, '" + (minutes + ":" + seconds) + "','" + time + "' FROM jugadores WHERE nick_jugador = '" + winner + "'";
     }
     
     @FXML
@@ -596,6 +620,8 @@ public class gameController implements Initializable {
         if (pointsP1 > pointsP2 && pointsP1 > pointsP3 && pointsP1 > pointsP4) {
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/luigiSide.png")));
             winnerName.setText(nameP1.getText());
+            insertDataGames(nameP1.getText());
+            connectionSet(insertDataGames(winnerName.getText()));
             if (winsPlayer1.getText().equals("CPU")) {
 
             } else {
@@ -704,9 +730,9 @@ private void pauseGame(){
         PauseTransition pause = new PauseTransition(Duration.seconds(1));
         pause.setOnFinished(e -> {
             ImageView imageView = (ImageView) board.getChildren().get(indexCard1 + desp);
-            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
+            imageView.setImage(cardStyles[vecSt]);
             imageView = (ImageView) board.getChildren().get(indexCard2 + desp);
-            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
+            imageView.setImage(cardStyles[vecSt]);
 
         });
         pause.play();
@@ -718,7 +744,7 @@ private void pauseGame(){
         }
         for (int i = 0 + desp; i < boardSize + desp; i++) {
             ImageView imageView = (ImageView) board.getChildren().get(i);
-            imageView.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Card.png")));
+            imageView.setImage(cardStyles[vecSt]);
         }
     }
 
@@ -745,7 +771,7 @@ private void pauseGame(){
             node.setEffect(new DropShadow(15, 0, 0, Color.WHITE));
         }
     }
-
+    
     private void startTime() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
 

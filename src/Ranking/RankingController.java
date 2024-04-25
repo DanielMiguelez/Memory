@@ -74,7 +74,6 @@ public class RankingController implements Initializable {
     public String getRankingUsers(){
         return "select nick_jugador from jugadores j order by victorias_jugador desc limit 3";
     }
-    //select nick_jugador 
 
     
     public String[][] connectionSelect( String q ){

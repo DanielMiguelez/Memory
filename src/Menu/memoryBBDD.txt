@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS jugadores (
     id_jugador SERIAL PRIMARY KEY,
     nick_jugador VARCHAR(20) UNIQUE NOT NULL,
     victorias_jugador INT default 0,
-    contraseña VARCHAR(20) NOT NULL
+    contraseï¿½a VARCHAR(20) NOT NULL
 );
 
 -- Tabla partidas
@@ -12,14 +12,14 @@ CREATE TABLE IF NOT EXISTS partidas (
     duracion INT,
     fecha DATE,
     ganador_id INT REFERENCES jugadores(id_jugador),
-    guardar_partida BIGINT -- Otra opción si necesitas almacenar números grandes
+    guardar_partida BIGINT -- Otra opciï¿½n si necesitas almacenar nï¿½meros grandes
 );
 
 -- Tabla jugadores_partidas
 CREATE TABLE IF NOT EXISTS jugadores_partidas (
     id_jugador INT REFERENCES jugadores(id_jugador),
     id_partida INT REFERENCES partidas(id_partida),
-    puntuacion_partida INT,
+    puntos INT,
     PRIMARY KEY (id_jugador, id_partida)
 );
 

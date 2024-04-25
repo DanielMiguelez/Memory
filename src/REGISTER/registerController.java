@@ -3,7 +3,7 @@ package REGISTER;
 /*
 TO-DO:
 VEC TAM 3;
-DEJAR CLARO DE QUIEN ES TURNO;
+    DEJAR CLARO DE QUIEN ES TURNO;
 EASTER-EGGS;
 PÁGINA DE INSTRUCCIONES;
 OPTIONS;
@@ -115,6 +115,7 @@ public class registerController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         
     }
+    
 
     public boolean openConnection(String q) {
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
