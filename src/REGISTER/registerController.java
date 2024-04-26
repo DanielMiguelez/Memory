@@ -42,9 +42,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import memory.Player;
+import org.apache.commons.codec.digest.DigestUtils;
 import utilidades.bbdd.Bd;
 import static utilidades.bbdd.Bd.crearBBDD;
 import utilidades.bbdd.Gestor_conexion_POSTGRE;
+
 
 public class registerController implements Initializable {
 
@@ -115,8 +117,6 @@ public class registerController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         
     }
-    
-
     public boolean openConnection(String q) {
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
         String query = String.format(q);
@@ -125,6 +125,7 @@ public class registerController implements Initializable {
         return verify;
     }
 
+      
     public void changePlayerLeft(Event e) {
         Object o = (Object) e.getSource();
         Node n = (Node) e.getSource();
@@ -293,14 +294,19 @@ public class registerController implements Initializable {
     public void registerUser1() {
         name = labelNameLeft.getText().toLowerCase();
         password = passwordUserLeft.getText().toLowerCase();
-
+            
+        String hashedPassword = DigestUtils.sha256Hex(password);
+        
         //SI USUARIO Y CONTRASEÑA SON "VALIDOS"
         if (name.length() > 0 && password.length() >= 5) {
+            
             //LOS METEMOS A LA BBDD MEMORY
+            
             Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
-            String query = String.format("insert into jugadores (nick_jugador,contraseña) values (" + "'" + name + "'" + " , " + "'" + password + "'" + ")");
+            String query = String.format("insert into jugadores (nick_jugador,contraseña) values (" + "'" + name + "'" + " , " + "'" + hashedPassword + "'" + ")");
             consulta = Bd.consultaModificacion(gestor, query);
             gestor.cerrar_Conexion(true);
+            
             if (consulta) {
                 System.out.println("Registrando usuario 1");
                 btnRegisterLeft.setStyle("-fx-background-color: green;");
@@ -329,10 +335,12 @@ public class registerController implements Initializable {
     public void registerUser2() {
         name = labelNameRight.getText().toLowerCase();
         password = passwordUserRight.getText().toLowerCase();
+        
+        String hashedPassword = DigestUtils.sha256Hex(password);
 
         if (name.length() > 0 && password.length() >= 5) {
             Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
-            String query = String.format("insert into jugadores (nick_jugador,contraseña) values (" + "'" + name + "'" + " , " + "'" + password + "'" + ")");
+            String query = String.format("insert into jugadores (nick_jugador,contraseña) values (" + "'" + name + "'" + " , " + "'" + hashedPassword + "'" + ")");
             consulta = Bd.consultaModificacion(gestor, query);
             gestor.cerrar_Conexion(true);
             if (consulta) {
@@ -362,7 +370,10 @@ public class registerController implements Initializable {
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
         nameP1 = labelNameLeft.getText().toLowerCase();
         password1 = passwordUserLeft.getText().toLowerCase();
-        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + nameP1 + "'" + " AND contraseña=" + "'" + password1 + "'");
+        
+        String hashedPassword = DigestUtils.sha256Hex(password1);
+        
+        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + nameP1 + "'" + " AND contraseña=" + "'" + hashedPassword + "'");
         String[][] resultados = Bd.consultaSelect(gestor, query);
         gestor.cerrar_Conexion(true);
 
@@ -371,20 +382,23 @@ public class registerController implements Initializable {
                 btnLoginLeft.setStyle("-fx-background-color: red;");
                 labelNameLeft.setStyle("-fx-border-color: red;");
                 logged = false;
+                System.out.println(password);
             } else {
-                btnLoginLeft.setStyle("-fx-background-color: green;");
-                labelNameLeft.setStyle("-fx-border-color: green;");
-                logged = true;
-                numberOfLogins++;
-
                 id = Integer.parseInt(resultados[0][0]);
                 name = (resultados[0][1]);
                 victories = Integer.parseInt(resultados[0][2]);
                 password = (resultados[0][3]);
-                player1 = new Player(id, name, victories, password);
-                System.out.println("Logueando p1" + player1);
-                nameP1 = name;
-                victoriesP1 = victories + "";
+                
+                    btnLoginLeft.setStyle("-fx-background-color: green;");
+                    labelNameLeft.setStyle("-fx-border-color: green;");
+                    logged = true;
+                    numberOfLogins++;
+                    
+                    player1 = new Player(id, name, victories, password);
+                    System.out.println("Logueando p1" + player1);
+                    nameP1 = name;
+                    victoriesP1 = victories + "";
+               
             }
         } else {
             btnLoginLeft.setStyle("-fx-background-color: red;");
@@ -397,8 +411,10 @@ public class registerController implements Initializable {
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
         nameP2 = labelNameRight.getText().toLowerCase();
         password2 = passwordUserRight.getText().toLowerCase();
+        
+        String hashedPassword2 = DigestUtils.sha256Hex(password2);
 
-        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + nameP2 + "'" + " AND contraseña=" + "'" + password2 + "'");
+        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + nameP2 + "'" + " AND contraseña=" + "'" + hashedPassword2 + "'");
         String[][] resultados = Bd.consultaSelect(gestor, query);
         gestor.cerrar_Conexion(true);
 
@@ -438,7 +454,10 @@ public class registerController implements Initializable {
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
         nameP3 = labelNameLeft.getText().toLowerCase();
         password3 = passwordUserLeft.getText().toLowerCase();
-        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + nameP3 + "'" + " AND contraseña=" + "'" + password3 + "'");
+        
+        String hashedPassword3 = DigestUtils.sha256Hex(password3);
+        
+        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + nameP3 + "'" + " AND contraseña=" + "'" + hashedPassword3 + "'");
         String[][] resultados = Bd.consultaSelect(gestor, query);
         gestor.cerrar_Conexion(true);
 
@@ -478,8 +497,10 @@ public class registerController implements Initializable {
         Gestor_conexion_POSTGRE gestor = new Gestor_conexion_POSTGRE("memory", true);
         nameP4 = labelNameRight.getText().toLowerCase();
         password4 = passwordUserRight.getText().toLowerCase();
+        
+        String hashedPassword4 = DigestUtils.sha256Hex(password4);
 
-        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + nameP4 + "'" + " AND contraseña=" + "'" + password4 + "'");
+        String query = String.format("select id_jugador, nick_jugador, COALESCE(victorias_jugador, 0), contraseña from jugadores where nick_jugador = " + "'" + nameP4 + "'" + " AND contraseña=" + "'" + hashedPassword4 + "'");
         String[][] resultados = Bd.consultaSelect(gestor, query);
         gestor.cerrar_Conexion(true);
 
