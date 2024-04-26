@@ -242,6 +242,13 @@ public class gameController implements Initializable {
                 "WHERE j.nick_jugador = '" + nick + "' AND id_partida = (SELECT MAX(id_partida) FROM partidas)" ;
 
 }
+ 
+     public String insertDataPlayerGames(String nick,int puntos){
+            return "INSERT INTO jugadores_partidas(id_jugador,id_partida,puntos)" +
+                "SELECT j.id_jugador, (SELECT MAX(id_partida) FROM partidas), '" + puntos + "' " +
+                "FROM jugadores j " +
+                "WHERE j.nick_jugador = '" + nick + "'";
+    }
 
 // public String getLastPartidaId(){
 //        return "select id_partida FROM partidas ORDER BY fecha DESC LIMIT 1";
@@ -580,6 +587,11 @@ public class gameController implements Initializable {
                         if (gameFinished) {
                             pauseTime();
                             score();
+                            connectionSet(insertDataPlayerGames(nameP2.getText(),pointsP2));
+                            connectionSet(insertDataPlayerGames(nameP1.getText(), pointsP1));
+                            connectionSet(insertDataPlayerGames(nameP3.getText(), pointsP3));
+                            connectionSet(insertDataPlayerGames(nameP4.getText(), pointsP4));
+                            
                         }
                     }
                 }
@@ -650,6 +662,7 @@ public class gameController implements Initializable {
         } else if (pointsP2 > pointsP3 && pointsP2 > pointsP4 && pointsP2 > pointsP1) {
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/GreenMushroom.png")));
             winnerName.setText(nameP2.getText());
+            insertDataGames(nameP2.getText());
             connectionSet(insertDataGames(winnerName.getText()));
             if (winsPlayer2.getText().equals("CPU")) {
 
@@ -659,6 +672,7 @@ public class gameController implements Initializable {
         } else if (pointsP3 > pointsP2 && pointsP3 > pointsP4 && pointsP3 > pointsP1) {
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/marioSide.png")));
             winnerName.setText(nameP3.getText());
+            insertDataGames(nameP3.getText());
             connectionSet(insertDataGames(winnerName.getText()));
             if (winsPlayer3.getText().equals("CPU")) {
 
@@ -668,6 +682,7 @@ public class gameController implements Initializable {
         } else if (pointsP4 > pointsP3 && pointsP4 > pointsP2 && pointsP4 > pointsP1) {
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Mushroom1.png")));
             winnerName.setText(nameP4.getText());
+            insertDataGames(nameP4.getText());
             connectionSet(insertDataGames(winnerName.getText()));
             if (winsPlayer4.getText().equals("CPU")) {
             } else {
