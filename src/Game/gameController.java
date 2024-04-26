@@ -224,15 +224,28 @@ public class gameController implements Initializable {
         return "select victorias_jugador from jugadores where nick_jugador = '" + user + "'";
     }
     
+    public String createMatch() {
+        LocalDate date = LocalDate.now();
+        return "INSERT INTO partidas(fecha) VALUES( '" + date + "')";
+    }
     
- public String insertCommentsDB(String nick, String comment) {
-    return "INSERT INTO comentarios (id_jugador, id_partida, contenido) \n" +
-            "SELECT j.id_jugador, p.id_partida, '" + comment + "' " +
-            "FROM jugadores j " +
-            "JOIN partidas p ON j.nick_jugador = '" + nick + "' " +
-            "WHERE j.nick_jugador = '" + nick + "'";
+   public String insertDataGames(String winner) {
+        LocalDate time = LocalDate.now();
+        return "UPDATE partidas SET ganador_id = (SELECT id_jugador FROM jugadores WHERE nick_jugador = '" + winner + "') , duracion = '" + (minutes + ":" + seconds) + "', fecha = '" + time + "' WHERE id_partida = (SELECT MAX(id_partida) FROM partidas)";
+    }
+
+    public String insertCommentsDB(String nick, String comment) {
+        return "INSERT INTO comentarios (id_jugador,id_partida,contenido) \n" +
+                "SELECT j.id_jugador, p.id_partida, '" + comment + "' " +
+                "FROM jugadores j " +
+                "LEFT JOIN partidas p ON p.id_partida = id_partida  " +
+                "WHERE j.nick_jugador = '" + nick + "' AND id_partida = (SELECT MAX(id_partida) FROM partidas)" ;
+
 }
 
+// public String getLastPartidaId(){
+//        return "select id_partida FROM partidas ORDER BY fecha DESC LIMIT 1";
+//    }
     
 
 //   return "INSERT INTO partidas (ganador_id, duracion, fecha) SELECT id_jugador,
@@ -316,19 +329,13 @@ public class gameController implements Initializable {
         
         setBackground(boardSize);
         setBoard(boardSize);
-
         indexUsed = new boolean[boardSize];
         winnerPane.setVisible(false);
         startTime();
-        
+        connectionSet(createMatch());
         playerTurns();
         
 
-    }
-    
-    public String insertDataGames(String winner) {
-        LocalDate time = LocalDate.now();
-        return "INSERT INTO partidas (ganador_id, duracion, fecha) SELECT id_jugador, '" + (minutes + ":" + seconds) + "','" + time + "' FROM jugadores WHERE nick_jugador = '" + winner + "'";
     }
     
     @FXML
@@ -368,13 +375,13 @@ public class gameController implements Initializable {
                 break;
             case "sendToChatP3":
                 nuevoTexto = new Text ( nameP3.getText() + ": " +player3Comments.getText() +"\n" );
-                insertCommentsDB(nameP3.getText(), player3Comments.getText());
+                connectionSet(insertCommentsDB(nameP3.getText(), player3Comments.getText()));
                 player3Comments.setText("");
                 nuevoTexto.setFill(Color.YELLOW);
                 break;
             case "sendToChatP4":
                 nuevoTexto = new Text ( nameP4.getText() + ": " +player4Comments.getText() +"\n" );
-                insertCommentsDB(nameP4.getText(), player4Comments.getText());
+                connectionSet(insertCommentsDB(nameP4.getText(), player4Comments.getText()));
                 player4Comments.setText("");
                 nuevoTexto.setFill(Color.GREEN);
                 break;
@@ -643,6 +650,7 @@ public class gameController implements Initializable {
         } else if (pointsP2 > pointsP3 && pointsP2 > pointsP4 && pointsP2 > pointsP1) {
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/GreenMushroom.png")));
             winnerName.setText(nameP2.getText());
+            connectionSet(insertDataGames(winnerName.getText()));
             if (winsPlayer2.getText().equals("CPU")) {
 
             } else {
@@ -651,6 +659,7 @@ public class gameController implements Initializable {
         } else if (pointsP3 > pointsP2 && pointsP3 > pointsP4 && pointsP3 > pointsP1) {
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/marioSide.png")));
             winnerName.setText(nameP3.getText());
+            connectionSet(insertDataGames(winnerName.getText()));
             if (winsPlayer3.getText().equals("CPU")) {
 
             } else {
@@ -659,6 +668,7 @@ public class gameController implements Initializable {
         } else if (pointsP4 > pointsP3 && pointsP4 > pointsP2 && pointsP4 > pointsP1) {
             winnerPicture.setImage(new Image(memory.Card.class.getResourceAsStream("/media/Mushroom1.png")));
             winnerName.setText(nameP4.getText());
+            connectionSet(insertDataGames(winnerName.getText()));
             if (winsPlayer4.getText().equals("CPU")) {
             } else {
                 connectionSet(incrementWins(nameP4.getText()));
